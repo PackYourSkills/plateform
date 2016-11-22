@@ -24,7 +24,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.role = "packer"
       user.save
-      packer = Packer.new(email: user.email, first_name: user.first_name, last_name: user.last_name)
+      packer = @user.packer.build(email: user.email, first_name: user.first_name, last_name: user.last_name)
       packer.save
     end
 

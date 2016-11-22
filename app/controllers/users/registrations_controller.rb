@@ -8,19 +8,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
 
     if @user.save
+
       if @user.role == "crew"
-        @crew = Crew.new(crew_params)
+
+        @crew = @user.crew.build(crew_params)
         if @crew.save
           redirect_to crew_path @crew
         else
+          params['role'] = @user.role
           render :new
         end
 
       else
-        @packer = Packer.new(packer_params)
+
+        @packer = @user.packer.build(packer_params)
         if @packer.save
           redirect_to packer_path @packer
         else
+          params['role'] = @user.role
           render :new
         end
 
