@@ -1,2 +1,45 @@
 <h1>Packers#edit</h1>
 <p>Find me in app/views/packers/edit.html.erb</p>
+
+
+
+
+<h2>Edit Profile</h2>
+<%= form_for(@packer) do |u| %>
+
+
+    <label for="first_name">First Name</label>
+    <input type="text" name="packer[first_name]" id="first_name" value="<%= @packer.first_name %>">
+
+    <label for="last_name">Last Name</label>
+    <input type="text" name="packer[last_name]" id="last_name" value="<%= @packer.last_name %>">
+
+    <label for="city">City</label>
+    <input type="text" name="packer[city]" id="city" value="<%= @packer.city %>">
+
+    <label for="country">Country</label>
+    <input type="text" name="packer[country]" id="country" value="<%= @packer.country %>">
+
+
+    <label for="phone">Phone</label>
+    <input type="text" name="packer[phone]" id="phone" value="<%= @packer.phone %>">
+
+
+    <label for="skype">Skype</label>
+    <input type="text" name="packer[skype]" id="skype" value="<%= @packer.skype %>">
+
+
+    <label for="youtube_link">Youtube link</label>
+    <input type="text" name="packer[youtube_link]" id="youtube_link" value="<%= @packer.youtube_link %>">
+
+    <label for="story">Please, introduce you:</label><br>
+    <textarea name="packer[story]">
+      <%= @packer.story %>
+    </textarea>
+
+
+
+
+
+  <input type="submit" value="Save" class="btn btn-default">
+<% end %>
