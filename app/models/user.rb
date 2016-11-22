@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_one :crew, dependent: :destroy
+  has_one :packer, dependent: :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
@@ -28,4 +31,8 @@ class User < ApplicationRecord
     return user
   end
 
+  ## method to verify role
+  def self.crew?
+    self.role == "crew"
+  end
 end
