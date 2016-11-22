@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 20161122103847) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "experiences", force: :cascade do |t|
+    t.string   "type"
+    t.date     "start_time"
+    t.date     "end_time"
+    t.string   "organisation"
+    t.string   "position"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "missions", force: :cascade do |t|
     t.string   "title"
     t.string   "duration"
@@ -54,6 +65,26 @@ ActiveRecord::Schema.define(version: 20161122103847) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["crew_id"], name: "index_missions_on_crew_id", using: :btree
+  end
+
+  create_table "packers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "sexe"
+    t.integer  "age"
+    t.string   "city"
+    t.string   "country"
+    t.string   "nationality"
+    t.string   "phone"
+    t.string   "skype"
+    t.text     "story"
+    t.string   "youtube_link"
+    t.string   "website"
+    t.string   "cv_link"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
