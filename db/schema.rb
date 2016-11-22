@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 20161122111907) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string   "title"
+    t.string   "level"
+    t.string   "type"
+    t.integer  "packer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["packer_id"], name: "index_skills_on_packer_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -124,4 +134,5 @@ ActiveRecord::Schema.define(version: 20161122111907) do
 
   add_foreign_key "educations", "packers"
   add_foreign_key "missions", "crews"
+  add_foreign_key "skills", "packers"
 end
