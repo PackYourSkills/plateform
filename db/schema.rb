@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122111907) do
+ActiveRecord::Schema.define(version: 20161122112404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.text     "message"
+    t.string   "status"
+    t.integer  "packer_id"
+    t.integer  "mission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_applications_on_mission_id", using: :btree
+    t.index ["packer_id"], name: "index_applications_on_packer_id", using: :btree
+  end
 
   create_table "crews", force: :cascade do |t|
     t.string   "name"
@@ -132,6 +143,8 @@ ActiveRecord::Schema.define(version: 20161122111907) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "applications", "missions"
+  add_foreign_key "applications", "packers"
   add_foreign_key "educations", "packers"
   add_foreign_key "missions", "crews"
   add_foreign_key "skills", "packers"
