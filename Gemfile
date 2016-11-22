@@ -50,6 +50,21 @@ gem 'cloudinary', '1.1.0'
 # Devise
 gem 'devise'
 
+# Geocoder
+gem "geocoder"
+gem 'bootstrap-datepicker-rails'
+
+# GMAPS4RAILS
+# gem "coffee-rails"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
+# image
+gem 'carrierwave'
+
 #--------------------------------------------------#
 #End
 #--------------------------------------------------#
