@@ -62,8 +62,11 @@ source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
 
-# image
+# image 1 seule
 gem 'carrierwave'
+
+# Gemfile
+gem 'omniauth-facebook'
 
 #--------------------------------------------------#
 #End
