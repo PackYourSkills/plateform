@@ -1,4 +1,8 @@
-<h2>Log in</h2>
+<% if params['role'] == 'crew' %>
+  <h2>Log in as a Crew </h2>
+<% else %>
+  <h2>Log in as a Packer </h2>
+<% end %>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
