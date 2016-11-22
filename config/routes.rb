@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   devise_for :users,
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
+    controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations', sessions: 'users/sessions' }
 
   get "crews/:id/deck", to: "crews#deck", as: 'deck_crew'
 
