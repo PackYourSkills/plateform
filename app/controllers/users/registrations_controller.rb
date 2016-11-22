@@ -8,7 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
 
     if @user.save
-
       if @user.role == "crew"
         @crew = Crew.new(crew_params)
         if @crew.save
