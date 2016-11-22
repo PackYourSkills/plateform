@@ -1,6 +1,6 @@
 class CrewsController < ApplicationController
 
-  before_action :set_crew, only: {:edit, :update, :show, :destroy}
+  before_action :set_crew, only: [ :edit, :update, :show, :destroy ]
 
   def edit
   end
@@ -15,7 +15,7 @@ class CrewsController < ApplicationController
 
   def destroy
     @crew.destroy
-    redirect_to user_path @user
+    redirect_to new_user_session_path
   end
 
   private
