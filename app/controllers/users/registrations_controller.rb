@@ -6,7 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
+
       if @user.role == "crew"
         @crew = Crew.new(crew_params)
 
@@ -24,7 +26,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         else
           render :new
         end
+
       end
+
     else
       render :new
     end
