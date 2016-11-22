@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
+  get "crews/:id/deck", to: "crews#deck", as: 'deck_crew'
 
   resources :crews, only: [:edit, :destroy, :update, :show] do
     resources :orders, only: [:new, :show, :create]

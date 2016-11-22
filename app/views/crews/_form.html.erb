@@ -1,0 +1,33 @@
+<div class="container crew_edit">
+  <div class="crew_form_inputs">
+    <%= simple_form_for (@crew) do |a| %>
+      <%= a.hidden_field :crew_id, :value => @crew.id %>
+
+      <%= a.input :name %>
+      <%= a.input :address %>
+      <%= a.input :city %>
+      <%= a.input :country, as: :string, priority: [ 'FR' ] %>
+
+      <%= a.input :social_issue %>
+      <%= a.input :values %>
+      <%= a.input :mission %>
+      <%= a.input :description %>
+
+      <%= a.input :creation_date %>
+      <%= a.input :nb_collaborators %>
+      <%= a.input :team_description %>
+
+      <%= a.input :phone %>
+      <%= a.input :email %>
+      <%= a.input :website %>
+      <%= a.input :facebook %>
+      <%= a.input :twitter %>
+
+      <%= a.input :credit_count %>
+  </div>
+</div>
+
+<div class="container submit">
+  <%= a.submit class: "btn btn-primary"%>
+</div>
+<% end %>

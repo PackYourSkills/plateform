@@ -1,2 +1,11 @@
-<h1>Crews#show</h1>
-<p>Find me in app/views/crews/show.html.erb</p>
+<div class="container welcome text-center">
+      <h1>Welcome home <%= @crew.name %> ! </h1>
+</div>
+
+
+<div class="container text-center link">
+  <% if user_signed_in? %>
+      <%= link_to "delete my crew", crew_path(@crew), method: :delete, data: { confirm: "Are you sure?" } %></br>
+          <%= link_to 'edit', edit_crew_path(@crew) %>
+    <% end %>
+</div>
