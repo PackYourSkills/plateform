@@ -10,6 +10,9 @@
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
+      <!-- To delete -->
+      -- Just to check, you are a <%= current_user.role %> --
+
       <!-- Login out link -->
       <%= link_to destroy_user_session_path, method: :delete do %>
         <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
@@ -17,11 +20,9 @@
     <% else %>
       <!-- Login text link -->
       <!-- Packer -->
-        <%= link_to t(".sign_in", default: "Sign_up as packer"), new_user_registration_path(role: :packer), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "I'm a packer"), new_user_session_path(role: :packer), class: "navbar-wagon-item navbar-wagon-link" %>
       <!-- Crew -->
-        <%= link_to t(".sign_in", default: "Sign_up as crew"), new_user_registration_path(role: :crew), class: "navbar-wagon-item navbar-wagon-link" %>
-
-        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "I'm a crew"), new_user_session_path(role: :crew), class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
 
 

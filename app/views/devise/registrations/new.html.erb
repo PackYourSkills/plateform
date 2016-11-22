@@ -1,4 +1,8 @@
-<h2>Sign up</h2>
+<% if params['role'] == 'crew' %>
+  <h2>Sign up as a Crew </h2>
+<% else %>
+  <h2>Sign up as a Packer </h2>
+<% end %>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>

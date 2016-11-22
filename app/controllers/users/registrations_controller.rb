@@ -11,7 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       if @user.role == "crew"
         @crew = Crew.new(crew_params)
-
         if @crew.save
           redirect_to crew_path @crew
         else
@@ -20,7 +19,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       else
         @packer = Packer.new(packer_params)
-
         if @packer.save
           redirect_to packer_path @packer
         else
@@ -30,6 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
 
     else
+      params['role'] = @user.role
       render :new
     end
   end
