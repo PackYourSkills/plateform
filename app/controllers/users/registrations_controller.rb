@@ -1,9 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-  def new
-    super
-  end
-
   def create
     @user = User.new(user_params)
 
@@ -16,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           sign_in @user
           redirect_to crew_path @crew
         else
+          @user.destroy
           params['role'] = @user.role
           render :new
         end
@@ -27,6 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           sign_in @user
           redirect_to packer_path @packer
         else
+          @user.destroy
           params['role'] = @user.role
           render :new
         end
@@ -39,9 +37,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def update
-    super
-  end
 
 private
 
