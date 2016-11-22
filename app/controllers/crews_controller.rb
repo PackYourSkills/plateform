@@ -7,7 +7,7 @@ class CrewsController < ApplicationController
 
   def update
     @crew.update(crew_params)
-    redirect_to crew_path @crew
+    redirect_to root_path @crew
   end
 
   def show
@@ -15,7 +15,7 @@ class CrewsController < ApplicationController
 
   def destroy
     @crew.destroy
-    redirect_to new_user_session_path
+    redirect_to root_path
   end
 
   private
