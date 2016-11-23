@@ -1,2 +1,13 @@
-<h1>Missions#edit</h1>
-<p>Find me in app/views/missions/edit.html.erb</p>
+<div class="container mission_form">
+  <div class ="intro">
+    <p>Tell us more about the mission </p>
+  </div>
+
+  <div class="mission_form">
+    <%= render 'form' %>
+  </div>
+
+<div class="container">
+  <%= link_to "return to your deck", deck_crew_path %>
+</div>
+</div>
