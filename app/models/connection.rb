@@ -1,4 +1,4 @@
-class Application < ApplicationRecord
+class Connection < ApplicationRecord
   belongs_to :packer
   belongs_to :mission
 end

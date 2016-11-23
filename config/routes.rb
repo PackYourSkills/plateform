@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "crews/:id/deck", to: "crews#deck", as: 'deck_crew'
 
   resources :missions, only: [:new, :create, :edit, :show, :index, :destroy, :update] do
-    resources :applications, only: [:new, :create, :edit, :show, :index, :destroy, :update]
+    resources :connections, only: [:new, :create, :edit, :show, :index, :destroy, :update]
   end
   get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
 
