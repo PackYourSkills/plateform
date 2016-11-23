@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-    resource['role'] = params['user']['role']
+    resource[:role] = params['user']['role']
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -64,11 +64,11 @@ private
   end
 
   def crew_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit()
   end
 
   def packer_params
-    params.require(:user).permit(:email, :first_name, :last_name)
+    params.require(:user).permit()
   end
 end
 
