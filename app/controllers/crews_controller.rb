@@ -1,6 +1,10 @@
 class CrewsController < ApplicationController
 
-  before_action :set_crew, only: [ :edit, :update, :show, :destroy ]
+  before_action :set_crew, only: [ :edit, :update, :show, :destroy, :deck ]
+
+  def index
+    @crews = policy_scope(Crew)
+  end
 
   def edit
   end
@@ -13,10 +17,15 @@ class CrewsController < ApplicationController
   def show
   end
 
+  def deck
+    authorize @crew
+  end
+
   private
 
   def set_crew
     @crew = Crew.find (params[:id])
+    authorize @crew
   end
 
   def crew_params

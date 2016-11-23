@@ -8,7 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-
   validates :story, :allow_blank => true, length: { within: 100..500 }
 
   ## Facebook Autentification
@@ -36,7 +35,7 @@ class User < ApplicationRecord
   end
 
   ## method to verify role
-  def self.crew?
+  def crew?
     self.role == "crew"
   end
 end
