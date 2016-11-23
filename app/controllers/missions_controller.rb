@@ -15,11 +15,7 @@ class MissionsController < ApplicationController
   def create
     @mission = @crew.missions.build(mission_params)
     authorize @mission
-    if @mission.save
-      redirect_to mission_path(@mission)
-    else
-      render :new
-    end
+    @mission.save ? redirect_to mission_path(@mission) | render :new
   end
 
   def show
@@ -37,6 +33,8 @@ class MissionsController < ApplicationController
     @mission.destroy
     redirect_to deck_crew_path @crew
   end
+
+  private
 
   def set_mission
     @mission = Mission.find(params[:id])

@@ -4,20 +4,18 @@ class SkillsController < ApplicationController
   before_action :set_packer, only: [ :new, :create, :edit, :update, :destroy ]
 
   def index
-    @skills = Skill.all
+    @skills = policy_scope(Skill)
   end
 
   def new
     @skill = Skill.new
+    authorize @skill
   end
 
   def create
     @skill = @packer.skills.build(skill_params)
-    if @skill.save
-      redirect_to packer_path(@packer)
-    else
-      render :new
-    end
+    authorize @skill
+    @skill.save ? redirect_to packer_path(@packer) | render :new
   end
 
   def edit
@@ -25,7 +23,7 @@ class SkillsController < ApplicationController
 
   def update
     @skill.update(skill_params)
-    redirect_to packer_path @packer
+    @skill.save ? redirect_to packer_path @packer | render :edit
   end
 
   def destroy
@@ -40,11 +38,11 @@ class SkillsController < ApplicationController
   end
 
   def set_skill
-   @skill = Skill.find (params[:id])
+    @skill = Skill.find (params[:id])
+    authorize @skill
   end
 
   def skill_params
     params.require(:skill).permit(:title, :level, :type_of_skill)
   end
-
 end

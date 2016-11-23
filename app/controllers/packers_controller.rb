@@ -10,10 +10,8 @@ class PackersController < ApplicationController
   end
 
   def update
-    if params[:packer]
-      @packer.update(packer_params)
-    end
-    redirect_to packer_path @packer
+    @packer.update(packer_params)
+    @packer.save ? redirect_to packer_path @packer | render :edit
   end
 
   def show
@@ -33,5 +31,4 @@ private
     @packer = Packer.find (params[:id])
     authorize @packer
   end
-
 end
