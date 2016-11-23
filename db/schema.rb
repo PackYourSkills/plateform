@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123103142) do
+ActiveRecord::Schema.define(version: 20161123133433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20161123103142) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "type"
+    t.string   "type_of_exp"
     t.date     "start_time"
     t.date     "end_time"
     t.string   "organisation"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20161123103142) do
     t.text     "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "packer_id"
+    t.index ["packer_id"], name: "index_experiences_on_packer_id", using: :btree
   end
 
   create_table "missions", force: :cascade do |t|
@@ -154,6 +156,7 @@ ActiveRecord::Schema.define(version: 20161123103142) do
   add_foreign_key "applications", "packers"
   add_foreign_key "crews", "users"
   add_foreign_key "educations", "packers"
+  add_foreign_key "experiences", "packers"
   add_foreign_key "missions", "crews"
   add_foreign_key "packers", "users"
   add_foreign_key "skills", "packers"
