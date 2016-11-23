@@ -2,30 +2,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-    resource['role'] = params['user']['role']
+    resource[:role] = params['user']['role']
     resource.save
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         if resource.role == "crew"
-          @crew = resource.build_crew(crew_params)
+          @crew = resource.build_crew()
           if @crew.save
             sign_up(resource_name, resource)
             respond_with resource, location: after_sign_up_path_for(resource)
           else
             resource.destroy
+            flash[:alert] = "registration error ! contact Maxime at
+            maxime@packyourskills.com and say ERROR 666 :)"
             redirect_to :back
           end
         else
-          @packer = resource.build_packer(packer_params)
+          @packer = resource.build_packer()
           if @packer.save
             sign_up(resource_name, resource)
             respond_with resource, location: after_sign_up_path_for(resource)
           else
             resource.destroy
-            flash[:alert] = "registration error ! If you arrive here,
-            please contact Maxime at maxime@packyourskills.com"
+            flash[:alert] = "registration error ! contact Maxime at
+            maxime@packyourskills.com and say ERROR 666 :)"
             redirect_to :back
           end
         end
@@ -60,13 +62,6 @@ private
     end
   end
 
-  def crew_params
-    params.require(:user).permit(:email)
-  end
-
-  def packer_params
-    params.require(:user).permit(:email, :first_name, :last_name)
-  end
 end
 
 ## :email, :facebook_picture_url, :token, :token_expiry, :first_name, :last_name, :role
