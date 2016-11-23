@@ -1,0 +1,15 @@
+<div class="container skill_edit">
+  <div class="skill_form_inputs">
+    <%= simple_form_for [@packer, @skill] do |a| %>
+      <%= a.hidden_field :skill_id, :value => @skill.id %>
+
+      <%= a.input :title %>
+      <%= a.input :level %>
+      <%= a.input :type_of_skill %>
+  </div>
+</div>
+
+<div class="container submit">
+  <%= a.submit class: "btn btn-primary" %>
+</div>
+<% end %>
