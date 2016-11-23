@@ -12,7 +12,8 @@ class Users::SessionsController < Devise::SessionsController
       yield resource if block_given?
       respond_with resource, location: after_sign_in_path_for(resource)
     else
-      fail
+      flash[:alert] = "invalid email or password"
+      redirect_to :back
     end
   end
 
@@ -20,10 +21,15 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
+  private
+
   def after_sign_in_path_for(resource)
-    fail
+    if resource.role == "crew"
+      deck_crew_path(resource.crew)
+    else
+      deck_packer_path(resource.packer)
+    end
   end
 
-private
 
 end

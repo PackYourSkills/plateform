@@ -1,47 +1,63 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-
-      if @user.role == "crew"
-
-        @crew = @user.build_crew(crew_params)
-        if @crew.save
-          sign_in @user
-          redirect_to crew_path @crew
+    build_resource(sign_up_params)
+    resource['role'] = params['user']['role']
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        if resource.role == "crew"
+          @crew = resource.build_crew(crew_params)
+          if @crew.save
+            sign_up(resource_name, resource)
+            respond_with resource, location: after_sign_up_path_for(resource)
+          else
+            resource.destroy
+            redirect_to :back
+          end
         else
-          @user.destroy
-          params['role'] = @user.role
-          render :new
+          @packer = resource.build_packer(packer_params)
+          if @packer.save
+            sign_up(resource_name, resource)
+            respond_with resource, location: after_sign_up_path_for(resource)
+          else
+            resource.destroy
+            flash[:alert] = "registration error ! If you arrive here,
+            please contact Maxime at maxime@packyourskills.com"
+            redirect_to :back
+          end
         end
-
       else
-
-        @packer = @user.build_packer(packer_params)
-        if @packer.save
-          sign_in @user
-          redirect_to packer_path @packer
-        else
-          @user.destroy
-          params['role'] = @user.role
-          render :new
-        end
-
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
-
     else
-      params['role'] = @user.role
-      render :new
+      clean_up_passwords resource
+      set_minimum_password_length
+      flash[:alert] = resource.errors.full_messages
+      redirect_to :back
     end
   end
 
-
 private
 
-  def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :role, :password)
+  def after_sign_up_path_for(resource)
+    if resource.role == "crew"
+      deck_crew_path(resource.crew)
+    else
+      deck_packer_path(resource.packer)
+    end
+  end
+
+  def after_inactive_sign_up_path_for(resource)
+    if resource.role == "crew"
+      deck_crew_path(resource.crew)
+    else
+      deck_packer_path(resource.packer)
+    end
   end
 
   def crew_params
@@ -54,3 +70,40 @@ private
 end
 
 ## :email, :facebook_picture_url, :token, :token_expiry, :first_name, :last_name, :role
+
+
+
+    # @user = User.new(user_params)
+
+    # if @user.save
+
+    #   if @user.role == "crew"
+
+    #     @crew = @user.build_crew(crew_params)
+    #     if @crew.save
+    #       sign_in @user
+    #       redirect_to deck_crew_path @crew
+    #     else
+    #       @user.destroy
+    #       params['role'] = @user.role
+    #       render :new
+    #     end
+
+    #   else
+
+    #     @packer = @user.build_packer(packer_params)
+    #     if @packer.save
+    #       sign_in @user
+    #       redirect_to deck_packer_path @packer
+    #     else
+    #       @user.destroy
+    #       params['role'] = @user.role
+    #       render :new
+    #     end
+
+    #   end
+
+    # else
+    #   params['role'] = @user.role
+    #   render :new
+    # end

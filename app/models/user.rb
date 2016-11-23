@@ -27,7 +27,6 @@ class User < ApplicationRecord
       packer = user.build_packer(email: user.email, first_name: user.first_name, last_name: user.last_name)
       packer.save
     end
-
     return user
   end
 
