@@ -1,0 +1,14 @@
+<%= simple_form_for @education, url: packer_education_path(@packer, @education) do |f| %>
+
+    <%= f.input :school %>
+    <%= f.input :degree %>
+    <%= f.input :end_time, as: :date, start_year: Date.today.year - 100,
+                                end_year: Date.today.year, discard_day: false,
+                                order: [:month, :year] %>
+    <%= f.input :field %>
+
+
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
+<% end %>
