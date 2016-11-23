@@ -9,6 +9,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
 
+  validates :story, :allow_blank => true, length: { within: 100..500 }
 
   ## Facebook Autentification
 
