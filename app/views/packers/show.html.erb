@@ -1,2 +1,19 @@
 <h1>Packers#show</h1>
-<p>Find me in app/views/packers/show.html.erb</p>
+<p>Find me in app/views/packers/show.html.erb</p></br>
+
+<hr>
+<h3>Your skills</h3>
+<ul>
+<% @packer.skills.each do |skill| %>
+<li><%= skill.title %>      <%= skill.level %>      <%= skill.type_of_skill %>
+
+  <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
+  <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+
+</li>
+
+<%end%>
+</ul>
+<hr>
+
+<%= link_to 'edit', edit_packer_path(@packer) %></br>
