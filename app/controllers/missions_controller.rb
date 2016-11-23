@@ -39,6 +39,7 @@ end
 
 def set_crew
   @crew = Crew.find(params[:crew_id])
+end
 
 def mission_params
   params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
