@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         if resource.role == "crew"
-          @crew = resource.build_crew()
+          @crew = resource.build_crew
           if @crew.save
             set_flash_message! :notice, :signed_up
             sign_up(resource_name, resource)
@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             redirect_to :back
           end
         else
-          @packer = resource.build_packer()
+          @packer = resource.build_packer
           if @packer.save
             set_flash_message! :notice, :signed_up
             sign_up(resource_name, resource)
