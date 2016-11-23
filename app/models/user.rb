@@ -8,6 +8,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
+
+  validates :story, :allow_blank => true, length: { within: 100..500 }
+
+  ## Facebook Autentification
+
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
@@ -24,7 +29,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.role = "packer"
       user.save
-      packer = user.build_packer(email: user.email, first_name: user.first_name, last_name: user.last_name)
+      packer = user.build_packer
       packer.save
     end
     return user

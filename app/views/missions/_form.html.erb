@@ -1,0 +1,27 @@
+<div class="container mission_edit">
+  <div class="mission_form_inputs">
+    <%= simple_form_for (@mission) do |a| %>
+      <%= a.hidden_field :mission_id, :value => @mission.id %>
+
+      <%= a.input :title %>
+      <%= a.input :address %>
+      <%= a.input :city %>
+      <%= a.input :country, as: :string %>
+
+      <%= a.input :duration %>
+      <%= a.input :skill %>
+      <%= a.input :description %>
+
+      <%= a.input :hours_per_day %>
+      <%= a.input :days_per_week %>
+      <%= a.input :hosting_condition %>
+      <%= a.input :food %>
+
+      <%= a.input :other_comment %>
+  </div>
+</div>
+
+<div class="container submit">
+  <%= a.submit %>
+</div>
+<% end %>

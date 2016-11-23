@@ -1,32 +1,29 @@
 class PackersController < ApplicationController
 
-  def show
-    @packer = Packer.find(params[:id])
+  before_action :set_packer, only: [ :edit, :update, :show ]
+
+  def edit
   end
 
   def update
-    @packer = Packer.find(params[:id])
     if params[:packer]
       @packer.update(packer_params)
     end
-    redirect_to packer_path
+    redirect_to packer_path @packer
   end
 
-  def edit
-    @packer = Packer.find(params[:id])
-  end
-
-  def destroy
-    @packer = Packer.find(params[:id])
-    @packer.destroy
-    session.clear
-    flash[:notice] = "Le compte vient d'être supprimé."
-    redirect_to logout_path
+  def show
   end
 
 private
 
   def packer_params
-    params.require(:packer).permit(:first_name, :last_name, :email, :password, :cv_link, :website, :youtube_link, :story, :skype, :phone, :nationality, :country, :city, :age, :sexe)
+    params.require(:packer).permit( :cv_link, :website, :youtube_link,
+      :skype, :phone, :nationality, :sexe)
   end
+
+  def set_packer
+    @packer = Packer.find (params[:id])
+  end
+
 end

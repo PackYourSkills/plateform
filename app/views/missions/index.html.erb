@@ -1,0 +1,6 @@
+<% @missions.each do |mission| %>
+  <h2><%= mission.title %></h2>
+<% end %>
+
+<%= link_to "back to your deck", deck_crew_path(current_user.crew) %></br>
+

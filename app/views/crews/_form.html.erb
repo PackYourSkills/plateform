@@ -4,14 +4,10 @@
       <%= a.hidden_field :crew_id, :value => @crew.id %>
 
       <%= a.input :name %>
-      <%= a.input :address %>
-      <%= a.input :city %>
-      <%= a.input :country, as: :string, priority: [ 'FR' ] %>
 
       <%= a.input :social_issue %>
       <%= a.input :values %>
       <%= a.input :mission %>
-      <%= a.input :description %>
 
       <%= a.input :creation_date, discard_day: true %>
       <%= a.input :nb_collaborators %>
@@ -28,6 +24,6 @@
 </div>
 
 <div class="container submit">
-  <%= a.submit class: "btn btn-primary"%>
+  <%= a.submit class: "btn btn-primary" %>
 </div>
 <% end %>

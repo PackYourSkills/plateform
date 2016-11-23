@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
-
   root to: 'pages#home'
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations', sessions: 'users/sessions' }
 
-  resources :crews, only: [:edit, :destroy, :update, :show] do
+  resources :crews, only: [:edit, :update, :show] do
     resources :orders, only: [:new, :show, :create]
   end
   get "crews/:id/deck", to: "crews#deck", as: 'deck_crew'
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
   end
   get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
 
-  resources :packers, only: [:edit, :destroy, :update, :show] do
+  resources :packers, only: [:edit, :update, :show] do
     resources :experiences, only: [:new, :create, :edit, :destroy, :update]
     resources :skills, only: [:new, :create, :edit, :destroy, :update]
     resources :educations, only: [:new, :create, :edit, :destroy, :update]

@@ -13,11 +13,6 @@ class CrewsController < ApplicationController
   def show
   end
 
-  def destroy
-    @crew.destroy
-    redirect_to root_path
-  end
-
   private
 
   def set_crew
@@ -25,9 +20,10 @@ class CrewsController < ApplicationController
   end
 
   def crew_params
-    params.require(:crew).permit(:name, :city, :country, :address,
-      :social_issue, :mission, :creation_date, :description,
-      :nb_collaborators, :team_description, :phone, :skype, :twitter, :website,
-      :values, :credit_count, :email)
+    params.require(:crew).permit(:name,
+      :social_issue, :mission, :creation_date,
+      :nb_collaborators, :team_description,
+      :phone, :skype, :twitter, :website,
+      :values, :credit_count)
   end
 end
