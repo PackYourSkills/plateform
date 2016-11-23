@@ -16,7 +16,7 @@ class MissionsController < ApplicationController
     @mission = @crew.missions.build(mission_params)
     authorize @mission
     if @mission.save
-      redirect_to deck_crew_path (@crew)
+      redirect_to mission_path(@mission)
     else
       render :new
     end
@@ -38,14 +38,13 @@ class MissionsController < ApplicationController
     redirect_to deck_crew_path @crew
   end
 
-private
   def set_mission
     @mission = Mission.find(params[:id])
     authorize @mission
   end
 
   def set_crew
-    @crew = Crew.find(params[:crew_id])
+    @crew = Crew.find(current_user.crew)
   end
 
   def mission_params
