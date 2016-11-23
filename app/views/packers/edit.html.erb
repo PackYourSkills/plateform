@@ -3,43 +3,32 @@
 
 
 
-
-<h2>Edit Profile</h2>
-<%= form_for(@packer) do |u| %>
+<%= simple_form_for(@packer) do |f| %>
 
 
-    <label for="first_name">First Name</label>
-    <input type="text" name="packer[first_name]" id="first_name" value="<%= @packer.first_name %>">
-
-    <label for="last_name">Last Name</label>
-    <input type="text" name="packer[last_name]" id="last_name" value="<%= @packer.last_name %>">
-
-    <label for="city">City</label>
-    <input type="text" name="packer[city]" id="city" value="<%= @packer.city %>">
-
-    <label for="country">Country</label>
-    <input type="text" name="packer[country]" id="country" value="<%= @packer.country %>">
+  <div class="form-inputss">
 
 
-    <label for="phone">Phone</label>
-    <input type="text" name="packer[phone]" id="phone" value="<%= @packer.phone %>">
+    <%= f.input :sexe, as: :radio_buttons,
+      collection: ['Male', 'Female'], wrapper: :vertical_radio_and_checkboxes %>
+    <%= f.input :age, as: :date, start_year: Date.today.year - 100,
+                                end_year: Date.today.year - 18, discard_day: false,
+                                order: [:day, :month, :year] %>
+    <%= f.input :city %>
+    <%= f.input :country, as: :string %>
+    <%= f.input :nationality ,label: "nationality", placeholder: 'put it here'%>
+    <%= f.input :website ,label: "Your website", placeholder: 'put the link here'%>
+    <%= f.input :phone ,label: "Phone number", placeholder: 'put your phone number here'%>
+    <%= f.input :skype ,label: "Skype", placeholder: 'put your username in Skype'%>
+    <%= f.input :youtube_link ,label: "Do you want to add a video?", placeholder: 'give us a youtube link'%>
+    <%= f.input :job , placeholder: 'What are you doing ?' %>
+    <%= f.input :cv_link ,label: "Link to your CV", placeholder: 'put the link here (linkedin, viadeo...)'%>
+    <%= f.input :story , placeholder: 'Tell us more about you' %>
 
 
-    <label for="skype">Skype</label>
-    <input type="text" name="packer[skype]" id="skype" value="<%= @packer.skype %>">
+  </div>
 
-
-    <label for="youtube_link">Youtube link</label>
-    <input type="text" name="packer[youtube_link]" id="youtube_link" value="<%= @packer.youtube_link %>">
-
-    <label for="story">Please, introduce you:</label><br>
-    <textarea name="packer[story]">
-      <%= @packer.story %>
-    </textarea>
-
-
-
-
-
-  <input type="submit" value="Save" class="btn btn-default">
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
 <% end %>

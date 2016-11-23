@@ -7,10 +7,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
         if resource.role == "crew"
           @crew = resource.build_crew()
           if @crew.save
+            set_flash_message! :notice, :signed_up
             sign_up(resource_name, resource)
             respond_with resource, location: after_sign_up_path_for(resource)
           else
@@ -22,6 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         else
           @packer = resource.build_packer()
           if @packer.save
+            set_flash_message! :notice, :signed_up
             sign_up(resource_name, resource)
             respond_with resource, location: after_sign_up_path_for(resource)
           else
@@ -61,7 +62,6 @@ private
       deck_packer_path(resource.packer)
     end
   end
-
 end
 
 ## :email, :facebook_picture_url, :token, :token_expiry, :first_name, :last_name, :role
