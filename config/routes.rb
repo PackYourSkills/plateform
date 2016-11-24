@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/nelson', as: 'rails_admin'
   root to: 'pages#home'
 
   devise_for :users,

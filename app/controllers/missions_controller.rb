@@ -14,12 +14,8 @@ class MissionsController < ApplicationController
 
   def create
     @mission = @crew.missions.new(mission_params)
-    if @mission.save
-      redirect_to mission_path @mission
-    else
-      render :new
-    end
     authorize @mission
+    @mission.save ? (redirect_to mission_path @mission) : (render :new)
   end
 
   def show
@@ -29,8 +25,7 @@ class MissionsController < ApplicationController
   end
 
   def update
-    @mission.update(mission_params)
-    redirect_to mission_path
+    @mission.update(mission_params) ? (redirect_to mission_path @mission) : (render :edit)
   end
 
   def destroy
