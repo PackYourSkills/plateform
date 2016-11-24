@@ -13,7 +13,7 @@ class ExperiencesController < ApplicationController
   end
 
   def create
-    @experience = @packer.experiences.built(experience_params)
+    @experience = @packer.experiences.build(experience_params)
     authorize @experience
     @experience.save ? (redirect_to packer_path @packer) : (render :new)
   end
@@ -45,3 +45,4 @@ class ExperiencesController < ApplicationController
     params.require(:experience).permit(:type_of_exp, :start_time, :end_time, :organisation, :position, :description)
   end
 end
+

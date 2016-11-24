@@ -16,10 +16,13 @@ Rails.application.routes.draw do
   end
   get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
 
-  resources :packers, only: [:edit, :update, :show] do
+    resources :packers, only: [:edit, :update, :show] do
     resources :experiences, only: [:new, :create, :edit, :destroy, :update]
     resources :skills, only: [:new, :create, :edit, :destroy, :update]
     resources :educations, only: [:new, :create, :edit, :destroy, :update]
   end
 
 end
+
+
+
