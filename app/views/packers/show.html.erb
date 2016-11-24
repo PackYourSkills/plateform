@@ -4,47 +4,40 @@
 <hr>
 <h3>Your skills</h3>
 <ul>
+
   <% @packer.skills.each do |skill| %>
     <li><%= skill.title %>  <%= skill.level %>  <%= skill.type_of_skill %>
       <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
       <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+
     </li>
   <%end%>
+  <%= link_to "new", new_packer_skill_path(@packer) %>
 </ul>
 
 
 <h3>Your education </h3>
 <ul>
+
 <% @packer.educations.each do |education| %>
-  <li> <%= education.school %>   <%=education.degree %>    <%= education.end_time %>  <%= education.field %>
+  <li> <%= education.school %>   <%=education.degree %>  <%= education.end_time.month %>/<%= education.end_time.year %>  <%= education.field %>
 <%= link_to "edit", edit_packer_education_path(@packer, education) %>
 <%= link_to "delete", packer_education_path(@packer, education), method: :delete, data: {confirm: "Are you sure?"} %>
   </li>
 <%end%>
+<%= link_to "new", new_packer_education_path(@packer) %>
 </ul>
 
 
 <h3>Your experiences </h3>
 <ul>
 <% @packer.experiences.each do |experience| %>
-<li> <%= experience.type_of_exp %> <%=experience.start_time %> <%= experience.end_time %> <%= experience.organisation %> <%= link_to "edit", edit_packer_experience_path(@packer, experience) %>
-  <%= link_to "delete", packer_experience_path(@packer,experience), method: delete, data: {confirm: "Are your sure?"} %>
+<li> <%= experience.type_of_exp %> <%=experience.start_time.month %>/<%=experience.start_time.year %>-<%= experience.end_time.month %>/<%=experience.start_time.year %> <%= experience.organisation %> <%= link_to "edit", edit_packer_experience_path(@packer, experience) %>
+  <%= link_to "delete", packer_experience_path(experience), method: :delete, data: {confirm: "Are your sure?"} %>
   </li>
   <%end%>
   </ul>
-
-
-<h3>Your applications </h3>
-<ul>
-<% @packer.connections.each do |connection| %>
-<li> <% connection.message %> <%connection.status%>
-<% link_to "edit", edit_packer_connection_path(@packer,connection) %>
-<%=link_to "delete", packer_experience_path(@path, experience), method: delete, data: {confirm: "Are you sure?"} %>
-</li>
-<%end%>
-</ul>
-
-
+   <%= link_to "new", new_packer_experience_path(@packer) %>
 
 <hr>
 
