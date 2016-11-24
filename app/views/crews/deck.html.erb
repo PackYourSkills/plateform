@@ -1,6 +1,19 @@
 here is your deck crew</br>
+<h2> Hi <%= @crew.name %>!</h2></br>
 
-<%= link_to "post a mission", new_mission_path %></br>
+<h3> You have <%= @crew.missions.count %> current missions </h3>
+
+<ul>
+  <% @crew.missions.order(created_at: :desc).each do |mission| %>
+    <li>
+      <h3>Mission: <%= mission.title %></h3><br>
+      <p><%= mission.country %>   <%= mission.city %></p><br>
+      <p><%= mission.duration %></p><br>
+      <%= link_to "see more", mission_path(mission) %>
+    </li>
+    <hr>
+  <% end %>
+</ul>
+
+<%= link_to "post a new mission", new_mission_path %></br>
 <%= link_to "see your profile", crew_path %></br>
-<%= link_to "see your missions", missions_path %></br>
-

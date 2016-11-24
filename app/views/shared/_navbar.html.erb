@@ -13,6 +13,12 @@
       <!-- To delete -->
       -- Just to check, you are a <%= current_user.role %> --
 
+      <% if current_user.crew? %>
+        <%= link_to "My deck", deck_crew_path(current_user.crew) %>
+      <% else %>
+        <%= link_to "My deck", deck_packer_path(current_user.packer) %>
+      <% end %>
+
       <!-- Login out link -->
       <%= link_to destroy_user_session_path, method: :delete do %>
         <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
