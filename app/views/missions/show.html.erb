@@ -1,3 +1,42 @@
-<h3><%= @mission.title %></h3>
+<h2><%= @mission.title %></h2>
 
-<%= link_to "edit", edit_mission_path %>
+<h3> Where? </h3>
+<p><%= @mission.country %></p>
+<p><%= @mission.city %></p>
+<p><%= @mission.address %></p>
+
+<h3>To do what? </h3>
+<p>For: <%= @mission.duration %></p>
+<p>Skills: <%= @mission.skill %></p>
+<p>What for: <%= @mission.description %></p>
+
+<h3>Useful to know</h3>
+<p><%= @mission.hours_per_day %> hours per day</p>
+<p><%= @mission.days_per_week %> days a week</p>
+<p>Hosting: <%= @mission.hosting_condition %></p>
+<p>Meals: <%= @mission.food %></p>
+<p>Other: <%= @mission.other_comment %></p>
+
+<div id="map" style="width: 600px; height: 600px;"></div>
+
+<% content_for(:after_js) do %>
+ <%= javascript_tag do %>
+   $(document).ready(function() {
+     var handler = Gmaps.build('Google');
+     handler.buildMap({ internal: { id: 'map' } }, function() {
+       markers = handler.addMarkers(<%= raw @hash.to_json %>);
+       handler.bounds.extendWith(markers);
+       handler.fitMapToBounds();
+       if (markers.length == 0) {
+         handler.getMap().setZoom(2);
+       } else if (markers.length == 1) {
+         handler.getMap().setZoom(14);
+       }
+     });
+   });
+ <% end %>
+<% end %>
+
+<% if @mission.crew == current_user.crew %>
+  <%= link_to "edit", edit_mission_path %>
+<% end %>

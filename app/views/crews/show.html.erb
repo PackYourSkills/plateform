@@ -2,12 +2,30 @@
       <h1>Welcome home <%= @crew.name %> ! </h1>
 </div>
 
+<div class="container">
+  <h3>Your spirit</h3>
+  <p>The reason why : <%= @crew.social_issue %></p><br>
+  <p>Your values : <%= @crew.values %></p><br>
+  <p>Your goal : <%= @crew.mission %></p><br>
+
+  <h3>Your team</h3>
+  <p>Since: <%= @crew.creation_date %></p><br>
+  <p>How many of you: <%= @crew.nb_collaborators %></p><br>
+  <p>Who you are : <%= @crew.team_description %></p><br>
+
+  <h3>Your contact</h3>
+  <p>Your phone : <%= @crew.phone %></p><br>
+  <p>Your website : <%= @crew.website %></p><br>
+  <p>Your facebook : <%= @crew.facebook %></p><br>
+  <p>Your twitter : <%= @crew.twitter %></p><br>
+
+  <h3>Your credit account</h3>
+  <%= @crew.credit_count %><br>
+</div>
+
 
 <div class="container text-center link">
   <% if user_signed_in? %>
-      <%= link_to "delete my crew", crew_path(@crew), method: :delete, data: { confirm: "Are you sure?" } %></br>
           <%= link_to 'edit', edit_crew_path(@crew) %></br>
-          <%= link_to "back to your deck", deck_crew_path(current_user.crew) %></br>
-
     <% end %>
 </div>

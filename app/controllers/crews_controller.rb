@@ -11,7 +11,7 @@ class CrewsController < ApplicationController
 
   def update
     @crew.update(crew_params)
-    @crew.save ? (redirect_to root_path @crew) : (render :edit)
+    @crew.save ? (redirect_to crew_path(@crew)) : (render :edit)
   end
 
   def show
