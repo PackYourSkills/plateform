@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
 
   before_action :set_mission, only: [ :show, :edit, :update, :destroy ]
-  before_action :set_crew, only: [ :create, :destroy ]
+  before_action :set_crew, only: [ :edit, :create, :destroy ]
 
   def index
     @missions = policy_scope(Mission)
@@ -15,7 +15,7 @@ class MissionsController < ApplicationController
   def create
     @mission = @crew.missions.new(mission_params)
     authorize @mission
-    @mission.save ? (redirect_to mission_path @mission) : (render :new)
+    @mission.save ? (redirect_to mission_path @mission) : (render :new)
   end
 
   def show
@@ -26,7 +26,6 @@ class MissionsController < ApplicationController
 
   def update
     @mission.update(mission_params) ? (redirect_to mission_path @mission) : (render :edit)
-
   end
 
   def destroy

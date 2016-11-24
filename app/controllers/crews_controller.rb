@@ -24,7 +24,7 @@ class CrewsController < ApplicationController
   private
 
   def set_crew
-    @crew = Crew.find (params[:id])
+    @crew = Crew.find(params[:id])
     authorize @crew
   end
 
