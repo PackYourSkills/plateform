@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/nelson', as: 'rails_admin'
+  mount Attachinary::Engine => "/attachinary"
   root to: 'pages#home'
 
   devise_for :users,
