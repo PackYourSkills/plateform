@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   # geocode
   geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  after_validation :geocode, if: :full_address_changed?
 
   ## Facebook Autentification
 
@@ -41,5 +41,9 @@ class User < ApplicationRecord
   ## method to verify role
   def crew?
     self.role == "crew"
+  end
+
+  def full_address_changed?
+    address_changed? || city_changed? || country_changed?
   end
 end
