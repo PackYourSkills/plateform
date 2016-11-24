@@ -12,7 +12,6 @@ class PackersController < ApplicationController
   def update
     @packer.update(packer_params)
     @packer.save ? (redirect_to packer_path @packer) : (render :edit)
-
   end
 
   def show

@@ -24,6 +24,6 @@ private
   end
 
   def current_user_or_admin?
-    user == record.crew.user || user.admin
+    user == record.packer.user || user.admin
   end
 end

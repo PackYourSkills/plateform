@@ -13,7 +13,7 @@ class MissionsController < ApplicationController
   end
 
   def create
-    @mission = @crew.missions.build(mission_params)
+    @mission = @crew.missions.new(mission_params)
     authorize @mission
     @mission.save ? (redirect_to mission_path @mission) : (render :new)
   end
@@ -25,8 +25,8 @@ class MissionsController < ApplicationController
   end
 
   def update
-    @mission.update
-    @mission.save ? (redirect_to mission_path @mission) : (render :edit)
+    @mission.update(mission_params) ? (redirect_to mission_path @mission) : (render :edit)
+
   end
 
   def destroy
