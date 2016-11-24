@@ -1,10 +1,21 @@
 class MissionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   before_action :set_mission, only: [ :show, :edit, :update, :destroy ]
   before_action :set_crew, only: [ :edit, :create, :destroy ]
 
   def index
-    @missions = policy_scope(Mission)
+    @all = policy_scope(Mission)
+    radius = params['radius'].to_i
+    address = params['address']
+
+    @missions = @all.near(address, radius)
+
+    @hash = Gmaps4rails.build_markers(@missions) do |mission, marker|
+      marker.lat mission.latitude
+      marker.lng mission.longitude
+      # marker.infowindow render_to_string(partial: "/nests/map_box", locals: { nest: nest })
+    end
   end
 
   def new
@@ -19,6 +30,11 @@ class MissionsController < ApplicationController
   end
 
   def show
+    @hash = Gmaps4rails.build_markers(@mission) do |mission, marker|
+      marker.lat mission.latitude
+      marker.lng mission.longitude
+      # marker.infowindow render_to_string(partial: "/nests/map_box", locals: { nest: nest })
+    end
   end
 
   def edit

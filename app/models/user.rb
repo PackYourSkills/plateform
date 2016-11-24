@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   validates :story, :allow_blank => true, length: { within: 100..500 }
 
+  # geocode
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   ## Facebook Autentification
 
   def self.find_for_facebook_oauth(auth)
