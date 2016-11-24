@@ -1,4 +1,4 @@
-<%= simple_form_for @experience, url: packer_experience_path(@packer,@experience) do |f| %>
+<%= simple_form_for [@packer, @experience] do |f| %>
 
     <%= f.input :type_of_exp %>
     <%= f.input :start_time, as: :date, start_year: Date.today.year - 100,

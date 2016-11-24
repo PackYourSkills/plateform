@@ -15,7 +15,7 @@ class EducationsController < ApplicationController
   def create
     @education = @packer.educations.build(education_params)
     authorize @education
-    @education.save ? redirect_to packer_path @packer | render :new
+    @education.save ? (redirect_to packer_path @packer) : (render :new)
   end
 
   def edit
@@ -23,7 +23,7 @@ class EducationsController < ApplicationController
 
   def update
     @education.update_attributes(education_params)
-    @education.save ? redirect_to packer_path @packer | render :edit
+    @education.save ? (redirect_to packer_path @packer) : (render :edit)
   end
 
   def destroy
