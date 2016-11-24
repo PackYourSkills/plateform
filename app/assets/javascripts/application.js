@@ -12,5 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+//= require modernizr
+//= require rs-plugin/js/jquery.themepunch.tools.min
+//= require rs-plugin/js/jquery.themepunch.revolution.min
+//= require isotope/isotope.pkgd.min
+//= require magnific-popup/jquery.magnific-popup.min
+//= require waypoints/jquery.waypoints.min
+//= require jquery.countTo
+//= require jquery.parallax-1.1.3
+//= require jquery.validate
+//= require vide/jquery.vide
+//= require owl-carousel/owl.carousel
+//= require jquery.browser
+//= require SmoothScroll
+//= require template
+//= require custom
