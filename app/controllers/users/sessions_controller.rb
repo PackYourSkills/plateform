@@ -24,12 +24,6 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-    if resource.role == "crew"
-      deck_crew_path(resource.crew)
-    else
-      deck_packer_path(resource.packer)
-    end
+    resource.crew? ? (deck_crew_path(resource.crew)) : (deck_packer_path(resource.packer))
   end
-
-
 end

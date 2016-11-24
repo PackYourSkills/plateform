@@ -15,7 +15,7 @@ class SkillsController < ApplicationController
   def create
     @skill = @packer.skills.build(skill_params)
     authorize @skill
-    @skill.save ? redirect_to packer_path(@packer) | render :new
+    @skill.save ? (redirect_to packer_path @packer) : (render :new)
   end
 
   def edit
@@ -23,7 +23,7 @@ class SkillsController < ApplicationController
 
   def update
     @skill.update(skill_params)
-    @skill.save ? redirect_to packer_path @packer | render :edit
+    @skill.save ? (redirect_to packer_path @packer) : (render :edit)
   end
 
   def destroy

@@ -48,57 +48,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 private
 
   def after_sign_up_path_for(resource)
-    if resource.role == "crew"
-      deck_crew_path(resource.crew)
-    else
-      deck_packer_path(resource.packer)
-    end
+    resource.crew? ? (deck_crew_path(resource.crew)) : (deck_packer_path(resource.packer))
   end
 
   def after_inactive_sign_up_path_for(resource)
-    if resource.role == "crew"
-      deck_crew_path(resource.crew)
-    else
-      deck_packer_path(resource.packer)
-    end
+    resource.crew? ? (deck_crew_path(resource.crew)) : (deck_packer_path(resource.packer))
   end
 end
 
-## :email, :facebook_picture_url, :token, :token_expiry, :first_name, :last_name, :role
-
-
-
-    # @user = User.new(user_params)
-
-    # if @user.save
-
-    #   if @user.role == "crew"
-
-    #     @crew = @user.build_crew(crew_params)
-    #     if @crew.save
-    #       sign_in @user
-    #       redirect_to deck_crew_path @crew
-    #     else
-    #       @user.destroy
-    #       params['role'] = @user.role
-    #       render :new
-    #     end
-
-    #   else
-
-    #     @packer = @user.build_packer(packer_params)
-    #     if @packer.save
-    #       sign_in @user
-    #       redirect_to deck_packer_path @packer
-    #     else
-    #       @user.destroy
-    #       params['role'] = @user.role
-    #       render :new
-    #     end
-
-    #   end
-
-    # else
-    #   params['role'] = @user.role
-    #   render :new
-    # end

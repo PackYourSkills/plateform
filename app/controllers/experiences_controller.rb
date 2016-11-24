@@ -13,9 +13,9 @@ class ExperiencesController < ApplicationController
   end
 
   def create
-    @experience = @packer.experiences.new(experience_params)
+    @experience = @packer.experiences.built(experience_params)
     authorize @experience
-    @experience.save ? redirect_to packer_path @packer | render :new
+    @experience.save ? (redirect_to packer_path @packer) : (render :new)
   end
 
   def edit
@@ -23,7 +23,7 @@ class ExperiencesController < ApplicationController
 
   def update
     @experience.update_attributes(experience_params)
-    @experience.save ? redirect_to packer_path @packer | render :edit
+    @experience.save ? (redirect_to packer_path @packer) : (render :edit)
   end
 
   def destroy
