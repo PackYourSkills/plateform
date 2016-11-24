@@ -1,0 +1,8 @@
+<%= simple_form_for :search, :html => { class: 'form-inline' }, :url => missions_path, :method => 'get' do |f| %>
+  <%= f.input :address, label: false, :input_html => {:name => "address"} %>
+  <div class="input-group">
+    <%= f.input :radius, label: false, placeholder: 'max distance', :input_html => {:name => "radius", class: 'form-control'} %>
+    <div class="input-group-addon">km</div>
+  </div>
+  <%= f.submit 'Go', class: 'btn btn-primary' %>
+<% end %>
