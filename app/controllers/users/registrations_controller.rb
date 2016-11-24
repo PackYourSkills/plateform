@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
-        if resource.role == "crew"
+        if resource.crew?
           @crew = resource.build_crew
           if @crew.save
             set_flash_message! :notice, :signed_up
