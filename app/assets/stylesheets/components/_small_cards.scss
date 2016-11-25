@@ -1,0 +1,28 @@
+.small-card {
+  height: 75px;
+  width: 250px;
+  background-color: $brand-color;
+  margin: 20px;
+  margin-left: 0;
+  line-height: 75px;
+  h3 {
+    color: $dark;
+    font-family: $base-font;
+    font-size: 15px;
+    margin: 0;
+    line-height: 75px;
+  }
+  a {
+    color: $dark;
+    font-family: $base-font;
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+
+.small-card:hover {
+  a{
+    text-decoration: none;
+    color: $grey;
+  }
+}

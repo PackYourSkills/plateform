@@ -1,0 +1,20 @@
+.btn-crew-deck {
+  width: 150px;
+  height: 75px;
+  background-color: $dark;
+  padding-top: 25px;
+  margin-top: 25px;
+  a {
+  color: white;
+  font-family: $header-font;
+  font-size: 20px;
+  }
+}
+
+.btn-crew-deck:hover {
+  background-color: $brand-color;
+  a {
+  color: $dark;
+  text-decoration: none,
+  }
+}

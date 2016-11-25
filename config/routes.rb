@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   get "infos/edit" #, as: 'info_packer' #to: "basics_infos#packer",
+  patch "infos/update"
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations', sessions: 'users/sessions' }

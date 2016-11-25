@@ -23,12 +23,12 @@ class PackersController < ApplicationController
 private
 
   def packer_params
-    params.require(:packer).permit( :cv_link, :website, :youtube_link,
+    params.require(:packer).permit(:cv_link, :website, :youtube_link,
       :skype, :phone, :nationality, :sexe)
   end
 
   def set_packer
-    @packer = Packer.find (params[:id])
+    @packer = Packer.find(params[:id])
     authorize @packer
   end
 end
