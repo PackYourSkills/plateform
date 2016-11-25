@@ -24,7 +24,7 @@ class MissionsController < ApplicationController
   end
 
   def create
-    @mission = @crew.missions.new(mission_params)
+    @mission = @crew.missions.build(mission_params)
     authorize @mission
     @mission.save ? (redirect_to mission_path @mission) : (render :new)
   end
@@ -62,6 +62,6 @@ class MissionsController < ApplicationController
 
   def mission_params
     params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
-      :descritpion, :hours_per_day, :days_per_week, :hosting_condition, :food, :other_comment, photos: [])
+      :description, :hours_per_day, :days_per_week, :hosting_condition, :food, :other_comment, photos: [])
   end
 end
