@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/nelson', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
+
   root to: 'pages#home'
+
+  get "infos/edit" #, as: 'info_packer' #to: "basics_infos#packer",
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations', sessions: 'users/sessions' }
@@ -17,7 +20,7 @@ Rails.application.routes.draw do
   end
   get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
 
-    resources :packers, only: [:edit, :update, :show] do
+  resources :packers, only: [:edit, :update, :show] do
     resources :experiences, only: [:new, :create, :edit, :destroy, :update]
     resources :skills, only: [:new, :create, :edit, :destroy, :update]
     resources :educations, only: [:new, :create, :edit, :destroy, :update]

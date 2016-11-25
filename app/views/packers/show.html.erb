@@ -4,15 +4,13 @@
 <hr>
 <h3>Your skills</h3>
 <ul>
-
-  <% @packer.skills.each do |skill| %>
-    <li><%= skill.title %>  <%= skill.level %>  <%= skill.type_of_skill %>
-      <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
-      <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
-
-    </li>
-  <%end%>
-  <%= link_to "new", new_packer_skill_path(@packer) %>
+<% @packer.skills.each do |skill| %>
+  <li><%= skill.title %>  <%= skill.level %>  <%= skill.type_of_skill %>
+    <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
+    <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+  </li>
+<%end%>
+<%= link_to "new", new_packer_skill_path(@packer) %>
 </ul>
 
 
@@ -21,8 +19,8 @@
 
 <% @packer.educations.each do |education| %>
   <li> <%= education.school %>   <%=education.degree %>  <%= education.end_time.month %>/<%= education.end_time.year %>  <%= education.field %>
-<%= link_to "edit", edit_packer_education_path(@packer, education) %>
-<%= link_to "delete", packer_education_path(@packer, education), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to "edit", edit_packer_education_path(@packer, education) %>
+    <%= link_to "delete", packer_education_path(@packer, education), method: :delete, data: {confirm: "Are you sure?"} %>
   </li>
 <%end%>
 <%= link_to "new", new_packer_education_path(@packer) %>
@@ -35,10 +33,9 @@
 <li> <%= experience.type_of_exp %> <%=experience.start_time.month %>/<%=experience.start_time.year %>-<%= experience.end_time.month %>/<%=experience.start_time.year %> <%= experience.organisation %> <%= link_to "edit", edit_packer_experience_path(@packer, experience) %>
   <%= link_to "delete", packer_experience_path(experience), method: :delete, data: {confirm: "Are your sure?"} %>
   </li>
-  <%end%>
-  </ul>
-   <%= link_to "new", new_packer_experience_path(@packer) %>
-
-<hr>
+<%end%>
+</ul>
+<%= link_to "new", new_packer_experience_path(@packer) %>
 
 <%= link_to 'edit', edit_packer_path(@packer) %></br>
+<%= link_to 'edit your info', infos_edit_path %></br>
