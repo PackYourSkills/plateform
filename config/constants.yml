@@ -1,0 +1,36 @@
+#pour charger le fichier YML dans une variable
+#@constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+
+skills:
+- name: 'Community Management'
+  url: 'community_management'
+  picto: 'fa-comments-o'
+- name: 'Photography Video'
+  url: 'photography_video'
+  picto: 'fa-camera'
+- name: 'Graphic Design'
+  url: 'graphic_design'
+  picto: 'fa-pencil-square-o'
+- name: 'Redaction'
+  url: 'redaction'
+  picto: 'fa-align-left'
+- name: 'Impact assessment'
+  url: 'impact_assessment'
+  picto: 'fa-pie-chart'
+- name: 'Web development'
+  url: 'web_development'
+  picto: 'fa-laptop'
+- name: 'Marketing Studies'
+  url: 'marketing_studies'
+  picto: 'fa fa-area-chart'
+
+social_issues:
+- name: 'Mobility'
+- name: 'Inclusion & Social Link'
+- name: 'Environment'
+- name: 'Fight against poverty'
+- name: 'Human Rights'
+- name: 'Education'
+- name: 'Democracy'
+- name: 'Labour and Employment'
+- name: 'Agriculture & Food'

@@ -41,6 +41,10 @@
  <% end %>
 <% end %>
 
-<% if @mission.crew == current_user.crew %>
-  <%= link_to "edit", edit_mission_path %>
+<% if user_signed_in? %>
+  <% if current_user.crew? %>
+    <% if @mission.crew == current_user.crew %>
+      <%= link_to "edit", edit_mission_path %>
+    <% end %>
+  <% end %>
 <% end %>

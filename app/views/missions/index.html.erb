@@ -1,25 +1,77 @@
+<div class="nooverflow container_O_padding container_0_margin">
+  <div class="scroll-v col-xs-12 col-md-6">
+      <!-- main-container start -->
+      <!-- ================ -->
+          <div class="row">
 
-<%= render 'shared/searching_engine' %>
-<% @missions.each_with_index do |mission, index| %>
-<h2><%= mission.title %> - <%= mission.city %></h2>
-<% end %>
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
 
-<div id="map" style="width: 600px; height: 600px;"></div>
+              <!-- page-title start -->
+              <!-- ================ -->
+              <div class="search_engin_result_page">
+                <%= render "shared/searching_engine" %>
+              </div>
+              <div class="separator-2"></div>
 
+              <!-- isotope filters start -->
+              <div class="filters">
+                <ul class="nav nav-pills">
+                  <li class="active"><a href="#" data-filter="*">All</a></li>
+                  <% @constants = YAML.load_file(Rails.root.join('config', 'constants.yml')) %>
+                  <% @constants['skills'].each do |skill| %>
+                    <li><a href="#" data-filter=".<%= skill['url'] %>"><%= skill['name'] %></a></li>
+                  <% end %>
+                </ul>
+              </div>
+              <!-- isotope filters end -->
+
+              <div class="isotope-container-fitrows row grid-space-10">
+              <% @missions.each_with_index do |mission, index| %>
+                <div class="col-sm-12 col-md-6 isotope-item <%= mission.skill.downcase.gsub(/ /, '_') %>">
+                  <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
+                    <div class="overlay-container">
+                      <img src="images/portfolio-5.jpg" alt="">
+                      <div class="overlay-to-top">
+                        <p class="small margin-clear"><em>Site building <br> Lorem ipsum dolor sit</em></p>
+                      </div>
+                    </div>
+                    <div class="body">
+                      <h3><%= mission.title %></h3>
+                      <div class="separator"></div>
+                      <p><%= mission.description %></p>
+                      <a href=<%= mission_path(mission) %> class="btn btn-default btn-sm btn-hvr hvr-shutter-out-horizontal margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <!-- main end -->
+          </div>
+      <!-- main-container end -->
+  </div>
+  <div class="container_map col-xs-12 col-md-6">
+    <div class="image_100vh_fixed">
+      <div id="map" style="width: 100%; height: calc(100vh - 70px);"></div>
+    </div>
+  </div>
+</div>
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    if (markers.length == 0) {
+      handler.getMap().setZoom(2);
+    } else if (markers.length == 1) {
+    handler.getMap().setZoom(14);
+    }
+    });
     });
   <% end %>
 <% end %>
