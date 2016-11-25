@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/nelson', as: 'rails_admin'
+
   root to: 'pages#home'
+
+  get "basic_infos/packer" #, as: 'info_packer' #to: "basics_infos#packer",
+  patch 'basic_infos/packer'
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations', sessions: 'users/sessions' }
