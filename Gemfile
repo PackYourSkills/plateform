@@ -79,6 +79,9 @@ gem "pundit"
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 
+# Faker pour les Seeds
+gem 'faker', '~> 1.6', '>= 1.6.6'
+
 #--------------------------------------------------#
 #End
 #--------------------------------------------------#
