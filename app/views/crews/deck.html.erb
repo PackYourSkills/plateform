@@ -1,19 +1,85 @@
-here is your deck crew</br>
-<h2> Hi <%= @crew.name %>!</h2></br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12, col-sm-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <% if @crew.logo? %>
+            <%= cl_image_tag @crew.logo.path, width: 150, height: 150, crop: :fill %>
+          <% end %>
+        </div>
+        <div class="col-xs-12">
+          <div class="btn-crew-deck text-center">
+            <%= link_to "edit your profile", edit_crew_path %>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="btn-crew-deck text-center">
+            <%= link_to "see your profile", crew_path %>
+          </div>
+        </div>
+      </div>
 
-<h3> You have <%= @crew.missions.count %> current missions </h3>
+    </div>
 
-<ul>
-  <% @crew.missions.order(created_at: :desc).each do |mission| %>
-    <li>
-      <h3>Mission: <%= mission.title %></h3><br>
-      <p><%= mission.country %>   <%= mission.city %></p><br>
-      <p><%= mission.duration %></p><br>
-      <%= link_to "see more", mission_path(mission) %>
-    </li>
-    <hr>
-  <% end %>
-</ul>
+    <div class="col-xs-12, col-sm-9">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2> Hi <%= @crew.name %>!</h2>
+          <h3>Check your deck</h3>
+        </div>
+        <div class="col-xs-12">
+          <div class="progress style-1">
+            <span class="text"></span>
+              <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="50%">
+                <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - 50%</span>
+              </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="col-xs-4">
+            <div class="small-card text-center">
+              <h3>YOU HAVE 3 CREDITS LEFT</h3>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="small-card text-center">
+              <h3>YOU HAVE <%= @crew.missions.count %> CURRENT MISSIONS</h3>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="small-card text-center">
+              <%= link_to "POST A MISSION", new_mission_path %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to "post a new mission", new_mission_path %></br>
-<%= link_to "see your profile", crew_path %></br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12, col-sm-offset-3 col-sm-9">
+      <div class="panel-group collapse-style-2" id="accordion-2">
+        <% @crew.missions.order(created_at: :desc).each_with_index do |mission, index| %>
+          <div class="panel panel-default">
+            <div class="panel-heading myclass">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                  <%= mission.title %>  <%= mission.city %> <%= mission.country %>  <%= mission.duration %>
+                </a>
+              </h4>
+            </div>
+            <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+              <div class="panel-body">
+                <%= mission.description %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
