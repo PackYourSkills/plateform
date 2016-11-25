@@ -6,12 +6,12 @@ class InfosController < ApplicationController
 
   def update
     current_user.update(params_packer)
-    redirect_to root
+    redirect_to packer_path(current_user)
   end
 
   private
 
   def params_packer
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :story, :address, :city, :zip_code, :country, :birthdate)
   end
 end
