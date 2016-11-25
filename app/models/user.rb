@@ -46,4 +46,17 @@ class User < ApplicationRecord
   def full_address_changed?
     address_changed? || city_changed? || country_changed?
   end
+
+  def progress
+    percent = 20
+    percent+=10 if self.first_name != nil
+    percent+=10 if self.last_name != nil
+    percent+=10 if self.story != nil
+    percent+=10 if self.address != nil
+    percent+=10 if self.city != nil
+    percent+=10 if self.zip_code != nil
+    percent+=10 if self.country != nil
+    percent+=10 if self.birthdate != nil
+    return percent
+  end
 end
