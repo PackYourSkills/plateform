@@ -1,6 +1,6 @@
 <%= simple_form_for [@packer, @experience] do |f| %>
 
-    <%= f.input :type_of_exp %>
+    <%= f.input :type_of_exp, placeholder: "What kind of experience did you have?" %>
     <%= f.input :start_time, as: :date, start_year: Date.today.year - 100,
                                 end_year: Date.today.year, discard_day: false,
                                 order: [:month, :year] %>
@@ -9,9 +9,9 @@
     <%= f.input :end_time, as: :date, start_year: Date.today.year - 100,
                                 end_year: Date.today.year, discard_day: false,
                                 order: [:month, :year] %>
-    <%= f.input :organisation %>
-    <%= f.input :position %>
-    <%= f.input :description %>
+    <%= f.input :organisation, placeholder: "give us the name of the organisation where you worked ex: EDF..." %>
+    <%= f.input :position, placeholder: "type it here " %>
+    <%= f.input :description , placeholder: "Tell us more about it" %>
 
 
   <div class="form-actionss">

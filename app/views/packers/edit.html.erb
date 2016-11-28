@@ -13,9 +13,11 @@
     <%= f.input :cv_link ,label: "Link to your CV", placeholder: 'put the link here (linkedin, viadeo...)'%>
   </div>
 
-<%= link_to "Add a skill", new_packer_skill_path(current_user.packer) %></br>
+<%= link_to 'Add a skill', new_packer_skill_path(current_user.packer), :class => "btn btn-info active" %></br>
 
   <div class="form-actionss">
     <%= f.button :submit %>
   </div>
 <% end %>
+
+
