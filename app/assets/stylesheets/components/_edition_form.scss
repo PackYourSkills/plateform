@@ -1,0 +1,25 @@
+.intro {
+  h1 {
+    font-family: $base-font;
+    color: $brand-color;
+    margin: 0;
+  }
+  h3 {
+    font-family: $header-font;
+    color: $dark;
+    margin: 0;
+  }
+}
+
+.edit-form {
+  padding: 0;
+  margin: 30px;
+}
+
+.form_inputs {
+  width: 700px;
+}
+
+.control-label {
+  font-family: $base-font;
+}
