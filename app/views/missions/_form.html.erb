@@ -4,7 +4,7 @@
     <%= a.hidden_field :mission_id, :value => @mission.id %>
 
     <%= a.input :title %>
-    <%= a.input :photos, as: :attachinary %>
+    <%= a.input :cover_picture, as: :attachinary %>
 
     <%= a.input :address %>
     <%= a.input :city %>
@@ -19,6 +19,8 @@
     <%= a.input :hosting_condition %>
     <%= a.input :food %>
     <%= a.input :other_comment %>
+
+    <%= a.input :mission_photos, as: :attachinary %>
 
       <div class="container submit">
         <%= a.submit %>
