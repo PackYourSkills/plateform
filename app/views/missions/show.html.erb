@@ -23,6 +23,9 @@
 
 <div id="map" style="width: 600px; height: 600px;"></div>
 
+
+<%= link_to "APPLY",  new_mission_connection_path(@mission) %>
+
 <% content_for(:after_js) do %>
  <%= javascript_tag do %>
    $(document).ready(function() {
