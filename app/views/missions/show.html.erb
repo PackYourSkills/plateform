@@ -1,7 +1,5 @@
 <h2><%= @mission.title %></h2>
 
-<p>Status : <%= @mission.status %> </p>
-
 <% @mission.photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>

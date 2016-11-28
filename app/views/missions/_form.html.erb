@@ -20,8 +20,7 @@
     <%= a.input :other_comment %>
 
       <div class="container submit">
-        <%= a.submit 'Save & keep offline' if (@mission.status == nil || @mission.status == 'draft' || @mission.status == 'suspended') %>
-        <%= a.submit 'Publish' %>
+        <%= a.submit %>
       </div>
     <% end %>
   </div>
