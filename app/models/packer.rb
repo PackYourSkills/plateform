@@ -11,4 +11,17 @@ class Packer < ApplicationRecord
   validates :youtube_link, :allow_blank => true, format: { :with => /(?:https?:\/\/)?(?:(?:(?:www\.?)?youtube\.com(?:\/(?:(?:watch\?.*?(v=[^&\s]+).*)|(?:v(\/.*))|(channel\/.+)|(?:user\/(.+))|(?:results\?(search_query=.+))))?)|(?:youtu\.be(\/.*)?))/i, message: "it has to be a youtube link" }
 
 
+def progress
+
+    percent = 20
+    percent+=5 if self.skype.present?
+    percent+=5 if self.cv_link.present?
+    percent+=5 if self.nationality.present?
+    percent+=5 if self.youtube_link.present?
+    percent+=5 if self.sexe.present?
+    percent+=5 if self.job.present?
+    percent+=5 if self.website.present?
+
+    return percent
+  end
 end

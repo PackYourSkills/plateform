@@ -1,13 +1,6 @@
 <%= simple_form_for [@packer, @education] do |f| %>
 
-    <%= f.input :school %>
-    <%= f.input :degree %>
-    <%= f.input :end_time, as: :date, start_year: Date.today.year,
-                                end_year: Date.today.year, discard_day: false,
-                                order: [:month, :year] %>
-
-
-  <%= f.input :field %>
+    <%= f.input :description %>
 
 
   <div class="form-actionss">
