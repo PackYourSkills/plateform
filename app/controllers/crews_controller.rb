@@ -33,6 +33,6 @@ class CrewsController < ApplicationController
       :social_issue, :mission, :creation_date,
       :nb_collaborators, :team_description,
       :phone, :skype, :twitter, :website,
-      :values, :credit_count, :logo, photos: [])
+      :values, :credit_count, :logo, :cover_picture, crew_photos: [])
   end
 end

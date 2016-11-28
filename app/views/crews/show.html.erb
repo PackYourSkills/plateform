@@ -21,6 +21,10 @@
 
   <h3>Your credit account</h3>
   <%= @crew.credit_count %><br>
+
+  <% @crew.crew_photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+  <% end %>
 </div>
 
 

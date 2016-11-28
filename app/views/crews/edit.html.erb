@@ -1,14 +1,13 @@
-<div class="container nest_form">
+<div class="container">
   <div class ="intro">
     <h1>Hi <%= @crew.name %> ! </h1></br>
-    <p>Tell us more about your crew </p>
+    <h3>Tell us more about your crew </h3>
   </div>
+</div>
 
-  <div class="nest_form">
+<div class="wrapper-form">
+  <div class=" container edit-form">
     <%= render 'form' %>
   </div>
+</div>
 
-<div class="container">
-  <%= link_to "return to your profil", crew_path %>
-</div>
-</div>
