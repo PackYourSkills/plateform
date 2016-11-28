@@ -1,9 +1,5 @@
 <h2><%= @mission.title %></h2>
 
-<% @mission.photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %>
-
 <h3> Where? </h3>
 <p><%= @mission.country %></p>
 <p><%= @mission.city %></p>
@@ -21,7 +17,7 @@
 <p>Meals: <%= @mission.food %></p>
 <p>Other: <%= @mission.other_comment %></p>
 
-<% @mission.photos.each do |photo| %>
+<% @mission.mission_photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>
 
