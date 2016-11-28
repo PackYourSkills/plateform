@@ -1,9 +1,9 @@
 <div class="container crew_edit">
-  <div class="crew_form_inputs">
+  <div class="form_inputs">
     <%= simple_form_for (@crew) do |a| %>
       <%= a.hidden_field :crew_id, :value => @crew.id %>
 
-      <p>Your logo : <%= a.input :logo, as: :attachinary %></p>
+      <p><%= a.input :logo, as: :attachinary %></p>
       <%= a.input :name %>
 
       <%= a.input :social_issue %>
@@ -19,10 +19,13 @@
       <%= a.input :facebook %>
       <%= a.input :twitter %>
 
+      <%= a.input :crew_photos, as: :attachinary %>
+
       <%= a.input :credit_count %>
 
       <div class="container submit">
         <%= a.submit class: "btn btn-primary" %>
+        <%= link_to "Return to your profile", crew_path, class:"deviselink" %>
       </div>
     <% end %>
   </div>

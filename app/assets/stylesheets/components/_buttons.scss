@@ -18,3 +18,16 @@
   text-decoration: none,
   }
 }
+
+.btn-primary {
+  background-color: $brand-color;
+  color: white;
+  border-style: none;
+  margin: 0;
+  padding-right: 20px;
+}
+
+.btn-primary:hover {
+  background-color: $brown;
+  color: $brand-color;
+}

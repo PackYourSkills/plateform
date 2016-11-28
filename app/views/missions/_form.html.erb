@@ -1,9 +1,9 @@
 <div class="container mission_edit">
-  <div class="mission_form_inputs">
+  <div class="form_inputs">
     <%= simple_form_for (@mission) do |a| %>
 
     <%= a.input :title %>
-    <%= a.input :photos, as: :attachinary %>
+    <%= a.input :cover_picture, as: :attachinary %>
 
     <%= a.input :address %>
     <%= a.input :city %>
@@ -19,8 +19,10 @@
     <%= a.input :food %>
     <%= a.input :other_comment %>
 
+    <%= a.input :mission_photos, as: :attachinary %>
+
       <div class="container submit">
-        <%= a.submit %>
+        <%= a.submit class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
