@@ -12,18 +12,22 @@
     <%= a.input :duration %>
     <%= a.input :skill %>
     <%= a.input :description %>
+    <%= a.input :language %>
 
     <%= a.input :hours_per_day %>
     <%= a.input :days_per_week %>
     <%= a.input :hosting_condition %>
+    <%= a.input :hosting_photo, as: :attachinary %>
+
     <%= a.input :food %>
     <%= a.input :other_comment %>
 
     <%= a.input :mission_photos, as: :attachinary %>
 
       <div class="container submit">
-        <%= a.submit class: "btn btn-primary" %>
-      </div>
+       <%= a.submit 'Save & keep offline' if (@mission.status == nil || @mission.status == 'draft' || @mission.status == 'suspended') %>
+       <%= a.submit 'Publish', class: "btn btn-primary" %>
+     </div>
     <% end %>
   </div>
 </div>

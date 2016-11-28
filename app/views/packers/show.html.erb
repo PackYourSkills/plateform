@@ -1,7 +1,8 @@
-<h1>Packers#show</h1>
-<p>Find me in app/views/packers/show.html.erb</p></br>
 
-<hr>
+
+
+<div class="pads">
+
 <h3>Your skills</h3>
 <ul>
 <% @packer.skills.each do |skill| %>
@@ -10,32 +11,46 @@
     <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
   </li>
 <%end%>
-<%= link_to "new", new_packer_skill_path(@packer) %>
+<%= link_to 'Add a new skill', new_packer_skill_path(@packer), :class => "btn btn-info active btn-md" %>
 </ul>
 
 
-<h3>Your education </h3>
+<h3>Your education</h3>
 <ul>
+<%@packer.educations.each do |education| %>
+  <li> <%= education.description %>
+    <%= link_to 'Edit your education', edit_packer_education_path(@packer, education), :class => "btn btn-success active" %>
 
-<% @packer.educations.each do |education| %>
-  <li> <%= education.school %>   <%=education.degree %>  <%= education.end_time.month %>/<%= education.end_time.year %>  <%= education.field %>
-    <%= link_to "edit", edit_packer_education_path(@packer, education) %>
-    <%= link_to "delete", packer_education_path(@packer, education), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to "Delete an info", packer_education_path(@packer, education), method: :delete, data: {confirm:"Are you sure?"}, :class => "btn btn-primary active" %>
   </li>
 <%end%>
-<%= link_to "new", new_packer_education_path(@packer) %>
+<% if @packer.educations.empty? %>
+  <%= link_to 'Add a new education', new_packer_education_path(@packer), :class => "btn btn-info active" %>
+<%end%>
 </ul>
 
 
-<h3>Your experiences </h3>
+<h3>Your experiences</h3>
+
 <ul>
 <% @packer.experiences.each do |experience| %>
-<li> <%= experience.type_of_exp %> <%=experience.start_time.month %>/<%=experience.start_time.year %>-<%= experience.end_time.month %>/<%=experience.start_time.year %> <%= experience.organisation %> <%= link_to "edit", edit_packer_experience_path(@packer, experience) %>
-  <%= link_to "delete", packer_experience_path(experience), method: :delete, data: {confirm: "Are your sure?"} %>
+
+<li><%= experience.type_of_exp %> <%=experience.start_time.month %>/<%=experience.start_time.year %>-<%= experience.end_time.month %>/<%=experience.start_time.year %> <%= experience.organisation %>
+
+<%=link_to'Edit your experience', edit_packer_experience_path(@packer, experience), :class => "btn btn-success active"%>
+ <%=link_to"Delete an info", packer_experience_path(experience), :class => "btn btn-primary active", method: :delete, data: {confirm: "Are your sure?"} %> </br>
+
   </li>
 <%end%>
+
+<%= link_to'Add a new experience', new_packer_experience_path(@packer), :class => "btn btn-info active" %>
+<%= link_to'Edit your profile', edit_packer_path(@packer), :class => "btn btn-success active" %> </br>
+<%= link_to'Edit your basic infos', infos_edit_path, :class => "btn btn-success active" %>
 </ul>
 <%= link_to "new", new_packer_experience_path(@packer,type_of_skill: :professionnal) %>
 
-<%= link_to 'edit', edit_packer_path(@packer) %></br>
-<%= link_to 'edit your info', infos_edit_path %></br>
+
+
+</div>
+
+</div>

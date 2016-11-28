@@ -42,6 +42,6 @@ class EducationsController < ApplicationController
     authorize @education
   end
   def education_params
-    params.require(:education).permit(:school, :degree, :end_time, :field)
+    params.require(:education).permit(:description)
   end
 end

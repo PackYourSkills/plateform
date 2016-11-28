@@ -1,25 +1,96 @@
-<h2><%= @mission.title %></h2>
+<div class="banner-mission"
+  style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+  url('<%= cl_image_path @mission.cover_picture.path %>')">
+  <div class="logo">
+    <% if @mission.crew.logo? %>
+      <%= cl_image_tag @mission.crew.logo.path, width: 150, height: 150, crop: :fill %>
+    <% else %>
+      <%= image_tag "logo.png" %>
+    <% end %>
+  </div>
+  <div class="job-title">
+    <h2><%= @mission.title %></h2>
+  </div>
+  <div class="mission-essentials">
+    <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
+  </div>
+</div>
 
-<h3> Where? </h3>
-<p><%= @mission.country %></p>
-<p><%= @mission.city %></p>
-<p><%= @mission.address %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12, col-sm-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2><%= @mission.crew.name %></h2>
+          <p><%= @mission.crew.mission %></p>
+        </div>
+        <div class="col-xs-6">
+          <h3>Created in : <%= @mission.crew.creation_date %></h3>
+        </div>
+        <div class="col-xs-6">
+          <p><%= @mission.crew.nb_collaborators %> team members</p>
+        </div>
+        <div class="col-xs-12">
+          <%= link_to "See their profile", crew_path(@mission.crew) %>
+        </div>
+        <div class="col-xs-12">
+          <h3>Their values : <%= @mission.crew.values %></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12, col-sm-6">
+      <div class="row">
+        <div class="col-xs-12 mission-box box_ratio_1_1">
+          <h2>THE MISSION : </h2><p><%= @mission.description %></p>
+        </div>
+        <div class="col-xs-12 box_ratio_1_1">
+          <% if @mission.hosting_photo? %>
+            <%= cl_image_tag @mission.hosting_photo.path, crop: :fill %>
+          <% else %>
+            <%= cl_image_tag @mission.cover_picture.path, crop: :fill %>
+          <% end %>
+        </div>
+        <div class="col-xs-12, col-sm-8 box_ratio_1_1">
+            <div id="map" style="width: 100%; height: 250px;"></div>
+              <% content_for(:after_js) do %>
+               <%= javascript_tag do %>
+                 $(document).ready(function() {
+                   var handler = Gmaps.build('Google');
+                   handler.buildMap({ internal: { id: 'map' } }, function() {
+                     markers = handler.addMarkers(<%= raw @hash.to_json %>);
+                     handler.bounds.extendWith(markers);
+                     handler.fitMapToBounds();
+                     if (markers.length == 0) {
+                       handler.getMap().setZoom(8);
+                     } else if (markers.length == 1) {
+                       handler.getMap().setZoom(8);
+                     }
+                   });
+                 });
+               <% end %>
+              <% end %>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-12, col-sm-3">
+      <div calss="row">
+        <div class="col-xs-6">
+          <h3><%= @mission.days_per_week %> days/week</h3>
+        </div>
+        <div class="col-xs-6">
+          <h3><%= @mission.hours_per_day %> hours/day</h3>
+        </div>
+        <div class="col-xs-12">
+          <h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p>
+        </div>
+        <div class="col-xs-12">
+          <h3>Language spoken : </h3><p><%= @mission.language %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h3>To do what? </h3>
-<p>For: <%= @mission.duration %></p>
-<p>Skills: <%= @mission.skill %></p>
-<p>What for: <%= @mission.description %></p>
-
-<h3>Useful to know</h3>
-<p><%= @mission.hours_per_day %> hours per day</p>
-<p><%= @mission.days_per_week %> days a week</p>
-<p>Hosting: <%= @mission.hosting_condition %></p>
-<p>Meals: <%= @mission.food %></p>
-<p>Other: <%= @mission.other_comment %></p>
-
-<% @mission.mission_photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %>
 
 <div id="map" style="width: 600px; height: 600px;"></div>
 
@@ -42,6 +113,10 @@
      });
    });
  <% end %>
+<% end %>
+
+<% @mission.mission_photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>
 
 <% if user_signed_in? %>

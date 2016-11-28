@@ -1,0 +1,46 @@
+.banner-mission{
+  height: 60vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-color: rgba(255,255,255,0.8);
+  margin-bottom: 100px;
+  h2 {
+    position: absolute;
+    bottom: 40px;
+    left: 350px;
+    font-family: $header-font;
+    font-size: 32px;
+    font-weight: 700;
+    color: $brand-color;
+  }
+  p {
+    position: absolute;
+    bottom: 10px;
+    left: 350px;
+    font-family: $base-font;
+    font-weight: 500;
+    color: $brand-color;
+  }
+  .logo {
+    position: absolute;
+    bottom: -50px;
+    left: 50px;
+  }
+}
+
+.mission-box {
+  height: 300px;
+  background-color: $green;
+  margin-bottom: 10px;
+}
+
+.box_ratio_1_1{
+  position: relative;
+  width: 100%;   /* desired width */
+}
+.box_ratio_1_1:before{
+  content: "";
+  display: block;
+  padding-top: 100%;  /* initial ratio of 1:1*/
+}
