@@ -1,5 +1,7 @@
 <h2><%= @mission.title %></h2>
 
+<p>Status : <%= @mission.status %> </p>
+
 <% @mission.photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>
@@ -22,6 +24,9 @@
 <p>Other: <%= @mission.other_comment %></p>
 
 <div id="map" style="width: 600px; height: 600px;"></div>
+
+
+<%= link_to "APPLY",  new_mission_connection_path(@mission) %>
 
 <% content_for(:after_js) do %>
  <%= javascript_tag do %>

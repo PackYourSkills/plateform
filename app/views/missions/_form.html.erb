@@ -1,7 +1,6 @@
 <div class="container mission_edit">
   <div class="mission_form_inputs">
     <%= simple_form_for (@mission) do |a| %>
-    <%= a.hidden_field :mission_id, :value => @mission.id %>
 
     <%= a.input :title %>
     <%= a.input :photos, as: :attachinary %>
@@ -21,7 +20,8 @@
     <%= a.input :other_comment %>
 
       <div class="container submit">
-        <%= a.submit %>
+        <%= a.submit 'Save & keep offline' if (@mission.status == nil || @mission.status == 'draft' || @mission.status == 'suspended') %>
+        <%= a.submit 'Publish' %>
       </div>
     <% end %>
   </div>

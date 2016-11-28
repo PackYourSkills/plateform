@@ -1,15 +1,17 @@
 class MissionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-  before_action :set_mission, only: [ :show, :edit, :update, :destroy ]
-  before_action :set_crew, only: [ :edit, :create, :destroy ]
+  before_action :set_mission, only: [ :show, :edit, :update, :destroy, :close, :suspend, :cancel ]
+  before_action :set_crew, only: [ :create, :destroy ]
 
   def index
-    @all = policy_scope(Mission)
+    # info from the form
     radius = params['radius'].to_i
     address = params['address']
-
-    @missions = @all.near(address, radius)
+    # selection of the mission
+    @all = policy_scope(Mission)
+    @public_missions = @all.where(status: 'online')
+    @missions = @public_missions.near(address, radius)
 
     @hash = Gmaps4rails.build_markers(@missions) do |mission, marker|
       marker.lat mission.latitude
@@ -25,6 +27,7 @@ class MissionsController < ApplicationController
 
   def create
     @mission = @crew.missions.build(mission_params)
+    params[:commit] == 'Publish' ? (@mission.status = 'online') : (@mission.status = 'draft')
     authorize @mission
     @mission.save ? (redirect_to mission_path @mission) : (render :new)
   end
@@ -41,7 +44,26 @@ class MissionsController < ApplicationController
   end
 
   def update
+    params[:commit] == 'Publish' ? (@mission.status = 'online') : (@mission.status = 'draft')
     @mission.update(mission_params) ? (redirect_to mission_path @mission) : (render :edit)
+  end
+
+  def close
+    @mission.status = 'closed'
+    @mission.save
+    redirect_to mission_path @mission
+  end
+
+  def cancel
+    @mission.status = 'canceled'
+    @mission.save
+    redirect_to mission_path @mission
+  end
+
+  def suspend
+    @mission.status = 'suspended'
+    @mission.save
+    redirect_to mission_path @mission
   end
 
   def destroy
@@ -61,7 +83,7 @@ class MissionsController < ApplicationController
   end
 
   def mission_params
-    params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
-      :description, :hours_per_day, :days_per_week, :hosting_condition, :food, :other_comment, photos: [])
+    params.require(:mission).permit(:id, :title, :city, :country, :address, :duration, :skill,
+      :description, :hours_per_day, :days_per_week, :hosting_condition, :food, :other_comment, :language, photos: [])
   end
 end

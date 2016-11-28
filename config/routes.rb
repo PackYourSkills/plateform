@@ -19,13 +19,24 @@ Rails.application.routes.draw do
   resources :missions, only: [:new, :create, :edit, :show, :index, :destroy, :update] do
     resources :connections, only: [:new, :create, :edit, :show, :index, :destroy, :update]
   end
-  get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
+
+  #to change the status of a mission
+  get '/missions/:mission_id/connections/:id/accept', to:'connections#accept', as: 'accept_connection'
+  get '/missions/:mission_id/connections/:id/refuse', to:'connections#refuse', as: 'refuse_connection'
+  get '/missions/:mission_id/connections/:id/cancel', to:'connections#cancel', as: 'cancel_connection'
+  get '/missions/:mission_id/connections/:id/confirm', to:'connections#confirm', as: 'confirm_connection'
+
+  #to change the status of a connection
+  get '/missions/:id/suspend', to:'missions#suspend', as: 'suspend_mission'
+  get '/missions/:id/close', to:'missions#close', as: 'close_mission'
+  get '/missions/:id/cancel', to:'missions#cancel', as: 'cancel_mission'
 
   resources :packers, only: [:edit, :update, :show] do
     resources :experiences, only: [:new, :create, :edit, :destroy, :update]
     resources :skills, only: [:new, :create, :edit, :destroy, :update]
     resources :educations, only: [:new, :create, :edit, :destroy, :update]
   end
+  get "packers/:id/deck", to: "packers#deck", as: 'deck_packer'
 
 end
 
