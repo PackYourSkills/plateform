@@ -11,6 +11,7 @@ class MissionsController < ApplicationController
     # selection of the mission
     @all = policy_scope(Mission)
     @public_missions = @all.where(status: 'online')
+
     @missions = @public_missions.near(address, radius)
 
     @hash = Gmaps4rails.build_markers(@missions) do |mission, marker|

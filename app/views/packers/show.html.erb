@@ -35,7 +35,7 @@
   </li>
 <%end%>
 </ul>
-<%= link_to "new", new_packer_experience_path(@packer) %>
+<%= link_to "new", new_packer_experience_path(@packer,type_of_skill: :professionnal) %>
 
 <%= link_to 'edit', edit_packer_path(@packer) %></br>
 <%= link_to 'edit your info', infos_edit_path %></br>
