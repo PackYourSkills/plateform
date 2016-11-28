@@ -3,7 +3,7 @@
     <%= simple_form_for (@crew) do |a| %>
       <%= a.hidden_field :crew_id, :value => @crew.id %>
 
-      <p>Your logo : <%= a.input :logo, as: :attachinary %></p>
+      <p><%= a.input :logo, as: :attachinary %></p>
       <%= a.input :name %>
 
       <%= a.input :social_issue %>
@@ -18,6 +18,8 @@
       <%= a.input :website %>
       <%= a.input :facebook %>
       <%= a.input :twitter %>
+
+      <%= a.input :crew_photos, as: :attachinary %>
 
       <%= a.input :credit_count %>
 

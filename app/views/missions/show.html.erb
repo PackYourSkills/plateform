@@ -21,6 +21,10 @@
 <p>Meals: <%= @mission.food %></p>
 <p>Other: <%= @mission.other_comment %></p>
 
+<% @mission.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+<% end %>
+
 <div id="map" style="width: 600px; height: 600px;"></div>
 
 <% content_for(:after_js) do %>
