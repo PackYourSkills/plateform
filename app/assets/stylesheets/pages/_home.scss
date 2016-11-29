@@ -17,7 +17,6 @@
   }
 }
 
-
 body {
   background-color: #f2frr4f4;
   font-family: 'Catamaran', sans-serif;
@@ -215,8 +214,6 @@ p {
     background-attachment: fixed;
   }
 }
-
-
 /*---------------------------------------------------------------------*/
 /*  2. ANIMATION DELAY
 /*---------------------------------------------------------------------*/
@@ -270,8 +267,6 @@ p {
   -moz-transition-delay: .5s;
   -o-transition-delay: .5s;
 }
-
-
 /*---------------------------------------------------------------------*/
 /*  3. PAGE LOADER
 /*---------------------------------------------------------------------*/
@@ -293,9 +288,6 @@ p {
   margin-top: -64px;
   margin-left: -64px;
 }
-
-
-
 
 /*---------------------------------------------------------------------*/
 /*  1. VISION SECTION
@@ -466,7 +458,8 @@ p {
 /*---------------------------------------------------------------------*/
 #survey {
   background-image: image-url("bg-survey.jpg");
-  background-position: center bottom
+  background-position: center bottom;
+  padding: 0;
 }
 
 #survey .section-overlay{
@@ -483,8 +476,6 @@ p {
 #survey .btn{
   margin:10px;
 }
-
-
 
 #quote > .section-inner > .section-content .quote-text > .quote-icon > i {
   color: #EC605F;
