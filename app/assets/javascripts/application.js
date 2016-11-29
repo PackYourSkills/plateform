@@ -12,12 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require modernizr
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
 //= require google_maps_autocomplete.js
 // require turbolinks
-//= require modernizr
 //= require rs-plugin/js/jquery.themepunch.tools.min
 //= require rs-plugin/js/jquery.themepunch.revolution.min
 //= require isotope/isotope.pkgd.min
@@ -35,14 +35,3 @@
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
-
-      // <script src="assets/plugins/detectmobilebrowser/detectmobilebrowser.js"></script>
-      // <script src="assets/plugins/smartresize/smartresize.js"></script>
-      // <script src="assets/plugins/jquery-easing/jquery.easing.min.js"></script>
-      // <script src="assets/plugins/jquery-sticky/jquery.sticky.js"></script>
-      // <script src="assets/plugins/jquery-inview/jquery.inview.min.js"></script>
-      // <script src="assets/plugins/jquery-countdown/jquery.plugin.min.js"></script>
-      // <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-
-      // <script src="assets/js/main.js"></script>
-      // <script src="assets/js/animation.js"></script>
