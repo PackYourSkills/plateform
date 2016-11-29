@@ -1,14 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-4 col-lg-3 col-lg-offset-1">
-      <div class="box box_ratio_1_1" style="background-image:url('http://orig00.deviantart.net/ee5b/f/2015/105/7/c/goku_ssj_facebook_profil_by_mjd360-d8ps1ub.jpg');">
+      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url%>');">
         <% if @editable %>
           <div class="box_link">
             <i class="fa fa-camera-retro" aria-hidden="true"></i>
-            <%= link_to '', infos_edit_path(info: :basic) %>
+            <%= link_to '', edit_packer_path(@packer, infos: :photo) %>
           </div>
         <% end %>
       </div>
+
       <div class="box">
         <% if @packer.user.first_name == nil || @packer.user.first_name == '' %>
           <div class="box_empty">
@@ -36,6 +37,9 @@
         <!-- Box story 2 columns mandatory -->
         <div class="col-xs-12">
           <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
             <% if @packer.user.story == nil || @packer.user.story == '' %>
               <div class="box_empty">
                 <h2>Tell us your story</h2>
@@ -69,6 +73,9 @@
               <% end %>
             <% else %>
               <div class="content_box">
+                <div class="title_box col-xs-12">
+                  <h1>Education</h1>
+                </div>
                 <p><%= @packer.education.description %></p>
               </div>
               <% if @editable %>
@@ -81,11 +88,35 @@
           </div>
         </div>
 
+        <!-- Box story 1 columns volunteering experience -->
+        <div class="col-xs-12 col-md-6">
+          <div class="box box_ratio_1_1">
+            <% if @packer.education == nil || @packer.education == '' %>
+              <div class="box_empty">
+                <h2>Tell us about your education</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <div class="title_box col-xs-12">
+                  <h1>Education</h1>
+                </div>
+                <p><%= @packer.education.description %></p>
+              </div>
+            <% end %>
+            <% if @editable %>
+              <div class="box_link">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <%= link_to '', infos_edit_path(info: :story) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
         <!-- Box skills 2 columns mandatory -->
         <div class="col-xs-12 col-md-12">
           <div class="box">
             <div class="title_box col-xs-12">
-              <h1>Professionnal Experiences</h1>
+              <h1>Skills</h1>
             </div>
             <% pro_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "professionnal"  } %>
             <% if pro_skills.size.zero? %>
@@ -233,28 +264,8 @@
             <% end %>
           </div>
         </div>
-        <!-- Box story 1 columns professionnal experience -->
-        <div class="col-xs-12 col-md-6">
-          <div class="box box_ratio_1_1">
-            <% if @packer.education == nil || @packer.education == '' %>
-              <div class="box_empty">
-                <h2>Tell us about your education</h2>
-              </div>
-            <% else %>
-              <div class="content_box">
-                <p><%= @packer.education.description %></p>
-              </div>
-            <% end %>
-            <% if @editable %>
-              <div class="box_link">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <%= link_to '', infos_edit_path(info: :story) %>
-              </div>
-            <% end %>
-          </div>
-        </div>
 
-        <!-- Box story 1 columns volunteering experience -->
+        <!-- Box story 1 columns professionnal experience -->
         <div class="col-xs-12 col-md-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil || @packer.education == '' %>
@@ -278,15 +289,3 @@
     </div>
   </div>
 </div>
-
-
-  <h3>Your skills</h3>
-  <ul>
-  <% @packer.skills.each do |skill| %>
-    <li><%= skill.title %>  <%= skill.level %>  <%= skill.type_of_skill %>
-      <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
-      <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
-    </li>
-  <%end%>
-  <%= link_to 'Add a new skill', new_packer_skill_path(@packer), :class => "btn btn-info active btn-md" %>
-  </ul>
