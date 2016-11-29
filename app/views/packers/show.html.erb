@@ -29,11 +29,54 @@
         <% end %>
       </div>
       <div class="box">
+        <% lang_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "language"  } %>
+        <% if lang_skills.size.zero? %>
+        <div class="box_empty">
+          <h2>Which language do you speak ?</h2>
+        </div>
+        <% if @editable %>
+        <div class="box_link">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :language) %>
+        </div>
+        <% end %>
+        <% else %>
+        <div class="content_box">
+          <div class="row">
+            <% lang_skills.each_with_index do |skill| %>
+            <div class="col-xs-12 col-md-6">
+              <p>
+              <%= skill.title %>
+              <% if @editable %>
+                <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :language) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+              <% end %>
+              </p>
+              <% skill.level.to_i.times do %>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              <% end %>
+              <% (3 - skill.level.to_i).times do %>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <% end %>
+            <% if @editable %>
+            <div class="col-xs-12">
+              <div class="body_new">
+                <h4 class="title"><%= link_to 'add a language', new_packer_skill_path(@packer, type_of_skill: :language) %></h4>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
+
+
+
+
     <div class="col-xs-12 col-md-8 col-lg-7">
       <div class='row'>
-
         <!-- Box story 2 columns mandatory -->
         <div class="col-xs-12">
           <div class="box">
