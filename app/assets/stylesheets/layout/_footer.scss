@@ -1,1 +1,128 @@
 // Your footer style
+footer.footer #footer {
+    background-color: rgba(47, 32, 32, 0.82);
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+footer.footer #copyright {
+    background-color: rgba(47, 32, 32, 0.82);
+    padding: 15px 0px;
+    border-top: 1px solid rgba(47, 32, 32, 0.82);
+    text-align: center;
+
+}
+
+
+footer.footer #footer h4 {
+    color: #c9c9c9;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 0.2em;
+}
+
+.btn.btn-rj {
+    background-color: #f06060;
+    color: #fff;
+    border-color: #f27777;
+    text-transform: uppercase;
+    border-radius: 0%;
+
+}
+footer.footer a {
+    color: #c9c9c9;
+}
+
+
+footer.footer a {
+    color: #c9c9c9;
+}
+.btn-lg, .btn-group-lg>.btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+
+
+.btn:hover, .btn:focus, .btn.focus {
+    color: #333;
+    text-decoration: none;
+}
+footer.footer a {
+    color: #c9c9c9;
+}
+a:hover, a:focus {
+    outline: none;
+    text-decoration: none;
+}
+a:hover, a:focus {
+  background-color: white;
+    color: #23527c;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}
+
+
+.social-icon-list {
+  font-size: 40px;
+}
+
+
+footer.footer #footer ul.social-icon-list > li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #c9c9c9;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+footer.footer a {
+    color: #c9c9c9;
+}
+a {
+    outline: none;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+*, *:after, *::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: auto;
+}
+a:hover {
+    background-color: white;
+}
+
+footer.footer #footer > li {
+    padding-bottom: 10px;
+}
+
