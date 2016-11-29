@@ -7,9 +7,16 @@
   <% url_cover = @mission.cover_picture.path %>
 <% end %>
 
+<% if @mission.hosting_picture == nil %>
+  <% url_hosting = 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' %>
+<% else %>
+  <% url_hosting = @mission.hosting_picture.path %>
+<% end %>
+
+        <!-- Banner -->
+
 <div class="banner-mission"
   style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
-
   url('<%= cl_image_path url_cover %>')">
 
   <div class="logo">
@@ -30,46 +37,155 @@
   </div>
 </div>
 
+        <!-- Banner end -->
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12, col-sm-3">
       <div class="row">
+
         <div class="col-xs-12">
-          <h2><%= @mission.crew.name %></h2>
-          <p><%= @mission.crew.mission %></p>
-        </div>
-        <div class="col-xs-6">
-          <h3>Created in : <%= @mission.crew.creation_date %></h3>
-        </div>
-        <div class="col-xs-6">
-          <p><%= @mission.crew.nb_collaborators %> team members</p>
-        </div>
-        <div class="col-xs-12">
-          <%= link_to "See their profile", crew_path(@mission.crew) %>
-        </div>
-        <div class="col-xs-12">
-          <h3>Their values : <%= @mission.crew.values %></h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12, col-sm-6">
-      <div class="row">
-        <div class="col-xs-12 mission-box">
-          <div class="mission-description">
-            <h2>THE MISSION : </h2><p><%= @mission.description %></p>
+          <div class="box">
+            <% if @mission.crew.name == nil || @mission.crew.name == '' %>
+              <div class="box_empty">
+                <h2>Add information</h2>
+              </div>
+            <% else %>
+              <div class ="content_box">
+                <h2><%= @mission.crew.name %></h2>
+                <p><%= @mission.crew.mission %></p>
+              </div>
+            <% end %>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
           </div>
         </div>
-        <div class="col-xs-12 mission-box">
-          <div class="mission-hosting-picture">
-            <% if @mission.hosting_photo? %>
-              <%= cl_image_tag @mission.hosting_photo.path, crop: :fill %>
+
+        <div class="col-xs-6">
+          <div class="box">
+            <% if @mission.crew.creation_date == nil || @mission.crew.creation_date == '' %>
+              <div class="box_empty">
+                <h2>Add a creation date</h2>
+              </div>
             <% else %>
-              <%= cl_image_tag @mission.cover_picture.path, crop: :fill %>
+              <div class ="content_box">
+                <p>Created in : <%= @mission.crew.creation_date %></p>
+              </div>
+            <% end %>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="col-xs-6">
+          <div class="box">
+            <% if @mission.crew.nb_collaborators == nil || @mission.crew.nb_collaborators == '' %>
+              <div class="box_empty">
+                <h2>Add team info</h2>
+              </div>
+            <% else %>
+              <div class ="content_box">
+                <p><%= @mission.crew.nb_collaborators %> team members</p>
+              </div>
+            <% end %>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class ="box">
+            <div class="content_box">
+              <%= link_to "See their profile", crew_path(@mission.crew) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="box">
+            <% if @mission.crew.values == nil || @mission.crew.values == '' %>
+              <div class="box_empty">
+                <h2>Add values</h2>
+              </div>
+            <% else %>
+              <div class ="content_box">
+                <h3>Their values : <%= @mission.crew.values %></h3>
+               </div>
+            <% end %>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xs-12, col-sm-6">
+      <div class="row">
+
+        <!-- Box Mission 2 columns mandatory -->
+
+        <div class="col-xs-12">
+          <div class="box box_ratio_1_2">
+            <% if @mission.description == nil %>
+              <div class="box_empty">
+                <h2>Tell us about the mission</h2>
+              </div>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="content_box">
+                <h2>THE MISSION : </h2><p><%= @mission.description %></p>
+              </div>
+              <% if editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', edit_mission_path %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
-        <div class="col-xs-12, col-sm-8 mission-box">
-            <div id="map" style="width: 100%; height: 250px;"></div>
+
+        <!-- Box Hosting Picture 2 columns mandatory -->
+
+        <div class="col-xs-12">
+          <div class="box box_ratio_1_2">
+            <div class="content_box" style="background-image:url('<%= cl_image_path url_hosting %>')">
+            </div>
+            <% if editable %>
+              <div class="box_link">
+                <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                <%= link_to '', infos_edit_path(info: :basic) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box Map 1 column mandatory -->
+
+        <div class="col-xs-12, col-sm-6">
+            <div class ="content_box" id="map" style="width: 100%; height: 250px;"></div>
               <% content_for(:after_js) do %>
                <%= javascript_tag do %>
                  $(document).ready(function() {
@@ -90,21 +206,21 @@
           </div>
       </div>
     </div>
+
+
     <div class="col-xs-12, col-sm-3">
-      <div calss="row">
-        <div class="col-xs-6">
-          <h3><%= @mission.days_per_week %> days/week</h3>
-        </div>
-        <div class="col-xs-6">
-          <h3><%= @mission.hours_per_day %> hours/day</h3>
-        </div>
-        <div class="col-xs-12">
-          <h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p>
-        </div>
-        <div class="col-xs-12">
-          <h3>Language spoken : </h3><p><%= @mission.language %></p>
-        </div>
-      </div>
+      <table class="box table table-bordered">
+          <tr>
+            <td><%= @mission.days_per_week %> days/week</td>
+            <td><%= @mission.hours_per_day %> hours/day</td>
+          </tr>
+          <tr>
+            <td><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
+          </tr>
+          <tr>
+            <td><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
+          </tr>
+      </table>
     </div>
   </div>
 </div>

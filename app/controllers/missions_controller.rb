@@ -86,6 +86,6 @@ class MissionsController < ApplicationController
   def mission_params
     params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
       :description, :hours_per_day, :days_per_week, :hosting_condition, :food,
-      :other_comment, :cover_picture, :hosting_photo, mission_photos: [])
+      :other_comment, :cover_picture, :hosting_picture, mission_photos: [])
   end
 end

@@ -3,7 +3,7 @@ class Mission < ApplicationRecord
   has_many :connections, dependent: :destroy
   has_attachments :mission_photos, maximum: 6
   has_attachment :cover_picture
-  has_attachment :hosting_photo
+  has_attachment :hosting_picture
 
   # geocode
   geocoded_by :full_address
