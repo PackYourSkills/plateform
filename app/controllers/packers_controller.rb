@@ -15,6 +15,9 @@ class PackersController < ApplicationController
   end
 
   def show
+    @editable = current_user == @packer.user || current_user.admin
+    @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+    @db_skills = @db_constants['skills']
   end
 
   def deck
