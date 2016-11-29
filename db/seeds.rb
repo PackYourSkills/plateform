@@ -93,7 +93,7 @@ end
   [1,2,3].sample.times do
     skill = packer.skills.new(
       type_of_skill:'language',
-      level: ['Begginer','Intermediate','Fluent'].sample,
+      level: [1,2,3].sample,
       title: ['French','English','Spanish'].sample
       )
     skill.save
@@ -101,7 +101,7 @@ end
   [1,2,3].sample.times do
     skill = packer.skills.new(
       type_of_skill:'professionnal',
-      level: ['Begginer','Intermediate','Fluent'].sample,
+      level: [1,2,3].sample,
       title: @constants["Skills"].sample['name']
       )
     skill.save
@@ -125,7 +125,7 @@ end
     experience.save
   end
   [1,2,3].sample.times do
-    education = packer.educations.new(
+    education = packer.build_education(
       description:Faker::Lorem.paragraph(3, false, 2)
       )
     education.save

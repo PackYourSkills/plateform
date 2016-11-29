@@ -1,5 +1,6 @@
 .box {
   min-height: 100px;
+  height:auto;
   width:100%;
   padding: 10px;
   margin-top: 15px;
@@ -16,15 +17,7 @@
   align-items: center;
   justify-content: center;
   text-align:center;
-}
-
-.content_box {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  padding:3px;
+  overflow-y: scroll;
 }
 
 .box_link {
@@ -66,6 +59,14 @@
 .box_ratio_1_1{
   position: relative;
   width: 100%;   /* desired width */
+  .content_box {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    padding:3px;
+  }
 }
 .box_ratio_1_1:before{
   content: "";
