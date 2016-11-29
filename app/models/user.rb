@@ -47,6 +47,16 @@ class User < ApplicationRecord
     address_changed? || city_changed? || country_changed?
   end
 
+  def age
+    if self.birthdate == nil
+      nil
+    else
+      dob = self.birthdate
+      now = Time.now.utc.to_date
+      now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    end
+  end
+
   def progress
     percent = 20
     percent+=5 if self.first_name.present?
