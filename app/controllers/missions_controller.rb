@@ -3,7 +3,7 @@ class MissionsController < ApplicationController
 
   before_action :set_mission, only: [ :show, :edit, :update, :destroy, :close, :suspend, :cancel ]
   before_action :set_crew, only: [ :create, :destroy ]
-  before_action :set_list_skills, only: [ :index ]
+  before_action :set_list_skills, only: [ :index, :new, :edit ]
 
   def index
     # info from the form
