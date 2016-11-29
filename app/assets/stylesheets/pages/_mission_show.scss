@@ -7,40 +7,80 @@
   margin-bottom: 100px;
   h2 {
     position: absolute;
-    bottom: 40px;
+    bottom: 70px;
     left: 350px;
     font-family: $header-font;
     font-size: 32px;
     font-weight: 700;
     color: $brand-color;
+    margin: 0;
   }
   p {
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     left: 350px;
     font-family: $base-font;
     font-weight: 500;
     color: $brand-color;
+    margin: 0;
   }
   .logo {
     position: absolute;
     bottom: -50px;
     left: 50px;
   }
+
+  .apply-btn {
+    width: 100px;
+    height:40px;
+    background-color: $brand-color;
+    position: absolute;
+    bottom: 30px;
+    right: 100px;
+    .apply {
+      color: white;
+      font-family: $base-font;
+      font-weight: 700;
+      line-height: 40px;
+    }
+  }
+
+  .apply-btn:hover {
+    background-color: $brown;
+    .apply:hover {
+      text-decoration: none;
+    }
+  }
 }
+
 
 .mission-box {
-  height: 300px;
+  width: 100%;
+  height: 250px;
   background-color: $green;
   margin-bottom: 10px;
+  padding-top: 50%;
+  position: relative;
 }
 
-.box_ratio_1_1{
-  position: relative;
-  width: 100%;   /* desired width */
+.mission-hosting-picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
-.box_ratio_1_1:before{
-  content: "";
-  display: block;
-  padding-top: 100%;  /* initial ratio of 1:1*/
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
+.mission-description {
+  position: absolute;
+  padding: 10px;
+}
+
