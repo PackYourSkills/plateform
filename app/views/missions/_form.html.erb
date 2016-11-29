@@ -14,10 +14,12 @@
     <%= a.input :description, :input_html => {:minlength => 100 , maxlength: 300}, required: true %>
     <%= a.input :language, collection: LanguageList::COMMON_LANGUAGES, required: true, :input_html => {:minlength => 2} %>
 
+
     <%= a.input :hours_per_day, required: true, :input_html => {:value => 7, :minlength => 1} %>
     <%= a.input :days_per_week, required: true, :input_html => {:value => 4, :minlength => 1} %>
     <%= a.input :hosting_condition, required: true, as: :radio_buttons,
       collection: ['private flat', 'private room', 'common room'] %>
+
     <%= a.input :hosting_picture, as: :attachinary %>
 
     <%= a.input :food, required: true, as: :radio_buttons,
