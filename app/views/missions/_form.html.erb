@@ -2,24 +2,26 @@
   <div class="form_inputs">
     <%= simple_form_for (@mission) do |a| %>
 
-    <%= a.input :title %>
+    <%= a.input :title, required: true, :input_html => {:minlength => 10} %>
     <%= a.input :cover_picture, as: :attachinary %>
 
-    <%= a.input :address %>
-    <%= a.input :city %>
-    <%= a.input :country, as: :string %>
+    <%= a.input :address, required: true, :input_html => {:minlength => 1} %>
+    <%= a.input :city, required: true %>
+    <%= a.input :country, as: :string, required: true %>
 
-    <%= a.input :duration %>
-    <%= a.input :skill %>
-    <%= a.input :description %>
-    <%= a.input :language %>
+    <%= a.input :duration, required: true, :input_html => {:value => 2} %>
+    <%= a.input :skill, collection: @list, prompt: "Select a skill", required: true %>
+    <%= a.input :description, :input_html => {:minlength => 100 , maxlength: 300}, required: true %>
+    <%= a.input :language, collection: LanguageList::COMMON_LANGUAGES, required: true, :input_html => {:minlength => 2} %>
 
-    <%= a.input :hours_per_day %>
-    <%= a.input :days_per_week %>
-    <%= a.input :hosting_condition %>
-    <%= a.input :hosting_photo, as: :attachinary %>
+    <%= a.input :hours_per_day, required: true, :input_html => {:value => 7, :minlength => 1} %>
+    <%= a.input :days_per_week, required: true, :input_html => {:value => 4, :minlength => 1} %>
+    <%= a.input :hosting_condition, required: true, as: :radio_buttons,
+      collection: ['private flat', 'private room', 'common room'] %>
+    <%= a.input :hosting_picture, as: :attachinary %>
 
-    <%= a.input :food %>
+    <%= a.input :food, required: true, as: :radio_buttons,
+      collection: ['breakfast', 'breakfast & meal', 'full pension'] %>
     <%= a.input :other_comment %>
 
     <%= a.input :mission_photos, as: :attachinary %>
