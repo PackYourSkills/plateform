@@ -1,0 +1,6 @@
+<%= simple_form_for [@mission, @connection] do |a| %>
+  <%= a.hidden_field :packer_id, :value => current_user.packer.id %>
+  <%= a.input :message %>
+  <%= a.submit 'Save' %>
+  <%= a.submit 'Send' %>
+<% end %>

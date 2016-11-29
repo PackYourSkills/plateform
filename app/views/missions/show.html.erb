@@ -105,6 +105,25 @@
 <%= link_to "APPLY",  new_mission_connection_path(@mission) %>
 
 
+<% content_for(:after_js) do %>
+ <%= javascript_tag do %>
+   $(document).ready(function() {
+     var handler = Gmaps.build('Google');
+     handler.buildMap({ internal: { id: 'map' } }, function() {
+       markers = handler.addMarkers(<%= raw @hash.to_json %>);
+       handler.bounds.extendWith(markers);
+       handler.fitMapToBounds();
+       if (markers.length == 0) {
+         handler.getMap().setZoom(2);
+       } else if (markers.length == 1) {
+         handler.getMap().setZoom(14);
+       }
+     });
+   });
+ <% end %>
+<% end %>
+
+
 <% @mission.mission_photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>

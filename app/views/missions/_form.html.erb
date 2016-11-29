@@ -1,7 +1,6 @@
 <div class="container mission_edit">
   <div class="form_inputs">
     <%= simple_form_for (@mission) do |a| %>
-    <%= a.hidden_field :mission_id, :value => @mission.id %>
 
     <%= a.input :title %>
     <%= a.input :cover_picture, as: :attachinary %>

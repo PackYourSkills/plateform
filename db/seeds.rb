@@ -29,7 +29,7 @@
   ]}
 
 cities = ['Lyon','Manila','Mexico','Kuala Lumpur','Sao Paolo','Cape Town']
-status = ['draft','online','suspended','validated','canceled','closed']
+status = ['draft','online','suspended','closed','canceled']
 
 30.times do
   user = User.new(

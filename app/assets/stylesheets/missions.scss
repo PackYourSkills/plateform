@@ -4,13 +4,9 @@
 /* -------------------------------------------------------------------- */
 /* Index */
 /* -------------------------------------------------------------------- */
-.nooverflow {
-  position: absolute;
-  bottom: 0;
-  top: 70px;
-  left: 0;
-  right: 0;
-  overflow: hidden;
+.scroll-v {
+  overflow: scroll;
+  height: calc(100vh - 70px);
 }
 
 .search_engin_result_page {
@@ -26,10 +22,6 @@
   padding-left: 0px;
   height: calc(100vh - 70px);
   position:relative;
-}
-
-.scroll-v {
-  overflow-y: auto;
 }
 
 .image_100vh_fixed {
