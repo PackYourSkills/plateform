@@ -13,34 +13,47 @@
   <% url_hosting = @mission.hosting_picture.path %>
 <% end %>
 
+<% if @mission.crew.logo == nil %>
+  <% url_logo = 'logo.png' %>
+<% else %>
+  <% url_logo = @mission.crew.logo.path %>
+<% end %>
+
         <!-- Banner -->
 
 <div class="banner-mission"
   style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
   url('<%= cl_image_path url_cover %>')">
-
-  <div class="logo">
-    <% if @mission.crew.logo? %>
-      <%= cl_image_tag @mission.crew.logo.path, width: 150, height: 150, crop: :fill %>
-    <% else %>
-      <%= image_tag "logo.png" %>
-    <% end %>
-  </div>
-  <div class="job-title">
-    <h2><%= @mission.title %></h2>
-  </div>
-  <div class="mission-essentials">
-    <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
-  </div>
-  <div class="apply-btn text-center">
-    <%= link_to "APPLY",  new_mission_connection_path(@mission), class:"apply" %>
+  <div class="container banner-infos">
+    <div class="row">
+      <div class="col-xs-12, col-sm-3">
+        <div class="banner-mission-box logo"
+          style="background-image: url('<%= cl_image_path url_logo %>')">
+        </div>
+      </div>
+      <div class="col-xs-12, col-sm-6">
+        <div class="banner-mission-box">
+          <div class="job-title">
+            <h2><%= @mission.title %></h2>
+          </div>
+          <div class="mission-essentials">
+            <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12, col-sm-3">
+        <div class="banner-mission-box apply-btn text-center">
+          <%= link_to "APPLY",  new_mission_connection_path(@mission), class:"apply" %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
         <!-- Banner end -->
 
 <div class="container">
-  <div class="row">
+  <div class="row-1">
     <div class="col-xs-12, col-sm-3">
       <div class="row">
 
@@ -215,21 +228,15 @@
             <td><%= @mission.hours_per_day %> hours/day</td>
           </tr>
           <tr>
-            <td><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
+            <td colspan="2"><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
           </tr>
           <tr>
-            <td><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
+            <td colspan="2"><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
           </tr>
       </table>
     </div>
   </div>
 </div>
-
-
-<div id="map" style="width: 600px; height: 600px;"></div>
-
-
-<%= link_to "APPLY",  new_mission_connection_path(@mission) %>
 
 
 <% content_for(:after_js) do %>
