@@ -1,2 +1,5 @@
-<%= current_user.crew? ? (render 'form_crew') : (render 'form_packer') %>
-
+<% if current_user.crew? %>
+  <%= render 'form_crew' %>
+<% else %>
+ <%= params['info'] == 'basic' ? (render 'form_basic_packer') : (render 'form_story_packer')%>
+<% end %>

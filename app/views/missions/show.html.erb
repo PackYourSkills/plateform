@@ -1,6 +1,12 @@
+<% if @mission.cover_picture == nil %>
+  <% url_cover = 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' %>
+<% else %>
+  <% url_cover = @mission.cover_picture.path %>
+<% end %>
+
 <div class="banner-mission"
   style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
-  url('<%= cl_image_path @mission.cover_picture.path %>')">
+  url('<%= url_cover %>')">
   <div class="logo">
     <% if @mission.crew.logo? %>
       <%= cl_image_tag @mission.crew.logo.path, width: 150, height: 150, crop: :fill %>
