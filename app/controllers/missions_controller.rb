@@ -3,6 +3,7 @@ class MissionsController < ApplicationController
 
   before_action :set_mission, only: [ :show, :edit, :update, :destroy, :close, :suspend, :cancel ]
   before_action :set_crew, only: [ :create, :destroy ]
+  before_action :set_list_skills, only: [ :index ]
 
   def index
     # info from the form
@@ -73,6 +74,11 @@ class MissionsController < ApplicationController
   end
 
   private
+
+  def set_list_skills
+    db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+    @list = db_constants['skills']
+  end
 
   def set_mission
     @mission = Mission.find(params[:id])
