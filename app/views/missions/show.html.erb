@@ -1,3 +1,4 @@
+
 <% current_user == @mission.crew.user || current_user.admin ? editable = true : editable = false %>
 
 <% if @mission.cover_picture == nil %>
@@ -8,7 +9,9 @@
 
 <div class="banner-mission"
   style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+
   url('<%= cl_image_path url_cover %>')">
+
   <div class="logo">
     <% if @mission.crew.logo? %>
       <%= cl_image_tag @mission.crew.logo.path, width: 150, height: 150, crop: :fill %>

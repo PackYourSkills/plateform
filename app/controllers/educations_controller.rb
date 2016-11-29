@@ -13,7 +13,7 @@ class EducationsController < ApplicationController
   end
 
   def create
-    @education = @packer.educations.build(education_params)
+    @education = @packer.build_education(education_params)
     authorize @education
     @education.save ? (redirect_to packer_path @packer) : (render :new)
   end

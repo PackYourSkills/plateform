@@ -6,7 +6,7 @@ class InfosController < ApplicationController
 
   def update
     current_user.update(params_packer)
-    redirect_to packer_path(current_user)
+    redirect_to packer_path(current_user.packer)
   end
 
   private

@@ -29,7 +29,7 @@
   ]}
 
 cities = ['Lyon','Manila','Mexico','Kuala Lumpur','Sao Paolo','Cape Town']
-status = ['draft','online','suspended','closed','canceled']
+status_mission = ['draft','online','suspended','closed','canceled']
 
 30.times do
   user = User.new(
@@ -62,15 +62,12 @@ status = ['draft','online','suspended','closed','canceled']
       city: user.city,
       country: '',
       skill: @constants["Skills"].sample['name'],
-      status: status.sample,
+      status: status_mission.sample,
       description: Faker::Lorem.paragraph(3, false, 2),
       )
     mission.save
   end
 end
-
-
-@missions = Mission.all
 
 30.times do
   user = User.new(
@@ -127,5 +124,26 @@ end
       )
     experience.save
   end
+  [1,2,3].sample.times do
+    education = packer.educations.new(
+      description:Faker::Lorem.paragraph(3, false, 2)
+      )
+    education.save
+  end
 end
 
+@missions = Mission.all
+@packers = Packer.all
+
+status_connection = ['draft','online','accepted','refused','canceled','confirmed']
+
+@missions.each do |mission|
+  [1,2,3].sample.times do
+    connection = mission.connections.new(
+      message: Faker::Lorem.paragraph(3, false, 2),
+      packer_id: @packers.sample.id,
+      status: status_connection.sample
+      )
+    connection.save
+  end
+end
