@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
+
     <div class="col-xs-12, col-sm-3">
       <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @url_logo%>');">
         </div>
+
+          <div class="progress style-1">
+            <span class="text"></span>
+              <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="50%">
+                <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - 50%</span>
+              </div>
+          </div>
+
         <div class="box">
           <div class="box_link btn-crew-deck text-center">
             <%= link_to "edit your profile", edit_crew_path %>
@@ -20,25 +29,17 @@
         <div class="col-xs-12">
           <h2> Welcome home <%= @crew.name %>!</h2>
         </div>
-        <div class="col-xs-12">
-          <div class="progress style-1">
-            <span class="text"></span>
-              <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="50%">
-                <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - 50%</span>
-              </div>
-          </div>
-        </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <div class="small-card text-center">
             <h3>YOU HAVE 3 CREDITS LEFT</h3>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <div class="small-card text-center">
             <h3>YOU HAVE <%= @crew.missions.count %> CURRENT MISSIONS</h3>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <div class="small-card text-center">
             <%= link_to "POST A MISSION", new_mission_path %>
           </div>
