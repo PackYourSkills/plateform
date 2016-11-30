@@ -1,0 +1,32 @@
+<article class="col-sm-12 col-md-6 isotope-item <%= mission.skill.downcase.gsub(/ /, '_') %>">
+  <%= link_to mission_path(mission), class: 'mission-card', target: '_blank' do %>
+    <div class="mission-card--content">
+      <h1 class="mission-card--title">
+        <%= truncate(mission.title, length: 60) %>
+      </h1>
+      <ul class="mission-card--info">
+        <li class="info location">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <%= "#{mission.city}, #{mission.country}" %>
+        </li>
+        <li class="info duration">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          <%= mission.duration %>
+        </li>
+        <li class="info skill">
+          <i class="fa fa-handshake-o" aria-hidden="true"></i>
+          <%= mission.skill %>
+        </li>
+      </ul>
+    </div>
+    <div class="mission-card--background">
+       <div class="image" style="background: url('<%= mission.cover_picture %>') center no-repeat;"></div>
+    </div>
+    <div class="mission-card--brand">
+      <div class="logo" style="background: url(<%= mission.crew.cover_picture %>) no-repeat center #FFFFFF;"></div>
+      <div class="name">
+        <%= mission.crew.name %>
+      </div>
+    </div>
+  <% end %>
+</article>
