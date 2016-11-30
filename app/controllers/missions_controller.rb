@@ -35,6 +35,11 @@ class MissionsController < ApplicationController
   end
 
   def show
+    @editable = user_signed_in? ? (current_user == @mission.crew.user || current_user.admin) : false
+    @url_cover = @mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.cover_picture.path
+    @url_hosting = @mission.hosting_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.hosting_picture.path
+    @url_logo = @mission.crew.logo.nil? ? 'logo.png' : @mission.crew.logo.path
+
     @hash = Gmaps4rails.build_markers(@mission) do |mission, marker|
       marker.lat mission.latitude
       marker.lng mission.longitude

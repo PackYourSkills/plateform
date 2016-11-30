@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-4 col-lg-3 col-lg-offset-1">
-      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url%>');">
+    <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
+      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');">
         <% if @editable %>
           <div class="box_link">
             <i class="fa fa-camera-retro" aria-hidden="true"></i>
@@ -28,6 +28,7 @@
           </div>
         <% end %>
       </div>
+
       <div class="box">
         <% lang_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "language"  } %>
         <% if lang_skills.size.zero? %>
@@ -44,7 +45,7 @@
         <div class="content_box">
           <div class="row">
             <% lang_skills.each_with_index do |skill| %>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-sm-6">
               <p>
               <%= skill.title %>
               <% if @editable %>
@@ -62,7 +63,7 @@
             <% if @editable %>
             <div class="col-xs-12">
               <div class="body_new">
-                <h4 class="title"><%= link_to 'add a language', new_packer_skill_path(@packer, type_of_skill: :language) %></h4>
+                <h4 class="title"><%= link_to 'add a language', '#', :id => 'language', "data-toggle" => "modal", 'data-target' => '#newlangModal' %></h4>
               </div>
             </div>
             <% end %>
@@ -75,7 +76,7 @@
 
 
 
-    <div class="col-xs-12 col-md-8 col-lg-7">
+    <div class="col-xs-12 col-sm-8 col-lg-7">
       <div class='row'>
         <!-- Box story 2 columns mandatory -->
         <div class="col-xs-12">
@@ -95,20 +96,19 @@
             <% if @editable %>
               <div class="box_link">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <%= link_to '', infos_edit_path(info: :story) %>
+                <%= link_to '', '#', :id => 'story', "data-toggle" => "modal", 'data-target' => '#storyModal' %>
               </div>
             <% end %>
           </div>
         </div>
 
         <!-- Box Education 1 column mandatory -->
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil %>
               <div class="box_empty">
                 <h2>Tell us about your education</h2>
-              </div>
-              <% if @editable %>
+à              <% if @editable %>
                 <div class="box_link">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <%= link_to '', new_packer_education_path(@packer) %>
@@ -132,7 +132,7 @@
         </div>
 
         <!-- Box story 1 columns volunteering experience -->
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil || @packer.education == '' %>
               <div class="box_empty">
@@ -156,7 +156,7 @@
         </div>
 
         <!-- Box skills 2 columns mandatory -->
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12 col-sm-12">
           <div class="box">
             <div class="title_box col-xs-12">
               <h1>Skills</h1>
@@ -179,7 +179,7 @@
                 <!-- to find the picto -->
                     <% if index.odd? %>
                     <!-- left part index odd -->
-                      <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-12 col-sm-6">
                         <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                           <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
                           <div class="body">
@@ -199,7 +199,7 @@
                       </div>
                     <% else %>
                     <!-- right part index even -->
-                      <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-12 col-sm-6">
                         <div class="feature-box-2 object-non-visible right" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                           <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
                           <div class="body">
@@ -232,7 +232,7 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12 col-sm-12">
           <div class="box">
             <div class="title_box col-xs-12">
               <h1>Volunteering Experiences</h1>
@@ -255,7 +255,7 @@
                 <!-- to find the picto -->
                     <% if index.odd? %>
                     <!-- left part index odd -->
-                      <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-12 col-sm-6">
                         <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                           <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
                           <div class="body">
@@ -275,7 +275,7 @@
                       </div>
                     <% else %>
                     <!-- right part index even -->
-                      <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-12 col-sm-6">
                         <div class="feature-box-2 object-non-visible right" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                           <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
                           <div class="body">
@@ -309,7 +309,7 @@
         </div>
 
         <!-- Box story 1 columns professionnal experience -->
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil || @packer.education == '' %>
               <div class="box_empty">
@@ -328,6 +328,45 @@
             <% end %>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Story -->
+<div class="modal fade" id="storyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="storyModalLabel">Tell us your story</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @packer.user, url: infos_update_path do |f| %>
+            <%= f.input :story, label: false %>
+            <%= f.button :submit, 'Update' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal New Language -->
+<div class="modal fade" id="newlangModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="newlangModalLabel">Which language do you speak ?</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@packer, @skill = Skill.new], url: packer_skills_path(@packer) do |a| %>
+          <%= a.hidden_field :skill_id, :value => @skill.id %>
+          <%= a.input :title, label: :Language, collection: LanguageList::COMMON_LANGUAGES.select(&:living?).map { |e| e.name }, required: true %>
+          <%= a.input :level, collection: @pro_level, required: true, prompt: "What is your level" %>
+          <%= a.input :type_of_skill, as: :hidden, input_html: { value: 'language' } %>
+          <%= a.submit class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>

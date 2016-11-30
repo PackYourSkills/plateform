@@ -34,30 +34,30 @@ class ConnectionsController < ApplicationController
   def accept
     @connection.status = 'accepted'
     @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    redirect_to deck_crew_path(@mission.crew)
   end
 
   def refuse
     @connection.status = 'refused'
     @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    redirect_to deck_crew_path(@mission.crew)
   end
 
   def cancel
     @connection.status = 'canceled'
     @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    redirect_to deck_packer_path(@connection.packer)
   end
 
   def confirm
     @connection.status = 'confirmed'
     @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    redirect_to deck_packer_path(@connection.packer)
   end
 
   def destroy
     @connection.destroy
-    redirect_to deck_packer_path @packer
+    redirect_to deck_packer_path(@connection.packer)
   end
 
   private

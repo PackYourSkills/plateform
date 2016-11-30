@@ -107,7 +107,7 @@ private
   end
 
   def concerned_crew_or_admin?
-    user == record.crew.user || admin?
+    user == record.mission.crew.user || admin?
   end
 
   def concerned_packer_or_admin?

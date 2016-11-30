@@ -1,64 +1,53 @@
-
-<% current_user == @mission.crew.user || current_user.admin ? editable = true : editable = false %>
-
-<% if @mission.cover_picture == nil %>
-  <% url_cover = 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' %>
-<% else %>
-  <% url_cover = @mission.cover_picture.path %>
-<% end %>
-
-<% if @mission.hosting_picture == nil %>
-  <% url_hosting = 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' %>
-<% else %>
-  <% url_hosting = @mission.hosting_picture.path %>
-<% end %>
-
-<% if @mission.crew.logo == nil %>
-  <% url_logo = 'logo.png' %>
-<% else %>
-  <% url_logo = @mission.crew.logo.path %>
-<% end %>
-
         <!-- Banner -->
-
-<div class="banner-mission"
-  style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
-  url('<%= cl_image_path url_cover %>')">
-  <div class="container banner-infos">
+<div class="container_cover">
+  <div class="banner_mission" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('<%= cl_image_path @url_cover %>')">
+  </div>
+  <div class="container banner_info">
     <div class="row">
       <div class="col-xs-12, col-sm-3">
-        <div class="banner-mission-box logo"
-          style="background-image: url('<%= cl_image_path url_logo %>')">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box box_ratio_1_1_0-75" style="background-image: url('<%= cl_image_path @url_logo %>')">
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-xs-12, col-sm-6">
-        <div class="banner-mission-box">
-          <div class="job-title">
-            <h2><%= @mission.title %></h2>
-          </div>
-          <div class="mission-essentials">
-            <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box height_80px">
+              <div class="job-title">
+                <h2><%= @mission.title %></h2>
+              </div>
+              <div class="mission-essentials">
+                <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-xs-12, col-sm-3">
-        <div class="banner-mission-box apply-btn text-center">
-          <%= link_to "APPLY",  new_mission_connection_path(@mission), class:"apply" %>
+        <div class="box height_80px">
+          <div class="box_link">
+            <% if @editable %>
+              <%= link_to 'EDIT', edit_mission_path %>
+            <% else %>
+              <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-        <!-- Banner end -->
+<!-- Banner end -->
 
 <div class="container">
-  <div class="row-1">
+  <div class="row">
     <div class="col-xs-12, col-sm-3">
       <div class="row">
-
         <div class="col-xs-12">
-          <div class="box">
+          <div class="box box160px">
             <% if @mission.crew.name == nil || @mission.crew.name == '' %>
               <div class="box_empty">
                 <h2>Add information</h2>
@@ -69,17 +58,11 @@
                 <p><%= @mission.crew.mission %></p>
               </div>
             <% end %>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
           </div>
         </div>
 
         <div class="col-xs-6">
-          <div class="box">
+          <div class="box box80px">
             <% if @mission.crew.creation_date == nil || @mission.crew.creation_date == '' %>
               <div class="box_empty">
                 <h2>Add a creation date</h2>
@@ -89,17 +72,11 @@
                 <p>Created in : <%= @mission.crew.creation_date %></p>
               </div>
             <% end %>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
           </div>
         </div>
 
         <div class="col-xs-6">
-          <div class="box">
+          <div class="box box80px">
             <% if @mission.crew.nb_collaborators == nil || @mission.crew.nb_collaborators == '' %>
               <div class="box_empty">
                 <h2>Add team info</h2>
@@ -109,25 +86,23 @@
                 <p><%= @mission.crew.nb_collaborators %> team members</p>
               </div>
             <% end %>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
           </div>
         </div>
-
+      </div>
+      <div class="row">
         <div class="col-xs-12">
-          <div class ="box">
-            <div class="content_box">
-              <%= link_to "See their profile", crew_path(@mission.crew) %>
+          <div class ="box box80px">
+            <div class="box_link">
+              <% if @editable %>
+                <%= link_to 'Go to your profile', crew_path(@mission.crew) %>
+              <% else %>
+                <%= link_to "See their profile", crew_path(@mission.crew) %>
+              <% end %>
             </div>
           </div>
         </div>
-
         <div class="col-xs-12">
-          <div class="box">
+          <div class="box box80px">
             <% if @mission.crew.values == nil || @mission.crew.values == '' %>
               <div class="box_empty">
                 <h2>Add values</h2>
@@ -137,135 +112,76 @@
                 <h3>Their values : <%= @mission.crew.values %></h3>
                </div>
             <% end %>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
           </div>
         </div>
-
       </div>
     </div>
 
-    <div class="col-xs-12, col-sm-6">
+    <div class="col-xs-12, col-sm-9">
       <div class="row">
-
         <!-- Box Mission 2 columns mandatory -->
-
-        <div class="col-xs-12">
-          <div class="box box_ratio_1_2">
+        <div class="col-xs-12, col-sm-8">
+          <div class="box box270px">
             <% if @mission.description == nil %>
               <div class="box_empty">
                 <h2>Tell us about the mission</h2>
               </div>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
             <% else %>
               <div class="content_box">
                 <h2>THE MISSION : </h2><p><%= @mission.description %></p>
               </div>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', edit_mission_path %>
-                </div>
-              <% end %>
             <% end %>
+          </div>
+        </div>
+        <div class="col-xs-12, col-sm-4">
+          <table class="box box270px table table-bordered">
+              <tr>
+                <td><%= @mission.days_per_week %> days/week</td>
+                <td><%= @mission.hours_per_day %> hours/day</td>
+              </tr>
+              <tr>
+                <td colspan="2"><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
+              </tr>
+              <tr>
+                <td colspan="2"><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
+              </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Box Map 1 column mandatory -->
+        <div class="col-xs-12, col-sm-4">
+          <div class ="box box270px">
+            <div id="map" style="width: 100%; height: 100%;"></div>
           </div>
         </div>
 
         <!-- Box Hosting Picture 2 columns mandatory -->
-
-        <div class="col-xs-12">
-          <div class="box box_ratio_1_2">
-            <div class="content_box" style="background-image:url('<%= cl_image_path url_hosting %>')">
+        <div class="col-xs-12, col-sm-8">
+          <div class="box box270px">
+            <div class="content_box" style="background-image:url('<%= cl_image_path @url_hosting %>')">
             </div>
-            <% if editable %>
-              <div class="box_link">
-                <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                <%= link_to '', infos_edit_path(info: :basic) %>
-              </div>
-            <% end %>
           </div>
         </div>
-
-        <!-- Box Map 1 column mandatory -->
-
-        <div class="col-xs-12, col-sm-6">
-            <div class ="content_box" id="map" style="width: 100%; height: 250px;"></div>
-              <% content_for(:after_js) do %>
-               <%= javascript_tag do %>
-                 $(document).ready(function() {
-                   var handler = Gmaps.build('Google');
-                   handler.buildMap({ internal: { id: 'map' } }, function() {
-                     markers = handler.addMarkers(<%= raw @hash.to_json %>);
-                     handler.bounds.extendWith(markers);
-                     handler.fitMapToBounds();
-                     if (markers.length == 0) {
-                       handler.getMap().setZoom(8);
-                     } else if (markers.length == 1) {
-                       handler.getMap().setZoom(8);
-                     }
-                   });
-                 });
-               <% end %>
-              <% end %>
-          </div>
       </div>
-    </div>
-
-
-    <div class="col-xs-12, col-sm-3">
-      <table class="box table table-bordered">
-          <tr>
-            <td><%= @mission.days_per_week %> days/week</td>
-            <td><%= @mission.hours_per_day %> hours/day</td>
-          </tr>
-          <tr>
-            <td colspan="2"><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
-          </tr>
-          <tr>
-            <td colspan="2"><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
-          </tr>
-      </table>
     </div>
   </div>
 </div>
 
-
 <% content_for(:after_js) do %>
- <%= javascript_tag do %>
-   $(document).ready(function() {
-     var handler = Gmaps.build('Google');
-     handler.buildMap({ internal: { id: 'map' } }, function() {
-       markers = handler.addMarkers(<%= raw @hash.to_json %>);
-       handler.bounds.extendWith(markers);
-       handler.fitMapToBounds();
-       if (markers.length == 0) {
-         handler.getMap().setZoom(2);
-       } else if (markers.length == 1) {
-         handler.getMap().setZoom(14);
-       }
-     });
-   });
- <% end %>
-<% end %>
-
-
-<% @mission.mission_photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %>
-
-<% if user_signed_in? %>
-  <% if current_user.crew? %>
-    <% if @mission.crew == current_user.crew %>
-      <%= link_to "edit", edit_mission_path %>
-    <% end %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(4);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(6);
+      }
+    });
+  });
   <% end %>
 <% end %>

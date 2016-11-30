@@ -32,7 +32,7 @@ class SkillsController < ApplicationController
   def destroy
     @packer = Packer.find(params[:packer_id])
     @skill.destroy
-    redirect_to packer_path
+    redirect_to packer_path(@packer)
   end
 
   private

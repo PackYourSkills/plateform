@@ -9,10 +9,16 @@
       <%= a.input :social_issue %>
       <%= a.input :values %>
       <%= a.input :mission %>
+      <%= a.input :story %>
 
       <%= a.input :creation_date, discard_day: true %>
       <%= a.input :nb_collaborators %>
       <%= a.input :team_description %>
+
+      <%= a.input :address %>
+      <%= a.input :city %>
+      <%= a.input :zip_code %>
+      <%= a.input :country , as: :string %>
 
       <%= a.input :phone %>
       <%= a.input :website %>
