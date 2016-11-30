@@ -55,7 +55,7 @@ class CrewsController < ApplicationController
       :address, :country, :city, :zip_code, :latitude, :longitude,
       :social_issue, :mission, :creation_date,
       :nb_collaborators, :team_description,
-      :phone, :skype, :twitter, :website,
+      :phone, :skype, :twitter, :facebook, :website, :youtube_link,
       :value1, :value2, :value3, :quote, :quote_author,
       :credit_count, :logo, :cover_picture, crew_photos: [])
   end
