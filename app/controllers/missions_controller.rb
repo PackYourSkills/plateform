@@ -56,20 +56,17 @@ class MissionsController < ApplicationController
   end
 
   def close
-    @mission.status = 'closed'
-    @mission.save
+    @mission.close
     redirect_to mission_path @mission
   end
 
   def cancel
-    @mission.status = 'canceled'
-    @mission.save
+    @mission.cancel
     redirect_to mission_path @mission
   end
 
   def suspend
-    @mission.status = 'suspended'
-    @mission.save
+    @mission.suspend
     redirect_to mission_path @mission
   end
 

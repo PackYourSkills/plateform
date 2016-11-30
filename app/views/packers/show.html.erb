@@ -108,7 +108,7 @@
             <% if @packer.education == nil %>
               <div class="box_empty">
                 <h2>Tell us about your education</h2>
-à              <% if @editable %>
+                <% if @editable %>
                 <div class="box_link">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <%= link_to '', new_packer_education_path(@packer) %>
@@ -129,6 +129,7 @@
               <% end %>
             <% end %>
           </div>
+        </div>
         </div>
 
         <!-- Box story 1 columns volunteering experience -->

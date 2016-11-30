@@ -45,8 +45,151 @@
         </div>
         <div class="col-xs-12">
           <div class="panel-group collapse-style-2" id="accordion-2">
-            <!-- each on all missions -->
-            <% @crew.missions.order(created_at: :desc).each_with_index do |mission, index| %>
+            <% if @all_closed.size > 0 %>
+            <h1>Congrats, a packer is coming</h1>
+
+            <!-- each on all closed missions (crew accepted a packer) -->
+              <% @all_closed.each_with_index do |mission, index| %>
+                <div class="panel panel-default">
+                  <div class="panel-heading myclass">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                        <%= mission.title%>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="mission_description">
+                        <%= mission.description %>
+                        <%= link_to "see more", mission_path(mission) %>
+                      </div>
+
+                      <!-- each on all connections for this mission -->
+                      <div class="mission_connections">
+                        <% mission.connections.each do |connection| %>
+                          <% if connection.accepted? %>
+                            <div class="col-md-12 ">
+                              <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                <span class="icon without-bg"><i class="fa text-default fa-connectdevelop"></i></span>
+                                <div class="body">
+                                  <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
+                                  <p><%= connection.message %><%= link_to "see the profile", packer_path(connection.packer) %></p>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      <!-- end of each on all connections for this mission -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <!-- end of each on all closed missions -->
+            <% end %>
+
+            <!-- each on all online missions -->
+            <h1>All your online missions</h1>
+            <% @all_online.each_with_index do |mission, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                      <%= mission.title %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <%= mission.description %>
+                      <%= link_to "see more", mission_path(mission) %>
+                    </div>
+
+                    <!-- each on all connections for this mission -->
+                    <div class="mission_connections">
+                      <% unread = mission.connections.select { |c| c.read = false && !c.draft? } %>
+                      <% if unread.size > 0 %>
+                        <p>You have <%= unread.size %> new application(s)<p>
+                        <% undread.each do |connection| %>
+                          <div class="col-md-12 ">
+                            <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                              <span class="icon without-bg"><i class="fa text-default fa-connectdevelop"></i></span>
+                              <div class="body">
+                                <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
+                                <p><%= connection.message %><%= link_to "see the profile", packer_path(connection.packer) %></p>
+                                <p><%= link_to "accept",  accept_connection_path(mission,connection) %> - <%= link_to "refuse",  refuse_connection_path(mission,connection) %></p>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                      <% end %>
+                      <% online = mission.connections.select { |c| c.read = true && c.online? } %>
+                      <% if online.size > 0 %>
+                        <p>You need to answer to <%= online.size %> application(s)<p>
+                        <% online.each do |connection| %>
+                          <div class="col-md-12 ">
+                            <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                              <span class="icon without-bg"><i class="fa text-default fa-connectdevelop"></i></span>
+                              <div class="body">
+                                <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
+                                <p><%= connection.message %><%= link_to "see the profile", packer_path(connection.packer) %></p>
+                                <p><%= link_to "accept",  accept_connection_path(mission,connection) %> - <%= link_to "refuse",  refuse_connection_path(mission,connection) %></p>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                      <% end %>
+                      <% all_other = mission.connections.select { |c| c.read = true && !c.online? && !c.draft? } %>
+                      <% if all_other.size > 0 %>
+                        <p>You have <%= all_other.size %> old application(s)<p>
+                        <% all_other.each do |connection| %>
+                          <div class="col-md-12 ">
+                            <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                              <span class="icon without-bg"><i class="fa text-default fa-connectdevelop"></i></span>
+                              <div class="body">
+                                <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    <!-- end of each on all connections for this mission -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on all online missions -->
+
+
+            <!-- each on all draft missions -->
+            <h1>All your missions to send</h1>
+            <% @all_draft.each_with_index do |mission, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                      <%= mission.title %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <%= mission.description %>
+                      <%= link_to "see more", mission_path(mission) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on all draft missions -->
+
+            <!-- each on all past missions -->
+            <h1>Old missions</h1>
+            <% @all_old.each_with_index do |mission, index| %>
               <div class="panel panel-default">
                 <div class="panel-heading myclass">
                   <h4 class="panel-title">
@@ -61,28 +204,12 @@
                       <%= mission.description %>
                       <%= link_to "see more", mission_path(mission) %>
                     </div>
-
-                    <!-- each on all connections for this mission -->
-                    <div class="mission_connections">
-                      <% mission.connections.each do |connection| %>
-                        <div class="col-md-12 ">
-                          <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                            <span class="icon without-bg"><i class="fa text-default fa-connectdevelop"></i></span>
-                            <div class="body">
-                              <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
-                              <p><%= connection.message %><%= link_to "see the profile", packer_path(connection.packer) %></p>
-                              <p><%= link_to "accept",  accept_connection_path(mission,connection) %> - <%= link_to "refuse",  refuse_connection_path(mission,connection) %></p>
-                            </div>
-                          </div>
-                        </div>
-                      <% end %>
-                    <!-- end of each on all connections for this mission -->
-                    </div>
                   </div>
                 </div>
               </div>
             <% end %>
-            <!-- end of each on all missions -->
+            <!-- end of each on past missions -->
+
           </div>
         </div>
       </div>
