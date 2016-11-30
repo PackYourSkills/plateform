@@ -43,7 +43,7 @@ class Connection < ApplicationRecord
     self.status == 'canceled'
   end
 
-  def confirme
+  def confirm
     self.status = 'confirmed'
     self.save
     self.mission.validate

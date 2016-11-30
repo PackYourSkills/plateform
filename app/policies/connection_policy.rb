@@ -106,6 +106,7 @@ private
   def concerned_packer_or_admin?
     user == record.packer.user || admin?
   end
+
 end
 
 

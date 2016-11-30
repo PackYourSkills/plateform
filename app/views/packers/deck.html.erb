@@ -40,16 +40,16 @@
             <!-- each on all accepted missions if not nil -->
             <% if @all_accepted.size > 0 %>
             <h1> Congrats, this is your next mission(s) </h1>
-            <% @all_online.each_with_index do |connection, index| %>
+            <% @all_accepted.each_with_index do |connection, index| %>
               <div class="panel panel-default">
                 <div class="panel-heading myclass">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_accepted<%= index %>" >
                       <%= connection.mission.title %>
                     </a>
                   </h4>
                 </div>
-                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                <div id="Connection_accepted<%= index %>"  class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div class="mission_description">
                       <p>Mission description : <%= connection.mission.description %>
@@ -77,12 +77,12 @@
               <div class="panel panel-default">
                 <div class="panel-heading myclass">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_online<%= index %>" >
                       <%= connection.mission.title %>
                     </a>
                   </h4>
                 </div>
-                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                <div id="Connection_online<%= index %>"  class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div class="mission_description">
                       <p>Mission description : <%= connection.mission.description %>
@@ -109,12 +109,12 @@
               <div class="panel panel-default">
                 <div class="panel-heading myclass">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_draft<%= index %>" >
                       <%= connection.mission.title %>
                     </a>
                   </h4>
                 </div>
-                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                <div id="Connection_draft<%= index %>"  class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div class="mission_description">
                       <p>Mission description : <%= connection.mission.description %>
@@ -141,12 +141,12 @@
               <div class="panel panel-default">
                 <div class="panel-heading myclass">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Mission<%= index %>" >
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_old<%= index %>" >
                       <%= connection.mission.title + ' - ' + connection.status %>
                     </a>
                   </h4>
                 </div>
-                <div id="Mission<%= index %>"  class="panel-collapse collapse in">
+                <div id="Connection_old<%= index %>"  class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div class="mission_description">
                       <p>Mission description : <%= connection.mission.description %>
