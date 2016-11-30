@@ -1,12 +1,30 @@
 <div class="container">
-  <div class ="intro">
-    <h1>Hi <%= @crew.name %> ! </h1></br>
-    <h3>Tell us more about your crew </h3>
-  </div>
-</div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
 
-<div class="wrapper-form">
-  <div class=" container edit-form">
-    <%= render 'form' %>
+      <div class="row">
+
+        <div class="col-xs-12">
+          <div class ="intro text-center">
+            <h1>Hi <%= @crew.name %> ! </h1></br>
+            <h3>Tell us more about your crew </h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class=" form-box">
+            <%= render 'form' %>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="link text-center">
+            <%= link_to "Return to your profile", crew_path, class:"deviselink" %>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 </div>

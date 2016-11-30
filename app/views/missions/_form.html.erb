@@ -28,9 +28,9 @@
 
     <%= a.input :mission_photos, as: :attachinary %>
 
-      <div class="container submit">
+      <div class="text-center">
        <%= a.submit 'Save & keep offline' if (@mission.status == nil || @mission.status == 'draft' || @mission.status == 'suspended') %>
-       <%= a.submit 'Publish', class: "btn btn-primary" %>
+       <%= a.submit 'Publish', class: "btn btn-secondary" %>
      </div>
     <% end %>
   </div>
