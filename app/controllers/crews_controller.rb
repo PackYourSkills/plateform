@@ -44,7 +44,7 @@ class CrewsController < ApplicationController
 
   def crew_params
     params.require(:crew).permit(:name, :story,
-      :address, :country, :city, :zip_code,
+      :address, :country, :city, :zip_code, :latitude, :longitude,
       :social_issue, :mission, :creation_date,
       :nb_collaborators, :team_description,
       :phone, :skype, :twitter, :website,
