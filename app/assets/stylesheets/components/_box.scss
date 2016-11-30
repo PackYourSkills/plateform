@@ -118,3 +118,9 @@
   display: block;
   padding-top: 50%;  /* initial ratio of 1:1*/
 }
+
+.form-box {
+  background-color: $brand-color;
+  padding: 20px;
+  color: $dark;
+}
