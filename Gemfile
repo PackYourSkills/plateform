@@ -82,6 +82,9 @@ gem 'rails_admin', '>= 1.0.0.rc'
 # Faker pour les Seeds
 gem 'faker', '~> 1.6', '>= 1.6.6'
 
+# all_languages list
+gem 'language_list', '~> 1.1'
+
 #--------------------------------------------------#
 #End
 #--------------------------------------------------#

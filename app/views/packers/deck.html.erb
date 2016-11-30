@@ -1,39 +1,175 @@
-
-<div class="container text-center size">
-  <h1 class ="hune"> here is your deck packer</h1>
-</div>
-
 <div class="container">
-    <div class="row">
-      <div class="col-xs-3 col-sm-9">
+  <div class="row">
+    <div class="col-xs-12, col-sm-3">
+      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');">
+        <% if @editable %>
+          <div class="box_link">
+            <i class="fa fa-camera-retro" aria-hidden="true"></i>
+            <%= link_to '', edit_packer_path(@packer, infos: :photo) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="progress style-1">
+        <span class="text"></span>
+          <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="<%= @packer.progress %>%">
+            <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - <%= @packer.progress %>%</span>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box_link btn-crew-deck text-center">
+            <%= link_to "edit your profile", packer_path %>
+          </div>
+        </div>
+    </div>
 
-      <br>
-  <h3> Your profile picture </h3>
-  <%= image_tag "default-profile-photo.png", class: "img-Thumbnail",width: "10%",height: "10%"%>
-  <%= link_to "Edit your profile", packer_path, :class => "btn btn-success " %></br>
-  <%= link_to "See your applications", packer_path, :class => "btn btn-default" %></br>
+    <div class="col-xs-12, col-sm-9">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2> Welcome on board <%= @packer.user.first_name %>!</h2>
+        </div>
+        <div class="col-xs-12">
+          <div class="box" style="background-image:linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('/back_searchengine.jpg');">
+          <h3> Let's find the mission of your dream !</h3>
+            <div class="search_engin_result_page">
+              <%= render "shared/searching_engine" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="panel-group collapse-style-2" id="accordion-2">
+            <!-- each on all accepted missions if not nil -->
+            <% if @all_accepted.size > 0 %>
+            <h1> Congrats, this is your next mission(s) </h1>
+            <% @all_accepted.each_with_index do |connection, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_accepted<%= index %>" >
+                      <%= connection.mission.title %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Connection_accepted<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <p>Mission description : <%= connection.mission.description %>
+                      <%= link_to "see more", mission_path(connection.mission) %></p>
+                    </div>
 
-     </div>
+                    <div class="connection_content">
+                      <p>Your message : <%= connection.message %>
+                      <%= link_to "cancel",  cancel_connection_path(connection.mission,connection) %> <%= link_to "confirm",  confirm_connection_path(connection.mission,connection) %> </p>
+                    </div>
 
+                    <div class="crew_description">
+                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on accepted missions if not nil -->
+            <% end %>
+            <!-- each on all online -->
 
+            <h1> All your online application </h1>
+            <% @all_online.each_with_index do |connection, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_online<%= index %>" >
+                      <%= connection.mission.title %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Connection_online<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <p>Mission description : <%= connection.mission.description %>
+                      <%= link_to "see more", mission_path(connection.mission) %></p>
+                    </div>
 
-<div class="row row_bottom" >
-    <div class="col-xs-12 col-sm-2 si ">
+                    <div class="connection_content">
+                      <p>Your message : <%= connection.message %>
+                      <%= link_to "edit",   edit_mission_connection_path(connection.mission,connection) %> <%= link_to "cancel",  cancel_connection_path(connection.mission,connection) %></p>
+                    </div>
 
-    <h3> Infos base </h3>
+                    <div class="crew_description">
+                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on online missions -->
 
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar"
-    aria-valuenow="<%= @packer.user.progress + @packer.progress %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= @packer.user.progress + @packer.progress %>%">
-    <%= @packer.user.progress + @packer.progress%> %
+            <!-- each on all draft missions -->
+            <h1> All your application to send</h1>
+            <% @all_draft.each_with_index do |connection, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_draft<%= index %>" >
+                      <%= connection.mission.title %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Connection_draft<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <p>Mission description : <%= connection.mission.description %>
+                      <%= link_to "see more", mission_path(connection.mission) %></p>
+                    </div>
+
+                    <div class="connection_content">
+                      <p>Your message : <%= connection.message %>
+                      <%= link_to "edit or send",   edit_mission_connection_path(connection.mission,connection) %></p>
+                    </div>
+
+                    <div class="crew_description">
+                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on draft missions -->
+
+            <!-- each on all past missions -->
+            <h1> old applications </h1>
+            <% @all_old.each_with_index do |connection, index| %>
+              <div class="panel panel-default">
+                <div class="panel-heading myclass">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-2" href="#Connection_old<%= index %>" >
+                      <%= connection.mission.title + ' - ' + connection.status %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="Connection_old<%= index %>"  class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="mission_description">
+                      <p>Mission description : <%= connection.mission.description %>
+                      <%= link_to "see more", mission_path(connection.mission) %></p>
+                    </div>
+
+                    <div class="connection_content">
+                      <p>Your message : <%= connection.message %></p>
+                    </div>
+
+                    <div class="crew_description">
+                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <!-- end of each on past missions -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-    <% @packer.connections.each do |connection| %>
-    <p> <%= connection.status %> </p>
-    <% end %>
-
-    </div>
 </div>
 
 

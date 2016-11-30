@@ -3,6 +3,7 @@ class MissionsController < ApplicationController
 
   before_action :set_mission, only: [ :show, :edit, :update, :destroy, :close, :suspend, :cancel ]
   before_action :set_crew, only: [ :create, :destroy ]
+  before_action :set_list_skills, only: [ :index, :new, :edit ]
 
   def index
     # info from the form
@@ -34,6 +35,11 @@ class MissionsController < ApplicationController
   end
 
   def show
+    @editable = user_signed_in? ? (current_user == @mission.crew.user || current_user.admin) : false
+    @url_cover = @mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.cover_picture.path
+    @url_hosting = @mission.hosting_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.hosting_picture.path
+    @url_logo = @mission.crew.logo.nil? ? 'logo.png' : @mission.crew.logo.path
+
     @hash = Gmaps4rails.build_markers(@mission) do |mission, marker|
       marker.lat mission.latitude
       marker.lng mission.longitude
@@ -50,20 +56,17 @@ class MissionsController < ApplicationController
   end
 
   def close
-    @mission.status = 'closed'
-    @mission.save
+    @mission.close
     redirect_to mission_path @mission
   end
 
   def cancel
-    @mission.status = 'canceled'
-    @mission.save
+    @mission.cancel
     redirect_to mission_path @mission
   end
 
   def suspend
-    @mission.status = 'suspended'
-    @mission.save
+    @mission.suspend
     redirect_to mission_path @mission
   end
 
@@ -73,6 +76,11 @@ class MissionsController < ApplicationController
   end
 
   private
+
+  def set_list_skills
+    db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+    @list = db_constants['skills']
+  end
 
   def set_mission
     @mission = Mission.find(params[:id])
@@ -86,6 +94,6 @@ class MissionsController < ApplicationController
   def mission_params
     params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
       :description, :hours_per_day, :days_per_week, :hosting_condition, :food,
-      :other_comment, :cover_picture, :hosting_photo, mission_photos: [])
+      :other_comment, :cover_picture, :hosting_picture, mission_photos: [])
   end
 end

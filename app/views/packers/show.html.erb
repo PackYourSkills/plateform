@@ -1,19 +1,15 @@
-<% current_user == @packer.user || current_user.admin ? editable = true : editable = false %>
-
-<% dbconstants = YAML.load_file(Rails.root.join('config', 'constants.yml')) %>
-<% dbskills = dbconstants['skills'] %>
-
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-4 col-lg-3 col-lg-offset-1">
-      <div class="box box_ratio_1_1" style="background-image:url('http://orig00.deviantart.net/ee5b/f/2015/105/7/c/goku_ssj_facebook_profil_by_mjd360-d8ps1ub.jpg');">
-        <% if editable %>
+    <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
+      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');">
+        <% if @editable %>
           <div class="box_link">
             <i class="fa fa-camera-retro" aria-hidden="true"></i>
-            <%= link_to '', infos_edit_path(info: :basic) %>
+            <%= link_to '', edit_packer_path(@packer, infos: :photo) %>
           </div>
         <% end %>
       </div>
+
       <div class="box">
         <% if @packer.user.first_name == nil || @packer.user.first_name == '' %>
           <div class="box_empty">
@@ -25,22 +21,69 @@
             <p><%= @packer.user.age %></p>
           </div>
         <% end %>
-        <% if editable %>
+        <% if @editable %>
           <div class="box_link">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             <%= link_to '', infos_edit_path(info: :basic) %>
           </div>
         <% end %>
       </div>
+
       <div class="box">
+        <% lang_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "language"  } %>
+        <% if lang_skills.size.zero? %>
+        <div class="box_empty">
+          <h2>Which language do you speak ?</h2>
+        </div>
+        <% if @editable %>
+        <div class="box_link">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :language) %>
+        </div>
+        <% end %>
+        <% else %>
+        <div class="content_box">
+          <div class="row">
+            <% lang_skills.each_with_index do |skill| %>
+            <div class="col-xs-12 col-sm-6">
+              <p>
+              <%= skill.title %>
+              <% if @editable %>
+                <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :language) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+              <% end %>
+              </p>
+              <% skill.level.to_i.times do %>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              <% end %>
+              <% (3 - skill.level.to_i).times do %>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <% end %>
+            <% if @editable %>
+            <div class="col-xs-12">
+              <div class="body_new">
+                <h4 class="title"><%= link_to 'add a language', '#', :id => 'language', "data-toggle" => "modal", 'data-target' => '#newlangModal' %></h4>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
-    <div class="col-xs-12 col-md-8 col-lg-7">
-      <div class='row'>
 
+
+
+
+    <div class="col-xs-12 col-sm-8 col-lg-7">
+      <div class='row'>
         <!-- Box story 2 columns mandatory -->
         <div class="col-xs-12">
           <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
             <% if @packer.user.story == nil || @packer.user.story == '' %>
               <div class="box_empty">
                 <h2>Tell us your story</h2>
@@ -50,23 +93,22 @@
                 <p><%= @packer.user.story %></p>
               </div>
             <% end %>
-            <% if editable %>
+            <% if @editable %>
               <div class="box_link">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <%= link_to '', infos_edit_path(info: :story) %>
+                <%= link_to '', '#', :id => 'story', "data-toggle" => "modal", 'data-target' => '#storyModal' %>
               </div>
             <% end %>
           </div>
         </div>
 
         <!-- Box Education 1 column mandatory -->
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil %>
               <div class="box_empty">
                 <h2>Tell us about your education</h2>
-              </div>
-              <% if editable %>
+                <% if @editable %>
                 <div class="box_link">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <%= link_to '', new_packer_education_path(@packer) %>
@@ -74,9 +116,12 @@
               <% end %>
             <% else %>
               <div class="content_box">
+                <div class="title_box col-xs-12">
+                  <h1>Education</h1>
+                </div>
                 <p><%= @packer.education.description %></p>
               </div>
-              <% if editable %>
+              <% if @editable %>
                 <div class="box_link">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <%= link_to '', edit_packer_education_path(@packer, @packer.education) %>
@@ -85,61 +130,10 @@
             <% end %>
           </div>
         </div>
-
-        <!-- Box skills 2 columns mandatory -->
-        <div class="col-xs-12 col-md-12">
-          <div class="box">
-            <% if @packer.skills.size.zero? %>
-              <div class="box_empty">
-                <h2>What are your magic talents</h2>
-              </div>
-              <% if editable %>
-                <div class="box_link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to '', new_packer_skill_path(@packer) %>
-                </div>
-              <% end %>
-            <% else %>
-              <div class="content_box">
-                <div class="row">
-                <% @packer.skills.each_with_index do |skill, index| %>
-                <!-- to find the picto -->
-                <% element = dbskills.select { |sk|  sk['name'] == skill.title  } %>
-                    <% if index.odd? %>
-                    <!-- left part index odd -->
-                      <div class="col-xs-12 col-md-6 feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                        <span class="icon without-bg"><i class=" icon-tools"></i></span>
-                        <div class="body">
-                          <h4 class="title"><%= skill.title %></h4>
-                          <p><%= skill.level %></p>
-                        </div>
-                      </div>
-                    <% else %>
-                    <!-- right part index even -->
-                      <div class="col-xs-12 col-md-6 feature-box-2 object-non-visible right" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                        <span class="icon without-bg"><i class=" icon-tools"></i></span>
-                        <div class="body">
-                          <h4 class="title">Here? Support</h4>
-                          <p>Built with latest technologies like HTML5 and CSS3, with best practices and avoiding hacks and workarounds. <a href="page-services.html" class="link-light">Read More<i class="pl-5 fa fa-angle-double-right"></i></a></p>
-                          <div class="separator-2"></div>
-                        </div>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-                <% if editable %>
-                <div class="box_link">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <%= link_to '', infos_edit_path(info: :story) %>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
         </div>
 
-        <!-- Box story 1 columns professionnal experience -->
-        <div class="col-xs-12 col-md-6">
+        <!-- Box story 1 columns volunteering experience -->
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil || @packer.education == '' %>
               <div class="box_empty">
@@ -147,10 +141,13 @@
               </div>
             <% else %>
               <div class="content_box">
+                <div class="title_box col-xs-12">
+                  <h1>Education</h1>
+                </div>
                 <p><%= @packer.education.description %></p>
               </div>
             <% end %>
-            <% if editable %>
+            <% if @editable %>
               <div class="box_link">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 <%= link_to '', infos_edit_path(info: :story) %>
@@ -159,8 +156,161 @@
           </div>
         </div>
 
-        <!-- Box story 1 columns volunteering experience -->
-        <div class="col-xs-12 col-md-6">
+        <!-- Box skills 2 columns mandatory -->
+        <div class="col-xs-12 col-sm-12">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Skills</h1>
+            </div>
+            <% pro_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "professionnal"  } %>
+            <% if pro_skills.size.zero? %>
+              <div class="box_empty">
+                <h2>What are your magic talents</h2>
+              </div>
+              <% if @editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :professionnal) %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="content_box">
+                <div class="row">
+                <% pro_skills.each_with_index do |skill, index| %>
+                <!-- to find the picto -->
+                    <% if index.odd? %>
+                    <!-- left part index odd -->
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                          <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
+                          <div class="body">
+                            <h4 class="title"><%= skill.title %>
+                            <% if @editable %>
+                              <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :professionnal) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+                            <% end %>
+                            </h4>
+                            <% skill.level.to_i.times do %>
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                            <% end %>
+                            <% (3 - skill.level.to_i).times do %>
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% else %>
+                    <!-- right part index even -->
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="feature-box-2 object-non-visible right" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                          <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
+                          <div class="body">
+                            <h4 class="title">
+                            <% if @editable %>
+                              <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :professionnal) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+                            <% end %>
+                             <%= skill.title %></h4>
+                            <% skill.level.to_i.times do %>
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                            <% end %>
+                            <% (3 - skill.level.to_i).times do %>
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <% if @editable %>
+                  <div class="col-xs-12">
+                    <div class="body_new">
+                      <h4 class="title"><%= link_to 'add a new skill', new_packer_skill_path(@packer, type_of_skill: :professionnal) %></h4>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Volunteering Experiences</h1>
+            </div>
+            <% pro_skills = @packer.skills.select { |skill|  skill["type_of_skill"] == "volunteering"  } %>
+            <% if pro_skills.size.zero? %>
+              <div class="box_empty">
+                <h2>What are your magic talents</h2>
+              </div>
+              <% if @editable %>
+                <div class="box_link">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :volunteering) %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="content_box">
+                <div class="row">
+                <% pro_skills.each_with_index do |skill, index| %>
+                <!-- to find the picto -->
+                    <% if index.odd? %>
+                    <!-- left part index odd -->
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="feature-box-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                          <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
+                          <div class="body">
+                            <h4 class="title"><%= skill.title %>
+                            <% if @editable %>
+                              <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :volunteering) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+                            <% end %>
+                            </h4>
+                            <% skill.level.to_i.times do %>
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                            <% end %>
+                            <% (3 - skill.level.to_i).times do %>
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% else %>
+                    <!-- right part index even -->
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="feature-box-2 object-non-visible right" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                          <span class="icon without-bg"><i class="<%= @db_skills[skill.title]['picto'] %>"></i></span>
+                          <div class="body">
+                            <h4 class="title">
+                            <% if @editable %>
+                              <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :volunteering) %> <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
+                            <% end %>
+                             <%= skill.title %></h4>
+                            <% skill.level.to_i.times do %>
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                            <% end %>
+                            <% (3 - skill.level.to_i).times do %>
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <% if @editable %>
+                  <div class="col-xs-12">
+                    <div class="body_new">
+                      <h4 class="title"><%= link_to 'add a new skill', new_packer_skill_path(@packer, type_of_skill: :volunteering) %></h4>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box story 1 columns professionnal experience -->
+        <div class="col-xs-12 col-sm-6">
           <div class="box box_ratio_1_1">
             <% if @packer.education == nil || @packer.education == '' %>
               <div class="box_empty">
@@ -171,7 +321,7 @@
                 <p><%= @packer.education.description %></p>
               </div>
             <% end %>
-            <% if editable %>
+            <% if @editable %>
               <div class="box_link">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 <%= link_to '', infos_edit_path(info: :story) %>
@@ -184,14 +334,41 @@
   </div>
 </div>
 
+<!-- Modal Story -->
+<div class="modal fade" id="storyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="storyModalLabel">Tell us your story</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @packer.user, url: infos_update_path do |f| %>
+            <%= f.input :story, label: false %>
+            <%= f.button :submit, 'Update' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <h3>Your skills</h3>
-  <ul>
-  <% @packer.skills.each do |skill| %>
-    <li><%= skill.title %>  <%= skill.level %>  <%= skill.type_of_skill %>
-      <%= link_to "edit", edit_packer_skill_path(@packer, skill) %>
-      <%= link_to "delete", packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
-    </li>
-  <%end%>
-  <%= link_to 'Add a new skill', new_packer_skill_path(@packer), :class => "btn btn-info active btn-md" %>
-  </ul>
+<!-- Modal New Language -->
+<div class="modal fade" id="newlangModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="newlangModalLabel">Which language do you speak ?</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@packer, @skill = Skill.new], url: packer_skills_path(@packer) do |a| %>
+          <%= a.hidden_field :skill_id, :value => @skill.id %>
+          <%= a.input :title, label: :Language, collection: LanguageList::COMMON_LANGUAGES.select(&:living?).map { |e| e.name }, required: true %>
+          <%= a.input :level, collection: @pro_level, required: true, prompt: "What is your level" %>
+          <%= a.input :type_of_skill, as: :hidden, input_html: { value: 'language' } %>
+          <%= a.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

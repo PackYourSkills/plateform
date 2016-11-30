@@ -17,9 +17,8 @@
               <div class="filters">
                 <ul class="nav nav-pills">
                   <li class="active"><a href="#" data-filter="*">All</a></li>
-                  <% @constants = YAML.load_file(Rails.root.join('config', 'constants.yml')) %>
-                  <% @constants['skills'].each do |skill| %>
-                    <li><a href="#" data-filter=".<%= skill['url'] %>"><%= skill['name'] %></a></li>
+                  <% @list.each do |skill| %>
+                    <li><a href="#" data-filter=".<%= skill[1]['url'] %>"><%= skill[0] %></a></li>
                   <% end %>
                 </ul>
               </div>

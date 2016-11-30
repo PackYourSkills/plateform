@@ -7,4 +7,15 @@ class Crew < ApplicationRecord
   has_attachments :crew_photos, maximum: 6
   has_attachment :logo
   has_attachment :cover_picture
+
+    # geocode
+  geocoded_by :address
+  after_validation :geocode, if: :full_address_changed?
+
+  private
+
+  def full_address_changed?
+    address_changed? || city_changed? || country_changed?
+  end
+
 end

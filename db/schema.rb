@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128150951) do
+ActiveRecord::Schema.define(version: 20161130120237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(version: 20161128150951) do
     t.string   "status"
     t.integer  "packer_id"
     t.integer  "mission_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "read",       default: false
     t.index ["mission_id"], name: "index_connections_on_mission_id", using: :btree
     t.index ["packer_id"], name: "index_connections_on_packer_id", using: :btree
   end
@@ -58,6 +59,11 @@ ActiveRecord::Schema.define(version: 20161128150951) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.text     "story"
+    t.string   "address"
+    t.string   "country"
+    t.string   "city"
+    t.string   "zip_code"
     t.index ["user_id"], name: "index_crews_on_user_id", using: :btree
   end
 

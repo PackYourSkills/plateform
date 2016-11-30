@@ -1,5 +1,6 @@
 .box {
-  min-height: 100px;
+  min-height: 80px;
+  height:auto;
   width:100%;
   padding: 10px;
   margin-top: 15px;
@@ -16,15 +17,13 @@
   align-items: center;
   justify-content: center;
   text-align:center;
+  overflow: scroll;
 }
 
-.content_box {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  padding:3px;
+.height_80px{
+  margin-top:40px;
+  height:80px;
+  overflow:scroll;
 }
 
 .box_link {
@@ -63,12 +62,66 @@
   text-align:center;
 }
 
+.box_ratio_1_1_0-75{
+  position: relative;
+  margin: auto;
+  width: 75%; /* desired width */
+  .content_box {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    padding:3px;
+  }
+}
+
+.box_ratio_1_1_0-75:before{
+  content: "";
+  display: block;
+  padding-top: 100%;  /* initial ratio of 1:1*/
+}
 .box_ratio_1_1{
   position: relative;
-  width: 100%;   /* desired width */
+  width: 100%; /* desired width */
+  .content_box {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    padding:3px;
+  }
 }
+
 .box_ratio_1_1:before{
   content: "";
   display: block;
   padding-top: 100%;  /* initial ratio of 1:1*/
 }
+
+.box_ratio_1_2{
+  position: relative;
+  width: 100%;   /* desired width */
+  .content_box {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    padding:3px;
+  }
+}
+
+.box_ratio_1_2:before{
+  content: "";
+  display: block;
+  padding-top: 50%;  /* initial ratio of 1:1*/
+}
+
+.form-box {
+  background-color: $brand-color;
+  padding: 20px;
+  color: $dark;
+}
+
