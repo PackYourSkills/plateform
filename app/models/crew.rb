@@ -9,8 +9,10 @@ class Crew < ApplicationRecord
   has_attachment :cover_picture
 
     # geocode
-  geocoded_by :address
+ geocoded_by :full_address
   after_validation :geocode, if: :full_address_changed?
+
+
 
   def progress
     percent = 0
@@ -35,6 +37,10 @@ class Crew < ApplicationRecord
   end
 
   private
+
+  def full_address
+    self.address + ', ' + self.city + ', ' + self.country
+  end
 
   def full_address_changed?
     address_changed? || city_changed? || country_changed?
