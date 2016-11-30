@@ -1,0 +1,93 @@
+.mission-card {
+  background: #F8F8F8;
+  padding: 15px 0 0 0;
+  border: 1px solid #EBEBEC;
+  display: block;
+  margin-bottom: 30px;
+
+  &:hover{
+    border-color: #EC605F;
+    text-decoration: none;
+
+    .mission-card--background .image{
+      transform: scale(1.1);
+    }
+  }
+}
+
+.mission-card--content {
+ padding: 0 15px;
+ margin-bottom: 15px;
+}
+
+.mission-card--title {
+  font-size: 20px;
+  margin-top: 0;
+  color: #333333;
+  height: 50px;
+  text-transform: initial;
+}
+
+.mission-card--info {
+  font-size: 13px;
+  color: #999d9e;
+  list-style: none;
+  padding: 0;
+
+  > .info {
+    margin-right: 15px;
+    display: inline-block;
+  }
+}
+
+.mission-card--background {
+  border-top: solid 2px #EC605F;
+  height: 200px;
+  padding-left: 15px;
+  position: relative;
+  overflow: hidden;
+
+  .image {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 2s ease;
+  }
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(transparent, rgba(41,42,47,0.7));
+  }
+}
+
+.mission-card--brand {
+  position: absolute;
+  bottom: 60px;
+  left: 15px;
+
+
+  > .logo {
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    background-size: contain;
+    float: left;
+    margin-right: 20px
+  }
+
+  > .name {
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding-top: 15px
+  }
+}

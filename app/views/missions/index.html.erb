@@ -25,23 +25,8 @@
               <!-- isotope filters end -->
 
               <div class="isotope-container-fitrows row grid-space-10">
-              <% @missions.each_with_index do |mission, index| %>
-                <div class="col-sm-12 col-md-6 isotope-item <%= mission.skill.downcase.gsub(/ /, '_') %>">
-                  <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
-                    <div class="overlay-container">
-                      <img src="images/portfolio-5.jpg" alt="">
-                      <div class="overlay-to-top">
-                        <p class="small margin-clear"><em>Site building <br> Lorem ipsum dolor sit</em></p>
-                      </div>
-                    </div>
-                    <div class="body">
-                      <h3><%= mission.title %></h3>
-                      <div class="separator"></div>
-                      <p><%= mission.description %></p>
-                      <a href=<%= mission_path(mission) %> class="btn btn-default btn-sm btn-hvr hvr-shutter-out-horizontal margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
-                    </div>
-                  </div>
-                </div>
+                <% @missions.each_with_index do |mission, index| %>
+                  <%= render 'mission_card', mission: mission %>
                 <% end %>
               </div>
             </div>
@@ -58,17 +43,17 @@
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).ready(function() {
-    var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: { id: 'map' } }, function() {
-    markers = handler.addMarkers(<%= raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    if (markers.length == 0) {
-      handler.getMap().setZoom(2);
-    } else if (markers.length == 1) {
-    handler.getMap().setZoom(14);
-    }
-    });
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+      handler.getMap().setZoom(14);
+      }
+      });
     });
   <% end %>
 <% end %>
