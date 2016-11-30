@@ -1,16 +1,14 @@
-.small-card {
-  height: 75px;
-  width: 250px;
+.action-card {
   background-color: $brand-color;
   margin: 20px;
   margin-left: 0;
+  height: 75px;
   line-height: 75px;
   h3 {
     color: $dark;
     font-family: $base-font;
     font-size: 15px;
     margin: 0;
-    line-height: 75px;
   }
   a {
     color: $dark;
@@ -20,9 +18,26 @@
   }
 }
 
-.small-card:hover {
+.action-card:hover {
   a{
     text-decoration: none;
     color: $grey;
+  }
+}
+
+.small-card {
+  background-color: white;
+  margin: 20px;
+  margin-left: 0;
+  height: 75px;
+  border-style: solid;
+  border-color: $green;
+  h3 {
+    color: $dark;
+    font-family: $base-font;
+    font-size: 15px;
+    margin: 0;
+    padding: 3px;
+    padding-top: 20px;
   }
 }
