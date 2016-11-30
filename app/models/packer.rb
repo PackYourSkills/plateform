@@ -13,7 +13,7 @@ class Packer < ApplicationRecord
   has_attachment :profile_photo
   has_attachment :cover_picture
 
-def progress
+  def progress
     percent = 0
     percent+=5 if self.sexe.present?
     percent+=5 if self.nationality.present?
