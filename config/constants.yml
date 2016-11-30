@@ -2,37 +2,51 @@
 #@constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
 
 skills:
-- name: 'Community Management'
-  url: 'community_management'
-  picto: 'fa-comments-o'
-- name: 'Photography Video'
-  url: 'photography_video'
-  picto: 'fa-camera'
-- name: 'Graphic Design'
-  url: 'graphic_design'
-  picto: 'fa-pencil-square-o'
-- name: 'Redaction'
-  url: 'redaction'
-  picto: 'fa-align-left'
-- name: 'Impact assessment'
-  url: 'impact_assessment'
-  picto: 'fa-pie-chart'
-- name: 'Web development'
-  url: 'web_development'
-  picto: 'fa-laptop'
-- name: 'Marketing Studies'
-  url: 'marketing_studies'
-  picto: 'fa fa-area-chart'
+  Community Management:
+    url: 'community_management'
+    picto: 'fa fa-comments-o'
+  Photography Video:
+    url: 'photography_video'
+    picto: 'fa fa-camera'
+  Graphic Design:
+    url: 'graphic_design'
+    picto: 'fa fa-pencil-square-o'
+  Redaction:
+    url: 'redaction'
+    picto: 'fa fa-align-left'
+  Impact assessment:
+    url: 'impact_assessment'
+    picto: 'fa fa-pie-chart'
+  Web development:
+    url: 'web_development'
+    picto: 'fa fa-laptop'
+  Marketing Studies:
+    url: 'marketing_studies'
+    picto: 'fa fa-area-chart'
 
 social_issues:
-- name: 'Mobility'
-- name: 'Inclusion & Social Link'
-- name: 'Environment'
-- name: 'Fight against poverty'
-- name: 'Human Rights'
-- name: 'Education'
-- name: 'Democracy'
-- name: 'Labour and Employment'
-- name: 'Agriculture & Food'
+  Mobility:
+  Inclusion & Social Link:
+  Environment:
+  Fight against poverty:
+  Human Rights:
+  Education:
+  Democracy:
+  Labour and Employment:
+  Agriculture & Food:
 
+professionnal_level:
+  Begginer:
+    value: 1
+  Intermediate:
+    value: 2
+  Expert:
+    value: 3
 
+language_level:
+  Begginer:
+    value: 1
+  Intermediate:
+    value: 2
+  Fluent:
+    value: 3

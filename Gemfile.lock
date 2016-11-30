@@ -132,6 +132,7 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    language_list (1.1.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -297,6 +298,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-fileupload-rails
   jquery-rails
+  language_list (~> 1.1)
   listen (~> 3.0.5)
   omniauth-facebook
   pg (~> 0.18)
