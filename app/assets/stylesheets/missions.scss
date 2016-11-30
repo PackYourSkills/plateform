@@ -41,4 +41,39 @@
   // if 70px navbar => height: calc(100vh - 70px);
 }
 */
+/* -------------------------------------------------------------------- */
+/* show */
+/* -------------------------------------------------------------------- */
 
+.container_cover {
+  min-height:550px;
+  width:100%;
+  position:relative;
+}
+
+.banner_mission {
+  height: 500px;
+  width: 100%;
+  position: absolute;
+  background-size: cover !important;
+  background-position: center;
+  top: 0px;
+}
+
+.banner_info {
+  position:relative;
+  top:350px;
+}
+
+
+.box80px {
+  height:80px;
+}
+
+.box160px {
+  height:160px;
+}
+
+.box270px {
+  height:270px;
+}

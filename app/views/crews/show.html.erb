@@ -1,5 +1,155 @@
-<div class="container welcome text-center">
-      <h1>Welcome home <%= @crew.name %> ! </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
+      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @url_logo %>');">
+      </div>
+
+      <!-- Box name + social issue -->
+      <div class="box">
+        <% if @crew.name == nil || @crew.name == '' %>
+          <div class="box_empty">
+            <h2>Add information</h2>
+          </div>
+        <% else %>
+          <div class="content_box">
+            <p><%= @crew.name %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Box edit -->
+      <% if @editable %>
+        <div class="box">
+          <div class="box_link">
+            <%= link_to 'EDIT', edit_crew_path %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Box website -->
+      <div class="box">
+        <% if @crew.name == nil || @crew.name == '' %>
+          <div class="box_empty">
+            <h2>Add information</h2>
+          </div>
+        <% else %>
+          <div class="content_box">
+            <p><%= @crew.name %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Box contact + réseaux sociaux -->
+      <div class="box">
+        <% if @crew.name == nil || @crew.name == '' %>
+          <div class="box_empty">
+            <h2>Add information</h2>
+          </div>
+        <% else %>
+          <div class="content_box">
+            <p><%= @crew.name %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+
+    <div class="col-xs-12 col-sm-8 col-lg-7">
+      <div class='row'>
+
+        <!-- Box story 2 column -->
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
+            <% if @crew.user.story == nil || @crew.user.story == '' %>
+              <div class="box_empty">
+                <h2>Tell us your story</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <p><%= @crew.user.story %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box mission 1 column  -->
+        <div class="col-xs-12 col-sm-6">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
+            <% if @crew.user.story == nil || @crew.user.story == '' %>
+              <div class="box_empty">
+                <h2>Tell us your story</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <p><%= @crew.user.story %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box values 1 column  -->
+        <div class="col-xs-12 col-sm-6">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
+            <% if @crew.user.story == nil || @crew.user.story == '' %>
+              <div class="box_empty">
+                <h2>Tell us your story</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <p><%= @crew.user.story %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box Team (nb personne in team + team description) 1 column -->
+        <div class="col-xs-12 col-sm-6">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
+            <% if @crew.user.story == nil || @crew.user.story == '' %>
+              <div class="box_empty">
+                <h2>Tell us your story</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <p><%= @crew.user.story %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box photo team 1 column (not mandatory) -->
+        <div class="col-xs-12 col-sm-6">
+          <div class="box">
+            <div class="title_box col-xs-12">
+              <h1>Story</h1>
+            </div>
+            <% if @crew.user.story == nil || @crew.user.story == '' %>
+              <div class="box_empty">
+                <h2>Tell us your story</h2>
+              </div>
+            <% else %>
+              <div class="content_box">
+                <p><%= @crew.user.story %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -25,11 +175,4 @@
   <% @crew.crew_photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
   <% end %>
-</div>
-
-
-<div class="container text-center link">
-  <% if user_signed_in? %>
-          <%= link_to 'edit', edit_crew_path(@crew) %></br>
-    <% end %>
 </div>
