@@ -13,9 +13,9 @@ class ConnectionPolicy < ApplicationPolicy
 
   def update?
     case record.status
-      when 'draft', 'suspended' #suspended status is in case of moderation from an admin
+      when 'draft', 'suspended', 'online' #suspended status is in case of moderation from an admin
         current_user_a_crew? ? false : concerned_packer_or_admin?
-      when 'online', 'accepted', 'refused', 'canceled', 'confirmed'
+      when 'accepted', 'refused', 'canceled', 'confirmed'
         admin?
       else #should have nothing here but in case of a error in code
         admin?
@@ -23,14 +23,7 @@ class ConnectionPolicy < ApplicationPolicy
   end
 
   def show?
-    case record.status
-      when 'draft', 'suspended'
-        current_user_a_crew? ? false : concerned_packer_or_admin?
-      when 'online', 'accepted', 'refused', 'canceled', 'confirmed'
-        concerned_user_or_admin?
-      else #should have nothing here but in case of a error in code
-        admin?
-    end
+    admin?
   end
 
   def accept?

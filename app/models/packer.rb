@@ -14,16 +14,23 @@ class Packer < ApplicationRecord
   has_attachment :cover_picture
 
 def progress
-
-    percent = 20
-    percent+=5 if self.skype.present?
-    percent+=5 if self.cv_link.present?
-    percent+=5 if self.nationality.present?
-    percent+=5 if self.youtube_link.present?
+    percent = 0
     percent+=5 if self.sexe.present?
-    percent+=5 if self.job.present?
+    percent+=5 if self.nationality.present?
+    percent+=5 if self.phone.present?
+    percent+=5 if self.skype.present?
+    percent+=5 if self.youtube_link.present?
     percent+=5 if self.website.present?
-
+    percent+=10 if self.cv_link.present?
+    percent+=15 unless self.profile_photo.nil?
+    percent+=10 if self.user.first_name.present?
+    percent+=5 if self.user.last_name.present?
+    percent+=10 if self.user.story.present?
+    percent+=8 if self.user.address.present?
+    percent+=1 if self.user.country.present?
+    percent+=1 if self.user.city.present?
+    percent+=10 if self.user.birthdate.present?
     return percent
   end
 end
+

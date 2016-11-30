@@ -21,6 +21,11 @@ class CrewsController < ApplicationController
 
   def deck
     authorize @crew
+    @missions = @crew.missions.order(created_at: :desc)
+    @all_closed = @missions.select { |c| c.closed? }
+    @all_online = @missions.select { |c| c.online? }
+    @all_draft = @missions.select { |c| c.draft? }
+    @all_old = @missions.select { |c| !c.draft? && !c.online? && !c.closed? }
   end
 
   private
