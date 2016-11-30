@@ -28,10 +28,14 @@
       <div class="col-xs-12, col-sm-3">
         <div class="box height_80px">
           <div class="box_link">
-            <% if @editable %>
-              <%= link_to 'EDIT', edit_mission_path %>
+            <% if user_signed_in? %>
+              <% if @editable %>
+                <%= link_to 'EDIT', edit_mission_path %>
+              <% else %>
+                <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
+              <% end %>
             <% else %>
-              <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
+              <%= link_to "Sign in to continue", new_user_session_path(role: :packer) %>
             <% end %>
           </div>
         </div>
@@ -89,17 +93,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <div class ="box box80px">
-            <div class="box_link">
-              <% if @editable %>
-                <%= link_to 'Go to your profile', crew_path(@mission.crew) %>
-              <% else %>
-                <%= link_to "See their profile", crew_path(@mission.crew) %>
-              <% end %>
+        <% if user_signed_in? %>
+          <div class="col-xs-12">
+            <div class ="box box80px">
+              <div class="box_link">
+                <% if @editable %>
+                  <%= link_to 'Go to your profile', crew_path(@mission.crew) %>
+                <% else %>
+                  <%= link_to "See their profile", crew_path(@mission.crew) %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
         <div class="col-xs-12">
           <div class="box box80px">
             <% if @mission.crew.values == nil || @mission.crew.values == '' %>
