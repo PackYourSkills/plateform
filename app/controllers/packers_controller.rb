@@ -19,7 +19,6 @@ class PackersController < ApplicationController
 
   def show
     @editable = user_signed_in? ? (current_user == @packer.user || current_user.admin) : false
-    @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
     @db_skills = @db_constants['skills']
   end
 
@@ -49,9 +48,9 @@ private
   end
 
   def set_list
-    db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
-    @list = db_constants['skills'].keys
-    @pro_level = db_constants['professionnal_level']
-    @lang_level = db_constants['language_level']
+    @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+    @list = @db_constants['skills'].keys
+    @pro_level = @db_constants['professionnal_level']
+    @lang_level = @db_constants['language_level']
   end
 end
