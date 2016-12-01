@@ -84,3 +84,11 @@ color: red;
     color: #ffffff;
     background-color: $blue !important;
 }
+
+.btn-primary {
+    background-color: $blue;
+    color: white;
+    border-style: none;
+    margin: 0;
+    padding-right: 20px;
+}
