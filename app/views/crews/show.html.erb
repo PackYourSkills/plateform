@@ -9,26 +9,6 @@
         <h2><%= @crew.name %></h2>
         <p><i class="fa fa-map-marker" aria-hidden="true"></i>
         <%= @crew.city %>, <%= @crew.country %></p>
-        <% if (@crew.facebook != nil && @crew.facebook != "") %>
-          <p><i class="fa fa-facebook" aria-hidden="true"></i>
-                <%= @crew.facebook %></p>
-        <% end %>
-        <% if (@crew.twitter != nil && @crew.twitter != "") %>
-          <p><i class="fa fa-twitter" aria-hidden="true"></i>
-                @<%= @crew.twitter %></p>
-        <% end %>
-        <% if (@crew.skype != nil && @crew.skype != "") %>
-          <p><i class="fa fa-skype" aria-hidden="true"></i>
-                <%= @crew.skype %></p>
-        <% end %>
-        <% if (@crew.website != nil && @crew.website != "") %>
-          <p><i class="fa fa-laptop" aria-hidden="true"></i>
-                <%= @crew.website %></p>
-        <% end %>
-        <% if (@crew.user.email != nil && @crew.user.email != "") %>
-          <p><i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <%= @crew.user.email %></p>
-        <% end %>
       </div>
       <div class="box height_80px">
         <div class="box_link">
@@ -44,8 +24,8 @@
       <div class='row'>
         <!-- Box social_issue & mission 2 column -->
         <div class="col-xs-3">
-          <div class="box box120px">
-            <% if @crew.social_issue == nil || @crew.social_issue == '' %>
+          <div class="box box120px box_dark">
+            <% if nil_or_empty_string @crew.social_issue %>
               <div class="box_empty">
                 <p>Tell us your social_issue</p>
               </div>
@@ -72,7 +52,7 @@
 
         <!-- Box story 1 column  -->
         <div class="col-xs-12">
-          <div class="box">
+          <div class="box box_red">
             <div class="title_box">
               <h1>Story</h1>
             </div>
@@ -89,7 +69,7 @@
         </div>
 
         <!-- Box story 1 column  -->
-        <div class="col-xs-2, col-sm-3">
+        <div class="col-xs-12, col-sm-3">
           <table class="box box270px table table-bordered">
               <tr>
                 <td>created in<br/><%= @crew.creation_date %></td>
@@ -100,7 +80,7 @@
           </table>
         </div>
 
-        <div class="col-xs-10 col-sm-9">
+        <div class="col-xs-12 col-sm-9">
           <div class="box box270px">
             <div class="title_box">
               <h1>Team</h1>
@@ -117,54 +97,66 @@
           </div>
         </div>
 
-        <!-- Box Team (nb personne in team + team description) 1 column -->
-        <div class="col-xs-12 col-sm-6">
-          <div class="box">
-            <div class="title_box col-xs-12">
-              <h1>Story</h1>
-            </div>
-            <% if @crew.user.story == nil || @crew.user.story == '' %>
-              <div class="box_empty">
-                <h2>Tell us your story</h2>
-              </div>
-            <% else %>
+        <!-- Box youtube 1/1 -->
+        <% if !nil_or_empty_string @crew.youtube_link %>
+          <div class="col-xs-12">
+            <div class="box box_song box_dark">
               <div class="content_box">
-                <p><%= @crew.user.story %></p>
+                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/<%= @crew.song_youtube_id %>" frameborder="0" allowfullscreen></iframe>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
 
-        <!-- Box photo team 1 column (not mandatory) -->
-        <div class="col-xs-12 col-sm-6">
-          <div class="box">
-            <div class="title_box col-xs-12">
-              <h1>Story</h1>
-            </div>
-            <% if @crew.user.story == nil || @crew.user.story == '' %>
-              <div class="box_empty">
-                <h2>Tell us your story</h2>
-              </div>
-            <% else %>
+        <!-- Box value 1/1 -->
+        <% if (!nil_or_empty_string @crew.value1) || (!nil_or_empty_string @crew.value2) ||(!nil_or_empty_string @crew.value3)  %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="box box_ratio_1_1 box_green">
               <div class="content_box">
-                <p><%= @crew.user.story %></p>
+                <h1>Value</h1>
+                <% unless nil_or_empty_string @crew.value1 %>
+                  <p><%= @crew.value1 %></p>
+                <% end %>
+                <% unless nil_or_empty_string @crew.value2 %>
+                  <p><%= @crew.value2 %></p>
+                <% end %>
+                <% unless nil_or_empty_string @crew.value3 %>
+                  <p><%= @crew.value3 %></p>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
+        <% elsif @editable %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="box box_ratio_1_1">
+              <div class="box_empty">
+                <h2>Add your values</h2>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Box quote 1/1 -->
+        <% if (!nil_or_empty_string @crew.quote) && (!nil_or_empty_string @crew.quote_author) %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="box box_ratio_1_1 box_quote">
+              <div class="content_box">
+                <h1>Inspiring quote</h1>
+                <h2><%= @crew.quote %></h2>
+                <p><%= @crew.quote_author %></p>
+              </div>
+            </div>
+          </div>
+        <% elsif @editable %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="box box_ratio_1_1">
+              <div class="box_empty">
+                <h2>Add a inspiration quote</h2>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-
-
-creation_date, discard_day: true
-nb_collaborators, required: true
-team_description
-
-
-value
-quote
-quote_author
-crew_photos
-youtube_link
