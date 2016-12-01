@@ -4,7 +4,7 @@ class MissionsController < ApplicationController
   before_action :set_mission, only: [ :show, :edit, :update, :destroy, :close, :suspend, :cancel ]
   before_action :set_crew, only: [ :create, :destroy ]
   before_action :set_list_skills, only: [ :index, :new, :edit ]
-
+  before_action :set_urls, only: [:show]
   def index
     # info from the form
     radius = params['radius'].to_i
@@ -36,9 +36,6 @@ class MissionsController < ApplicationController
 
   def show
     @editable = user_signed_in? ? (current_user == @mission.crew.user || current_user.admin) : false
-    @url_cover = @mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.cover_picture.path
-    @url_hosting = @mission.hosting_picture.nil? ? '/no_hosting_picture.jpg' : @mission.hosting_picture.path
-    @url_logo = @mission.crew.logo.nil? ? "https://dummyimage.com/400x400/EC605F/2d221f.png&text=#{@mission.crew.name.chars.first}" : @mission.crew.logo.path
 
     @hash = Gmaps4rails.build_markers(@mission) do |mission, marker|
       marker.lat mission.latitude
@@ -76,6 +73,12 @@ class MissionsController < ApplicationController
   end
 
   private
+
+  def set_urls
+    @url_cover = @mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.cover_picture.path
+    @url_hosting = @mission.hosting_picture.nil? ? '/no_hosting_picture.jpg' : @mission.hosting_picture.path
+    @url_logo = @mission.crew.logo.nil? ? "https://dummyimage.com/400x400/EC605F/2d221f.png&text=#{@mission.crew.name.chars.first}" : @mission.crew.logo.path
+  end
 
   def set_list_skills
     db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
