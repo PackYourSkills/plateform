@@ -157,9 +157,7 @@
                                 <div class="body">
                                   <h4 class="title text-default"><%= connection.packer.user.first_name %> - status: <%= connection.status %></h4>
                                   <p><%= connection.message %><%= link_to "see the profile", packer_path(connection.packer) %></p>
-                                  <p><label><input type="checkbox" name="checkbox" value="value">Accept</label>
-                                  <label><input type="checkbox" name="checkbox" value="value">Refuse</label>
-<%= link_to "accept",  accept_connection_path(mission,connection) %> - <%= link_to "refuse",  refuse_connection_path(mission,connection) %></p>
+                                  <p><%= link_to "accept",  accept_connection_path(mission,connection) %> - <%= link_to "refuse",  refuse_connection_path(mission,connection) %></p>
                                 </div>
                               </div>
                             </div>
