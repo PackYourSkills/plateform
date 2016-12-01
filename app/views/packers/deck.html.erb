@@ -62,7 +62,12 @@
                     </div>
 
                     <div class="crew_description">
-                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                      <p>The crew : <%= connection.mission.crew.name %> - <%= link_to "see the profile", crew_path(connection.mission.crew) %> - <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                      <%= connection.mission.crew.user.email %> -
+                        <% unless nil_or_empty_string connection.mission.crew.skype %>
+                          <i class="fa fa-skype" aria-hidden="true"></i> <%= connection.mission.crew.skype %>
+                        <% end %>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -95,7 +100,12 @@
                     </div>
 
                     <div class="crew_description">
-                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %></p>
+                      <p>The crew : <%= connection.mission.crew.name %><%= link_to "see the profile", crew_path(connection.mission.crew) %> - <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                      <%= connection.mission.crew.user.email %> -
+                        <% unless nil_or_empty_string connection.mission.crew.skype %>
+                          <i class="fa fa-skype" aria-hidden="true"></i> <%= connection.mission.crew.skype %>
+                        <% end %>
+                      </p>
                     </div>
                   </div>
                 </div>

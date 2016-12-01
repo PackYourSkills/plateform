@@ -14,7 +14,11 @@ class Crew < ApplicationRecord
  geocoded_by :full_address
   after_validation :geocode, if: :full_address_changed?
 
-
+  def song_youtube_id
+    if youtube_link != "" && youtube_link != nil
+      youtube_link.match(/(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)/i)[1]
+    end
+  end
 
   def progress
     percent = 0
