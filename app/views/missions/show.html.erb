@@ -87,13 +87,16 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <% if @mission.crew.value1 == nil || @mission.crew.value1 == '' %>
+            <% if (nil_or_empty_string @mission.crew.value1) %>
               <div class="box_empty">
                 <h2>Add values</h2>
               </div>
             <% else %>
               <div class ="content_box">
-                <h3>Their values : <%= @mission.crew.value1 %></h3>
+                <h3>Their values</h3>
+                <p><%= @mission.crew.value1 %></p>
+                <p><%= @mission.crew.value2 %></p>
+                <p><%= @mission.crew.value3 %></p>
                </div>
             <% end %>
           </div>
