@@ -503,7 +503,7 @@ youtube_crew_list = ["https://www.youtube.com/watch?v=FkNImMHVWwk", "https://www
 status_mission_list = ['draft','online','closed','canceled']
 language_list = ['English','English','English','English','English','French','English','Spanish','Chinese','Portuguese','German']
 status_connection_list = ['draft','online']
-values_list = ['Trust','Sharing','Respect','Caring/Compassionate/Benevolent','Cooperative', 'Persevering/Diligent','Personal Responsibility', 'Empathy', 'Courage', 'Tolerance', 'Benefiting Others']
+values_list = ['Trust','Sharing','Respect','Caring','Cooperative', 'Persevering','Personal Responsibility', 'Empathy', 'Courage', 'Tolerance', 'Benefiting Others']
 name_list =["Pan-African Women's Organization", "Les Amis de la Terre", "Inter-African Union for Human Rights", "Sustainable Agriculture and Self-Help", "Alliance for Arab Women", "Organization Intersex International", "
 Reseau Africain pour le Developpement", "African Peace Network", "Action Aides aux Familles Demunies", "National Society for Human Rights", "African Refugees Foundation", "Community Social Welfare Foundation", "Environmental Development Action in the Third World", "New Hope for Cambodian Children", "Learn4Life", "The Green Gecko Project", "Senhoa", "Life and Hope Association", "Mercy International", "Rain Tree Foundation", "Good Child Foundation", "Fair Trek", "Ecoteer", "SAELAO Project", "Friends of Nature", "The Climate Reality Project", "Rivers Without Borders", "Clean Ocean Foundation", "Green Power", "Earthlife Africa", "Wildlife & Environment Society", "Green Belt Movement", "People & Planet", "The Civic Trust", "Marine Conservation Society", "Forest Peoples Programme", "Global Action Plan", "Equality Now", "Global Rights", "Minority Rights Group International", "International Alliance of Women", "Transparency International", "Womankind Worldwide", "Unimondo", "Odhikar", "Middle Finger Protests", "Karapatan", "Hands Up United", "National Youth Rights Association", "Workplace Fairness"]
 language_packer = ['French','Spanish','Chinese','Portuguese','German']
@@ -556,7 +556,8 @@ c = 0
     value3: values[2],
     quote: quote['quote'],
     quote_author: quote['author'],
-    youtube_link: youtube_crew_list[c]
+    youtube_link: youtube_crew_list[c],
+    other_comment: mission["other_comment"]
   )
   crew.save!
 

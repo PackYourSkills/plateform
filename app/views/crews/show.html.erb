@@ -10,13 +10,12 @@
         <p><i class="fa fa-map-marker" aria-hidden="true"></i>
         <%= @crew.city %>, <%= @crew.country %></p>
       </div>
-      <div class="box height_80px">
-        <div class="box_link_crew">
-          <% if @editable %>
-            <%= link_to 'edit your profile', edit_crew_path %>
-          <% end %>
+
+      <% if @editable %>
+        <div class="box_button secondary_crew">
+          <%= link_to 'edit your profile', edit_crew_path %>
         </div>
-      </div>
+      <% end %>
     </div>
 
 
