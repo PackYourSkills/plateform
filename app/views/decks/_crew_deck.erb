@@ -1,62 +1,46 @@
 <div class="main-container-deck-crew">
   <div class="row">
-
     <div class="col-xs-12, col-sm-3">
       <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @url_logo%>');">
+      </div>
+      <div class="progress style-1">
+        <span class="text"></span>
+          <div class="progress-bar progress-bar-green" role="progressbar" data-animate-width="<%= @crew.progress %>%">
+          <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - <%= @crew.progress %>%</span>
         </div>
-
-          <div class="progress style-1">
-            <span class="text"></span>
-              <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="<%= @crew.progress %>%">
-                <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - <%= @crew.progress %>%</span>
-              </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box_button secondary_crew">
+            <%= link_to "EDIT YOUR PROFILE", edit_crew_path(@crew) %>
           </div>
-
-        <div class="row">
-          <div class="col-xs-6">
-
-            <div class="path-box">
-              <div class="text-center">
-                <%= link_to "EDIT YOUR PROFILE", edit_crew_path(@crew) %>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-6">
-
-            <div class="path-box">
-              <div class="text-center">
-                <%= link_to "SEE YOUR PROFILE", crew_path(@crew) %>
-              </div>
-            </div>
-
+        </div>
+        <div class="col-xs-12">
+          <div class="box_button secondary_crew">
+            <%= link_to "SEE YOUR PROFILE", crew_path(@crew) %>
           </div>
         </div>
       </div>
-
-
+    </div>
     <div class="col-xs-12, col-sm-9">
       <div class="row">
         <div class="col-xs-12">
           <h2> Welcome home <%= @crew.name %>!</h2>
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-8">
           <table class="box table table-deck table-bordered">
-              <tr>
-                <td>YOU HAVE 3 ONLINE MISSIONS</td>
-                <td>YOU HAVE 4 APPLICATIONS</td>
-              </tr>
-              <tr>
-                <td>YOU HAVE 2 UNREAD APPLICATIONS</td>
-                <td>YOU HAVE 2 UNREAD APPLICATIONS</td>
-              </tr>
+            <tr>
+              <td>YOU HAVE 3 ONLINE MISSIONS</td>
+              <td>YOU HAVE 4 APPLICATIONS</td>
+              <td>YOU HAVE 2 UNREAD APPLICATIONS</td>
+              <td>YOU HAVE 2 UNREAD APPLICATIONS</td>
+            </tr>
           </table>
         </div>
-
-        <div class="col-xs-12 col-md-offset-2 col-md-4">
-          <div class="action-card text-center">
-            <%= link_to "POST A MISSION", new_mission_path %>
-          </div>
+        <div class="col-xs-12 col-md-offset-1 col-md-3">
+          <div class="box_button main_crew">
+              <%= link_to "POST A MISSION", new_mission_path %>
+            </div>
         </div>
         <div class="col-xs-12">
           <div class="panel-group collapse-style-2" id="accordion-2">

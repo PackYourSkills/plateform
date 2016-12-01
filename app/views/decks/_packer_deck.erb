@@ -22,14 +22,12 @@
       </div> -->
       <div class="progress style-1">
         <span class="text"></span>
-          <div class="progress-bar progress-bar-success" role="progressbar" data-animate-width="<%= @packer.progress %>%">
+          <div class="progress-bar progress-bar-blue" role="progressbar" data-animate-width="<%= @packer.progress %>%">
             <span class="label object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="1000">Profile filled - <%= @packer.progress %>%</span>
           </div>
         </div>
-        <div class="box">
-          <div class="box_link btn-crew-deck text-center">
-            <%= link_to "edit your profile", packer_path(@packer) %>
-          </div>
+        <div class="box_button main_packer">
+          <%= link_to "edit your profile", packer_path(@packer) %>
         </div>
     </div>
 
