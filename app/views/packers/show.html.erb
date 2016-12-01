@@ -1,14 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
-      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');">
         <% if @editable %>
-          <div class="box_link">
-            <i class="fa fa-camera-retro" aria-hidden="true"></i>
-            <%= link_to '', edit_packer_path(@packer, infos: :photo) %>
-          </div>
+          <%= form_for(@packer, url: update_avatar_packer_path(@packer), html: {class: 'avatar-form'}) do |f| %>
+            <div class="avatar_uploader slim"
+                 data-label="Drop your avatar here"
+                 data-ratio="1:1">
+                <%= f.attachinary_file_field :profile_photo %>
+                <%= cl_image_tag packer_avatar_path %>
+            </div>
+            <%= f.button :submit, class: 'btn btn-success' %>
+          <% end %>
+        <% else %>
+          <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');"></div>
         <% end %>
-      </div>
 
       <div class="box">
         <% if nil_or_empty_string @packer.user.first_name %>
@@ -401,4 +406,3 @@
     </div>
   </div>
 </div>
-

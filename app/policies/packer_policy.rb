@@ -9,6 +9,10 @@ class PackerPolicy < ApplicationPolicy
     current_user_or_admin?
   end
 
+  def update_avatar?
+    update?
+  end
+
   def deck?
     current_user_or_admin?
   end
