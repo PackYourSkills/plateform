@@ -8,10 +8,17 @@
     <%= f.input :youtube_link ,label: "Do you want to add a video?", placeholder: 'give us a youtube link'%>
     <%= f.input :job , placeholder: 'What are you doing ?' %>
     <%= f.input :cv_link ,label: "Link to your CV", placeholder: 'put the link here (linkedin, viadeo...)'%>
+
+    <p>What are your main values (3 maximum)</p>
+    <%= f.input :value1, label: false %>
+    <%= f.input :value2, label: false %>
+    <%= f.input :value3, label: false %>
+
+    <p>What is your favorite quote</p>
+    <%= f.input :quote %>
+    <%= f.input :quote_author %>
+
   </div>
-
-<%= link_to 'Add a skill', new_packer_skill_path(current_user.packer), :class => "btn btn-info active" %></br>
-
   <div class="form-actionss">
     <%= f.button :submit %>
   </div>

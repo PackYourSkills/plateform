@@ -13,6 +13,12 @@ class Packer < ApplicationRecord
   has_attachment :profile_photo
   has_attachment :cover_picture
 
+  def song_youtube_id
+    if youtube_link != "" && youtube_link != nil
+      youtube_link.match(/(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)/i)[1]
+    end
+  end
+
   def progress
     percent = 0
     percent+=5 if self.sexe.present?
