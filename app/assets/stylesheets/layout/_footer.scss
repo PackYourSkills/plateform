@@ -1,1 +1,74 @@
 // Your footer style
+footer.footer #footer {
+    background-color: #4e4747;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+
+
+footer.footer {
+  padding-bottom: 30px;
+  padding-top: 0;
+  color: #888;
+  background-color: #4e4747;
+  border-top: 2px solid #1abc9c;
+  a {
+    color: #b9b0b3;
+  }
+}
+
+
+footer.footer {
+  border-top: 2px solid #EC605F;
+}
+
+.list-inline {
+    margin-top: 9px;
+    margin-bottom: 8px;
+}
+.social-icon-list {
+    text-align: center;
+    font-size: 40px;
+    color: #1b191a;
+}
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+    margin-left: -5px;
+
+}
+
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a:hover {
+    color: #b9b0b3;
+}
+
+
+footer.footer #copyright {
+  text-align:center;
+  padding: 30px 0 0 0;
+}
+
+footer h4 {
+  text-align: center;
+}
+
+footer .footer-text p {
+  text-align: center;
+  font-size: 13px;
+}
+
+
+a {
+    color: #b9b0b3;
+}
