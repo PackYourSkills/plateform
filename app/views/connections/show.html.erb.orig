@@ -1,0 +1,19 @@
+<h1>Connections#show</h1>
+<p>Find me in app/views/connections/show.html.erb</p>
+
+<p>connection from <%= @connection.packer.user.first_name %> </p>
+<p>for the mission <%= @connection.mission.title %> </p>
+<p><%= @connection.message %> </p>
+
+<p>Status : <%= @connection.status %> </p>
+
+<%= link_to "edit",   edit_mission_connection_path(@mission,@connection) %>
+<%= link_to "accept",  accept_connection_path(@mission,@connection) %>
+<%= link_to "refuse",  refuse_connection_path(@mission,@connection) %>
+<%= link_to "cancel",  cancel_connection_path(@mission,@connection) %>
+<%= link_to "confirm",  confirm_connection_path(@mission,@connection) %>
+
+<%= link_to "delete",  mission_connection_path(@mission,@connection), method: :delete, data: {confirm: "Are your sure?"} %>
+
+
+

@@ -9,6 +9,7 @@
     padding-bottom: 0;
   }
 
+<<<<<<< HEAD
   .banner {
     color: white;
     text-align: center;
@@ -62,6 +63,11 @@
     }
   }
 
+=======
+body {
+  background-color: #f2frr4f4;
+  font-family: 'Catamaran', sans-serif;
+>>>>>>> da6e5a1d47dc596c4de4da503b03789c0f3ee768
 
   body {
     background-color: #f2frr4f4;
@@ -260,6 +266,7 @@
       background-attachment: fixed;
     }
   }
+<<<<<<< HEAD
 
 
   /*---------------------------------------------------------------------*/
@@ -341,6 +348,90 @@
 
 
 
+=======
+}
+/*---------------------------------------------------------------------*/
+/*  2. ANIMATION DELAY
+/*---------------------------------------------------------------------*/
+.delayp1 {
+  animation-delay: .1s;
+  -moz-animation-delay: .1s;
+  -webkit-animation-delay: .1s;
+  -o-animation-delay: .1s;
+  transition-delay: .1s;
+  -webkit-transition-delay: .1s;
+  -moz-transition-delay: .1s;
+  -o-transition-delay: .1s;
+}
+.delayp2 {
+  animation-delay: .2s;
+  -moz-animation-delay: .2s;
+  -webkit-animation-delay: .2s;
+  -o-animation-delay: .2s;
+  transition-delay: .2s;
+  -webkit-transition-delay: .2s;
+  -moz-transition-delay: .2s;
+  -o-transition-delay: .2s;
+}
+.delayp3 {
+  animation-delay: .3s;
+  -moz-animation-delay: .3s;
+  -webkit-animation-delay: .3s;
+  -o-animation-delay: .3s;
+  transition-delay: .3s;
+  -webkit-transition-delay: .3s;
+  -moz-transition-delay: .3s;
+  -o-transition-delay: .3s;
+}
+.delayp4 {
+  animation-delay: .4s;
+  -moz-animation-delay: .4s;
+  -webkit-animation-delay: .4s;
+  -o-animation-delay: .4s;
+  transition-delay: .4s;
+  -webkit-transition-delay: .4s;
+  -moz-transition-delay: .4s;
+  -o-transition-delay: .4s;
+}
+.delayp5 {
+  animation-delay: .5s;
+  -moz-animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+  -o-animation-delay: .5s;
+  transition-delay: .5s;
+  -webkit-transition-delay: .5s;
+  -moz-transition-delay: .5s;
+  -o-transition-delay: .5s;
+}
+/*---------------------------------------------------------------------*/
+/*  3. PAGE LOADER
+/*---------------------------------------------------------------------*/
+#page-loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #fff;
+}
+#page-loader .preload {
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -64px;
+  margin-left: -64px;
+}
+
+/*---------------------------------------------------------------------*/
+/*  1. VISION SECTION
+/*---------------------------------------------------------------------*/
+#vision .container {
+  padding: 0px;
+}
+>>>>>>> da6e5a1d47dc596c4de4da503b03789c0f3ee768
 
   /*---------------------------------------------------------------------*/
   /*  1. VISION SECTION
@@ -430,6 +521,7 @@
     padding: 10px;
   }
 
+<<<<<<< HEAD
   @media (min-width: 1024px) {
     #what-do-we-do .carousel-container {
       padding-bottom: 0px;
@@ -438,6 +530,79 @@
   #what-do-we-do .what-do-we-do-text {
     text-align: center;
   }
+=======
+/*---------------------------------------------------------------------*/
+/*  3. REGISTER SECTION
+/*---------------------------------------------------------------------*/
+#register {
+  background-image: url("bg-register.jpg");
+  padding: 0;
+}
+#register > .section-inner .section-content .section-title {
+  color: #b7ada4 !important;
+}
+#register > .section-inner .section-content .section-title > .section-line {
+  background-color: #b7ada4;
+}
+#register > .section-inner .section-content .content-message {
+  color: #fff;
+  background-color: #1abc9c;
+  margin-bottom: 50px;
+  padding: 30px;
+}
+#register > .section-inner .section-content .form-group .input-group {
+  width: 100%;
+}
+#register > .section-inner .section-content .form-group label {
+  color: #b7ada4;
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+#register > .section-inner .section-content .form-group label.error {
+  position: absolute;
+  top: -26px;
+  right: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+}
+#register > .section-inner .section-content .form-group input,
+#register > .section-inner .section-content .form-group textarea {
+  color: #222;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  border-radius: 0px;
+  border-left-color: #1abc9c;
+}
+#register > .section-inner .section-content .form-group textarea {
+  height: 137px;
+}
+#register > .section-inner .section-content .form-group button {
+  width: 100%;
+  margin-top: 0px;
+  border-radius: 0px;
+}
+#register > .section-inner .section-content .form-group span {
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 0px;
+  border-color: #1abc9c;
+}
+#register > .section-inner .section-content .form-group span > i {
+  width: 20px;
+}
+
+/*---------------------------------------------------------------------*/
+/*  7. SURVEY SECTION
+/*---------------------------------------------------------------------*/
+#survey {
+  background-image: image-url("bg-survey.jpg");
+  background-position: center bottom;
+  padding: 0;
+}
+>>>>>>> da6e5a1d47dc596c4de4da503b03789c0f3ee768
 
   #what-do-we-do .what-do-we-do-text > .page-scroll {
     padding-top: 0px;
@@ -514,6 +679,7 @@
     background-position: center bottom
   }
 
+<<<<<<< HEAD
   #survey .section-overlay{
     background-color: rgba(255,255,255,0.7);
   }
@@ -528,6 +694,14 @@
   #survey .btn{
     margin:10px;
   }
+=======
+#quote > .section-inner > .section-content .quote-text > .quote-icon > i {
+  color: #EC605F;
+}
+#quote > .section-inner > .section-content .quote-text > h2.quote-by {
+  color: #EC605F;
+}
+>>>>>>> da6e5a1d47dc596c4de4da503b03789c0f3ee768
 
 
 

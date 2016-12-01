@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pack Your Skills</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/ICONPackYourSkills.png" />
+    <meta name="description" content="Pack Your Skills is the new web platform that allows travelers to join the team of a project for the duration of a mission in exchange for food and accommodation. #Volunteering #PositiveImpact #SocialEntrepreneurship">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Add these line for detecting device width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  </head>
+
+  <body class="<%= params[:controller] %>">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+
+    <div id="body">
+      <%= yield %>
+    </div>
+
+    <%= render 'shared/footer' %>
+
+    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
+
+    <%= javascript_include_tag 'application' %>
+    <%= cloudinary_js_config %>
+
+    <%= yield(:after_js) %>
+
+    <!-- Script Facebook -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1678543439124411',
+          xfbml      : true,
+          version    : 'v2.8'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End Script Facebook -->
+  </body>
+</html>
