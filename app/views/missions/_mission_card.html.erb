@@ -20,10 +20,10 @@
       </ul>
     </div>
     <div class="mission-card--background">
-       <div class="image" style="background-image: url('<%= mission.cover_picture %>')"></div>
+       <div class="image" style="background-image: url('<%= cl_image_path mission.cover_picture.path %>')"></div>
     </div>
     <div class="mission-card--brand">
-      <div class="logo" style="background-image: url(<%= mission.crew.cover_picture %>)"></div>
+      <div class="logo" style="background-image: url('<%= cl_image_path mission.crew.logo.path %>')"></div>
       <div class="name">
         <%= mission.crew.name %>
       </div>

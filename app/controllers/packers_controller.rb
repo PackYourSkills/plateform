@@ -1,7 +1,7 @@
 class PackersController < ApplicationController
 
-  before_action :set_packer, only: [ :edit, :update, :show ]
-  before_action :set_picture_url, only: [ :show, :deck ]
+  before_action :set_packer, only: [ :edit, :update, :update_avatar, :show ]
+  before_action :set_picture_url, only: [ :show ]
   before_action :set_list, only: [:show]
   before_action :set_editable, only: [:show]
 
@@ -17,9 +17,16 @@ class PackersController < ApplicationController
     @packer.save ? (redirect_to packer_path @packer) : (render :edit)
   end
 
+  def update_avatar
+    upload_data = JSON.parse(params[:packer]['profile_photo'])
+    image = Cloudinary::Uploader.upload(upload_data['output']['image'], tags: 'tmp-upload')
+    @packer.profile_photo = image
+    @packer.save!
+    redirect_to :back
+  end
+
   def show
     @editable = user_signed_in? ? (current_user == @packer.user || current_user.admin) : false
-    @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
     @db_skills = @db_constants['skills']
   end
 
@@ -49,9 +56,9 @@ private
   end
 
   def set_list
-    db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
-    @list = db_constants['skills'].keys
-    @pro_level = db_constants['professionnal_level']
-    @lang_level = db_constants['language_level']
+    @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
+    @list = @db_constants['skills'].keys
+    @pro_level = @db_constants['professionnal_level']
+    @lang_level = @db_constants['language_level']
   end
 end

@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get '/missions/:id/cancel', to:'missions#cancel', as: 'cancel_mission'
 
   resources :packers, only: [:edit, :update, :show] do
+    member do
+      patch :update_avatar
+    end
     resources :experiences, only: [:new, :create, :edit, :destroy, :update]
     resources :skills, only: [:new, :create, :edit, :destroy, :update]
     resources :educations, only: [:new, :create, :edit, :destroy, :update]
