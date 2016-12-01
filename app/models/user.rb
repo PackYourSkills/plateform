@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-  validates :story, :allow_blank => true, length: { within: 100..500 }
+  validates :story, :allow_blank => true, length: { within: 0..500 }
 
   # geocode
   geocoded_by :address

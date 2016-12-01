@@ -68,3 +68,19 @@ color: red;
     font-size: 12px;
   }
 }
+
+
+.modal-content .modal-header {
+    background-color: $blue;
+}
+
+.btn-default {
+    color: #ffffff;
+    background-color: $blue;
+    border-color: $blue;
+}
+
+.collapse-style-2 .panel-heading a {
+    color: #ffffff;
+    background-color: $blue !important;
+}

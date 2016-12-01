@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
         <% if @editable %>
+<<<<<<< HEAD
           <%= form_for(@packer, url: update_avatar_packer_path(@packer), html: {class: 'avatar-form'}) do |f| %>
             <div class="avatar_uploader slim"
                  data-label="Drop your avatar here"
@@ -13,6 +14,12 @@
           <% end %>
         <% else %>
           <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');"></div>
+=======
+          <div class="box_link_packer">
+            <i class="fa fa-camera-retro" aria-hidden="true"></i>
+            <%= link_to '', '#', :id => 'photo', "data-toggle" => "modal", 'data-target' => '#photoModal' %>
+          </div>
+>>>>>>> 3619ffd66d1bd80784164d6e5211219740a8c5f2
         <% end %>
 
       <div class="box">
@@ -492,6 +499,8 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+=======
 
 <!-- Modal youtube -->
 <div class="modal fade" id="youtubeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -559,3 +568,6 @@
     </div>
   </div>
 </div>
+
+
+>>>>>>> 3619ffd66d1bd80784164d6e5211219740a8c5f2
