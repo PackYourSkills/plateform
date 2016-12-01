@@ -1,7 +1,7 @@
 class PackersController < ApplicationController
 
-  before_action :set_packer, only: [ :edit, :update, :show ]
-  before_action :set_picture_url, only: [ :show, :deck ]
+  before_action :set_packer, only: [ :edit, :update, :update_avatar, :show ]
+  before_action :set_picture_url, only: [ :show ]
   before_action :set_list, only: [:show]
   before_action :set_editable, only: [:show]
 
@@ -15,6 +15,14 @@ class PackersController < ApplicationController
   def update
     @packer.update(packer_params)
     @packer.save ? (redirect_to packer_path @packer) : (render :edit)
+  end
+
+  def update_avatar
+    upload_data = JSON.parse(params[:packer]['profile_photo'])
+    image = Cloudinary::Uploader.upload(upload_data['output']['image'], tags: 'tmp-upload')
+    @packer.profile_photo = image
+    @packer.save!
+    redirect_to :back
   end
 
   def show

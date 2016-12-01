@@ -1,14 +1,25 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12, col-sm-3">
-      <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @packer.profile_photo_url %>');">
+
+      <%= form_for(@packer, url: update_avatar_packer_path(@packer), html: {class: 'avatar-form'}) do |f| %>
+        <div class="avatar_uploader slim"
+             data-label="Drop your avatar here"
+             data-ratio="1:1">
+            <%= f.attachinary_file_field :profile_photo %>
+            <%= cl_image_tag packer_avatar_path %>
+        </div>
+        <%= f.button :submit, class: 'btn btn-success' %>
+      <% end %>
+
+      <!-- <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @packer.profile_photo_url %>');">
         <% if @editable %>
           <div class="box_link">
             <i class="fa fa-camera-retro" aria-hidden="true"></i>
             <%= link_to '', edit_packer_path(@packer, infos: :photo) %>
           </div>
         <% end %>
-      </div>
+      </div> -->
       <div class="progress style-1">
         <span class="text"></span>
           <div class="progress-bar progress-bar-blue" role="progressbar" data-animate-width="<%= @packer.progress %>%">

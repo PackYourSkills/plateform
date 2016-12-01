@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
         <% if @editable %>
+<<<<<<< HEAD
           <%= form_for(@packer, url: update_avatar_packer_path(@packer), html: {class: 'avatar-form'}) do |f| %>
             <div class="avatar_uploader slim"
                  data-label="Drop your avatar here"
@@ -13,6 +14,12 @@
           <% end %>
         <% else %>
           <div class="box box_ratio_1_1" style="background-image:url('<%= cl_image_path @profile_picture_url %>');"></div>
+=======
+          <div class="box_link_packer">
+            <i class="fa fa-camera-retro" aria-hidden="true"></i>
+            <%= link_to '', '#', :id => 'photo', "data-toggle" => "modal", 'data-target' => '#photoModal' %>
+          </div>
+>>>>>>> 3619ffd66d1bd80784164d6e5211219740a8c5f2
         <% end %>
 
       <div class="box">
@@ -34,7 +41,7 @@
         <% if @editable %>
           <div class="box_link_packer">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <%= link_to '', '#', :id => 'info_user', "data-toggle" => "modal", 'data-target' => '#info_userModal' %>
+            <%= link_to '', infos_edit_path(user: @packer.user, info: :basic) %>
           </div>
         <% end %>
       </div>
@@ -159,7 +166,7 @@
               <% if @editable %>
                 <div class="box_link_packer">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, '#', :id => 'new_skills', "data-toggle" => "modal", 'data-target' => '#new_skillsModal' %>
+                  <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :professionnal) %>
                 </div>
               <% end %>
             <% else %>
@@ -237,8 +244,7 @@
                   <% if @editable %>
                   <div class="col-xs-12">
                     <div class="body_new">
-                      <h4 class="title">
-                      <%= link_to "add a new skill", '#', :id => 'new_skills', "data-toggle" => "modal", 'data-target' => '#new_skillsModal' %>
+                      <h4 class="title"><%= link_to 'add a new skill', new_packer_skill_path(@packer, type_of_skill: :professionnal) %></h4>
                     </div>
                   </div>
                   <% end %>
@@ -258,7 +264,7 @@
             <% if @editable %>
             <div class="box_link_packer">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              <%= link_to '', '#', :id => 'language', "data-toggle" => "modal", 'data-target' => '#newlangModal' %>
+              <%= link_to '', new_packer_skill_path(@packer, type_of_skill: :language) %>
             </div>
             <% end %>
             <% else %>
@@ -266,13 +272,13 @@
               <div class="row">
                 <% lang_skills.each_with_index do |skill| %>
                 <div class="col-xs-12 col-sm-4">
-                  <h4 class="title">
+                  <p>
                   <%= skill.title %>
                   <% if @editable %>
-                    <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, '#', :id => 'language', "data-toggle" => "modal", 'data-target' => '#langModal' %>
+                    <%= link_to "<i class='fa fa-pencil' aria-hidden='true'></i>".html_safe, edit_packer_skill_path(@packer, skill, type_of_skill: :language) %>
                     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>".html_safe, packer_skill_path(@packer, skill), method: :delete, data: { confirm: "Are you sure?" } %>
                   <% end %>
-                  </h4>
+                  </p>
                   <% skill.level.to_i.times do %>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   <% end %>
@@ -280,28 +286,6 @@
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                   <% end %>
                 </div>
-                <!-- Modal skills -->
-                  <div class="modal fade" id="langModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                          <h4 class="modal-title" id="langModalLabel">What is your favorite quote</h4>
-                        </div>
-                        <div class="modal-body">
-                          <%= simple_form_for [@packer, skill] do |a| %>
-                          <%= a.hidden_field :skill_id, :value => skill.id %>
-                          <%= a.input :title, label: :Language, collection: LanguageList::COMMON_LANGUAGES.select(&:living?).map { |e| e.name }, required: true %>
-                          <%= a.input :level, collection: @pro_level, required: true, prompt: "What is your level" %>
-                          <%= a.input :type_of_skill, as: :hidden, input_html: { value: params['type_of_skill'] } %>
-                          <div class="container submit">
-                            <%= a.submit class: "btn btn-primary" %>
-                          </div>
-                        <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 <% end %>
                 <% if @editable %>
                 <div class="col-xs-12">
@@ -340,10 +324,9 @@
                 </div>
               </div>
             </div>
-          <% end %>
-          <!-- Box story 1 columns professionnal experience -->
+          <% end %>  <!-- Box story 1 columns professionnal experience -->
 
-              <!-- Box value 1/1 -->
+                  <!-- Box value 1/1 -->
           <% if (!nil_or_empty_string @packer.value1) || (!nil_or_empty_string @packer.value2) ||(!nil_or_empty_string @packer.value3)  %>
             <div class="col-xs-12 col-sm-6">
               <div class="box box_ratio_1_1 box_blue">
@@ -423,40 +406,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="photoModalLabel">Add a picture</h4>
+        <h4 class="modal-title" id="storyModalLabel">Add a picture</h4>
       </div>
       <div class="modal-body">
         <%= simple_form_for(@packer) do |f| %>
         <%= f.input :profile_photo, as: :attachinary %>
         <%= f.button :submit %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal basic_info -->
-<div class="modal fade" id="info_userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="info_userModalLabel">Nothing interesting to read here</h4>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for @packer.user, url: infos_update_path(@packer.user) do |f| %>
-            <%= f.input :first_name %>
-            <%= f.input :last_name %>
-
-            <%= f.input :address %>
-            <%= f.input :city %>
-            <%= f.input :zip_code %>
-            <%= f.input :country , as: :string %>
-
-            <%= f.input :birthdate, as: :date, start_year: Date.today.year - 100,
-                                        end_year: Date.today.year - 18, discard_day: false,
-                                        order: [:day, :month, :year] %>
-            <%= f.button :submit %>
         <% end %>
       </div>
     </div>
@@ -469,7 +424,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="websiteModalLabel">Add a website</h4>
+        <h4 class="modal-title" id="storyModalLabel">Add a picture</h4>
       </div>
       <div class="modal-body">
         <%= simple_form_for(@packer) do |f| %>
@@ -491,7 +446,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="cvModalLabel">Add a link to your cv</h4>
+        <h4 class="modal-title" id="storyModalLabel">Add a picture</h4>
       </div>
       <div class="modal-body">
         <%= simple_form_for(@packer) do |f| %>
@@ -516,7 +471,7 @@
         <h4 class="modal-title" id="storyModalLabel">Tell us your story</h4>
       </div>
       <div class="modal-body">
-        <%= simple_form_for @packer.user, url: infos_update_path(@packer.user) do |f| %>
+        <%= simple_form_for @packer.user, url: infos_update_path do |f| %>
             <%= f.input :story, label: false %>
             <%= f.button :submit, 'Update' %>
         <% end %>
@@ -544,28 +499,9 @@
     </div>
   </div>
 </div>
-<!-- Modal skills -->
-<div class="modal fade" id="new_skillsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="storyModalLabel">What is your favorite quote</h4>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for [@packer, skill = Skill.new] do |a| %>
-          <%= a.hidden_field :skill_id, :value => skill.id %>
-          <%= a.input :title, collection: @list, prompt: "Select a skill" %>
-          <%= a.input :level, collection: @pro_level, prompt: "What is your level" %>
-          <%= a.input :type_of_skill, as: :hidden, input_html: { value: 'professionnal' } %>
-          <div class="container submit">
-            <%= a.submit class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<<<<<<< HEAD
+=======
+
 <!-- Modal youtube -->
 <div class="modal fade" id="youtubeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -633,26 +569,5 @@
   </div>
 </div>
 
-<!-- Modal skills -->
-<div class="modal fade" id="newlangModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="newlangModalLabel">What is your favorite quote</h4>
-      </div>
-      <div class="modal-body">
-          <%= simple_form_for [@packer, @skill = Skill.new] do |a| %>
-            <%= a.hidden_field :skill_id, :value => @skill.id %>
-            <%= a.input :title, label: :Language, collection: LanguageList::COMMON_LANGUAGES.select(&:living?).map { |e| e.name }, required: true %>
-            <%= a.input :level, collection: @pro_level, required: true, prompt: "What is your level" %>
-            <%= a.input :type_of_skill, as: :hidden, input_html: { value: 'language' } %>
-          <div class="container submit">
-            <%= a.submit class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
 
+>>>>>>> 3619ffd66d1bd80784164d6e5211219740a8c5f2
