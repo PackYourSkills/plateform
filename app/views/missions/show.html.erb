@@ -36,25 +36,19 @@
       <div class="col-xs-12, col-sm-3">
         <% if user_signed_in? %>
           <% if @editable %>
-            <div class="box height_80px">
-              <div class="box_link">
-                <%= link_to 'edit', edit_mission_path %>
-              </div>
+            <div class="box_button main_button">
+              <%= link_to 'Edit', edit_mission_path %>
             </div>
           <% else %>
             <% unless current_user.crew? %>
-              <div class="box height_80px">
-                <div class="box_link">
-                  <%= link_to "apply", new_mission_connection_path(@mission), class:"apply" %>
-                </div>
+              <div class="box_button main_button">
+                <%= link_to "Apply", new_mission_connection_path(@mission), class:"apply" %>
               </div>
             <% end %>
           <% end %>
         <% else %>
-          <div class="box height_80px">
-            <div class="box_link">
-              <%= link_to "Sign in to continue", new_user_session_path(role: :packer) %>
-            </div>
+          <div class="box_button main_button">
+            <%= link_to "Sign in to continue<", new_user_session_path(role: :packer) %>
           </div>
         <% end %>
       </div>
@@ -106,14 +100,12 @@
         </div>
         <% if user_signed_in? %>
           <div class="col-xs-12">
-            <div class ="box">
-              <div class="box_link">
-                <% if @editable %>
-                  <%= link_to 'Go to your profile', crew_path(@mission.crew) %>
-                <% else %>
-                  <%= link_to "See their profile", crew_path(@mission.crew) %>
-                <% end %>
-              </div>
+            <div class ="box_button secondary_button">
+              <% if @editable %>
+                <%= link_to 'Go to your profile', crew_path(@mission.crew) %>
+              <% else %>
+                <%= link_to "See their profile", crew_path(@mission.crew) %>
+              <% end %>
             </div>
           </div>
         <% end %>

@@ -17,7 +17,7 @@ class ConnectionsController < ApplicationController
     @connection = @mission.connections.new(connection_params)
     params[:commit] == 'Send' ? (@connection.status = 'online') : (@connection.status = 'draft')
     authorize @connection
-    @connection.save ? (redirect_to deck_packer_path(@connection.packer)) : (render :new)
+    @connection.save ? (redirect_to authenticated_root_path) : (render :new)
   end
 
   def show
@@ -28,32 +28,32 @@ class ConnectionsController < ApplicationController
 
   def update
     params[:commit] == 'Send' ? (@connection.status = 'online') : (@connection.status = 'draft')
-    @connection.update(connection_params) ? (redirect_to deck_packer_path(@connection.packer)) : (render :edit)
+    @connection.update(connection_params) ? (redirect_to authenticated_root_path) : (render :edit)
   end
 
   def accept
     @connection.accept
-    redirect_to deck_crew_path(@mission.crew)
+    redirect_to authenticated_root_path
   end
 
   def refuse
     @connection.refuse
-    redirect_to deck_crew_path(@mission.crew)
+    redirect_to authenticated_root_path
   end
 
   def cancel
     @connection.cancel
-    redirect_to deck_packer_path(@connection.packer)
+    redirect_to authenticated_root_path
   end
 
   def confirm
     @connection.confirm
-    redirect_to deck_packer_path(@connection.packer)
+    redirect_to authenticated_root_path
   end
 
   def destroy
     @connection.destroy
-    redirect_to deck_packer_path(@connection.packer)
+    redirect_to authenticated_root_path
   end
 
   private
@@ -75,7 +75,3 @@ class ConnectionsController < ApplicationController
     params.require(:connection).permit(:message, :status, :packer_id)
   end
 end
-
-
-
-

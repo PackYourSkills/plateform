@@ -3,8 +3,10 @@
  * ------------------------------------- */
 // Google fonts
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Catamaran:100,300,500,700,900");
+
 $base-font: "Catamaran", "Helvetica", "sans-serif";
-$header-font: "Amatic SC", "Cursive", "sans-serif";
+$header-font: "Catamaran", "Helvetica", "sans-serif";
+$special-font: "Amatic SC", "Cursive", "sans-serif";
 
 // Local fonts (uncomment following lines)
 // @font-face {

@@ -38,5 +38,8 @@ class Packer < ApplicationRecord
     percent+=10 if self.user.birthdate.present?
     return percent
   end
-end
 
+  def profile_photo_url
+    profile_photo.present? ? profile_photo.path : 'http://orig00.deviantart.net/ee5b/f/2015/105/7/c/goku_ssj_facebook_profil_by_mjd360-d8ps1ub.jpg'
+  end
+end

@@ -18,7 +18,7 @@
                 <ul class="nav nav-pills">
                   <li class="active"><a href="#" data-filter="*">All</a></li>
                   <% @list.each do |skill| %>
-                    <li><a href="#" data-filter=".<%= skill[1]['url'] %>"><%= skill[0] %></a></li>
+                    <li><a href="#" data-filter=".<%= skill.downcase.gsub(' ', '_') %>"><%= skill %></a></li>
                   <% end %>
                 </ul>
               </div>
