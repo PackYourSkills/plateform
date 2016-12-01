@@ -24,7 +24,7 @@
        <div class="image" style="background-image: url('<%= cl_image_path url_cover %>')"></div>
     </div>
     <div class="mission-card--brand">
-    <% url_logo = mission.cover_picture.nil? ? 'https://dummyimage.com/400x400/EC605F/2d221f.png&text=.' : mission.crew.logo.path %>
+      <% url_logo = mission.crew.logo.nil? ? 'https://dummyimage.com/400x400/EC605F/2d221f.png&text=.' : mission.crew.logo.path %>
       <div class="logo" style="background-image: url('<%= cl_image_path url_logo %>')"></div>
       <div class="name">
         <%= mission.crew.name %>
