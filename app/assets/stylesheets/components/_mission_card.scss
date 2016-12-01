@@ -1,3 +1,10 @@
+@media (max-width: $screen-sm-max) {
+  .isotope-container-fitrows .isotope-item {
+
+    width: 100%;
+  }
+}
+
 .mission-card {
   background: #F8F8F8;
   padding: 15px 0 0 0;
