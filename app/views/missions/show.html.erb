@@ -38,14 +38,14 @@
           <% if @editable %>
             <div class="box height_80px">
               <div class="box_link">
-                <%= link_to 'EDIT', edit_mission_path %>
+                <%= link_to 'edit', edit_mission_path %>
               </div>
             </div>
           <% else %>
             <% unless current_user.crew? %>
               <div class="box height_80px">
                 <div class="box_link">
-                  <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
+                  <%= link_to "apply", new_mission_connection_path(@mission), class:"apply" %>
                 </div>
               </div>
             <% end %>
