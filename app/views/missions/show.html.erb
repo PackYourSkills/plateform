@@ -19,26 +19,44 @@
                 <h2><%= @mission.title %></h2>
               </div>
               <div class="mission-essentials">
-                <p><%= @mission.city %>, <%= @mission.country %>, <%= @mission.duration %>, <%= @mission.skill %></p>
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i>
+                <%= @mission.city %>, <%= @mission.country %>,
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                <%= @mission.duration %> weeks,
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <%= @mission.skill %>,
+                <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                <%= @mission.crew.social_issue %></p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-xs-12, col-sm-3">
-        <div class="box height_80px">
-          <div class="box_link">
-            <% if user_signed_in? %>
-              <% if @editable %>
+        <% if user_signed_in? %>
+          <% if @editable %>
+            <div class="box height_80px">
+              <div class="box_link">
                 <%= link_to 'EDIT', edit_mission_path %>
-              <% else %>
-                <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
-              <% end %>
-            <% else %>
-              <%= link_to "Sign in to continue", new_user_session_path(role: :packer) %>
+              </div>
+            </div>
+          <% else %>
+            <% unless current_user.crew? %>
+              <div class="box height_80px">
+                <div class="box_link">
+                  <%= link_to "APPLY", new_mission_connection_path(@mission), class:"apply" %>
+                </div>
+              </div>
             <% end %>
+          <% end %>
+        <% else %>
+          <div class="box height_80px">
+            <div class="box_link">
+              <%= link_to "Sign in to continue", new_user_session_path(role: :packer) %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -58,7 +76,7 @@
             <% else %>
               <div class ="content_box">
                 <h2><%= @mission.crew.name %></h2>
-                <p><%= @mission.crew.mission %></p>
+                <p>Their mission is to<br/>"<%= @mission.crew.mission %>"</p>
               </div>
             <% end %>
           </div>
@@ -72,7 +90,7 @@
               </div>
             <% else %>
               <div class ="content_box">
-                <p>Created in : <%= @mission.crew.creation_date %></p>
+                <p>Crew created in<br/><br/><%= @mission.crew.creation_date %></p>
               </div>
             <% end %>
           </div>
@@ -86,7 +104,7 @@
               </div>
             <% else %>
               <div class ="content_box">
-                <p><%= @mission.crew.nb_collaborators %> team members</p>
+                <p>Team members<br/><%= @mission.crew.nb_collaborators %></p>
               </div>
             <% end %>
           </div>
@@ -108,13 +126,13 @@
         <% end %>
         <div class="col-xs-12">
           <div class="box box80px">
-            <% if @mission.crew.values == nil || @mission.crew.values == '' %>
+            <% if @mission.crew.value1 == nil || @mission.crew.value1 == '' %>
               <div class="box_empty">
                 <h2>Add values</h2>
               </div>
             <% else %>
               <div class ="content_box">
-                <h3>Their values : <%= @mission.crew.values %></h3>
+                <h3>Their values : <%= @mission.crew.value1 %></h3>
                </div>
             <% end %>
           </div>
@@ -133,7 +151,8 @@
               </div>
             <% else %>
               <div class="content_box">
-                <h2>THE MISSION : </h2><p><%= @mission.description %></p>
+                <h2>Why do they need you ?</h2>
+                <p><%= @mission.description %></p>
               </div>
             <% end %>
           </div>
@@ -145,10 +164,11 @@
                 <td><%= @mission.hours_per_day %> hours/day</td>
               </tr>
               <tr>
-                <td colspan="2"><h3>Hosting condition : </h3><p><%= @mission.hosting_condition %></p></td>
+                <td>hosting<br/><%= @mission.hosting_condition %></td>
+                <td>food<br/><%= @mission.food %></td>
               </tr>
               <tr>
-                <td colspan="2"><h3>Language spoken : </h3><p><%= @mission.language %></p></td>
+                <td colspan="2">language spoken<br/><%= @mission.language %></td>
               </tr>
           </table>
         </div>
@@ -163,12 +183,34 @@
 
         <!-- Box Hosting Picture 2 columns mandatory -->
         <div class="col-xs-12, col-sm-8">
-          <div class="box box270px">
-            <div class="content_box" style="background-image:url('<%= cl_image_path @url_hosting %>')">
-            </div>
+          <div class="box box270px" style="background-image:url('<%= cl_image_path @url_hosting %>')">
           </div>
         </div>
       </div>
+      <% if @mission.other_comment == nil || @mission.other_comment == "" %>
+        <% if @editable %>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class ="box">
+                <div class="box_empty">
+                  <h2>Tell us more about the mission add a comment</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class ="box">
+              <div class="content_box">
+                <h2>More information</h2>
+                <p><%= @mission.other_comment %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -190,3 +232,28 @@
   });
   <% end %>
 <% end %>
+
+
+    t.string   "name"
+    t.string   "social_issue"
+    t.string   "mission"
+    t.date     "creation_date"
+    t.integer  "nb_collaborators"
+    t.text     "team_description"
+    t.string   "phone"
+    t.string   "skype"
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "website"
+    t.integer  "credit_count"
+    t.text     "story"
+    t.string   "address"
+    t.string   "country"
+    t.string   "city"
+    t.string   "zip_code"
+    t.string   "value1"
+    t.string   "value2"
+    t.string   "value3"
+    t.string   "quote"
+    t.string   "quote_author"
+    t.string   "youtube_link"

@@ -79,7 +79,7 @@ class MissionsController < ApplicationController
 
   def set_list_skills
     db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
-    @list = db_constants['skills']
+    @list = db_constants['skills'].keys
   end
 
   def set_mission
@@ -94,6 +94,6 @@ class MissionsController < ApplicationController
   def mission_params
     params.require(:mission).permit(:title, :city, :country, :address, :duration, :skill,
       :description, :hours_per_day, :days_per_week, :hosting_condition, :food, :latitude, :longitude,
-      :other_comment, :cover_picture, :hosting_picture, mission_photos: [])
+      :other_comment, :language, :cover_picture, :hosting_picture, mission_photos: [])
   end
 end

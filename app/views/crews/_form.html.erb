@@ -6,28 +6,38 @@
       <p><%= a.input :logo, as: :attachinary %></p>
       <%= a.input :name %>
 
-      <%= a.input :social_issue %>
-      <%= a.input :values %>
+      <%= a.input :social_issue, collection: @list, prompt: "Select a social_issue", required: true %>
       <%= a.input :mission %>
-      <%= a.input :story %>
+      <%= a.input :story, required: true %>
 
       <%= a.input :creation_date, discard_day: true %>
-      <%= a.input :nb_collaborators %>
+      <%= a.input :nb_collaborators, required: true %>
       <%= a.input :team_description %>
 
       <%= a.input :address %>
       <%= a.input :city %>
       <%= a.input :zip_code %>
-      <%= a.input :country , as: :string %>
+      <%= a.input :country, as: :string %>
 
       <%= a.input :phone %>
       <%= a.input :website %>
       <%= a.input :facebook %>
       <%= a.input :twitter %>
+      <%= a.input :skype %>
+
+      <p>What are your main values (3 maximum)</p>
+      <%= a.input :value1, label: false %>
+      <%= a.input :value2, label: false %>
+      <%= a.input :value3, label: false %>
+
+      <p>What is your favorite quote</p>
+      <%= a.input :quote %>
+      <%= a.input :quote_author %>
 
       <%= a.input :crew_photos, as: :attachinary %>
 
-      <%= a.input :credit_count %>
+      <p>Do you have a video presenting your organisation ? (only youtube)</p>
+      <%= a.input :youtube_link, label: false %>
 
       <div class="text-center">
         <%= a.submit class: "btn btn-secondary" %>
@@ -35,5 +45,3 @@
     <% end %>
   </div>
 </div>
-
-

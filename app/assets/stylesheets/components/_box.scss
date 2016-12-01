@@ -145,6 +145,7 @@
   color: $dark;
 }
 
+
 .path-box {
   background-color: $grey;
   border: 1px solid $green;
@@ -164,4 +165,20 @@
 
 .path-box:hover {
   background-color: $green;
+
+.box80px {
+  height:80px;
+}
+
+.box120px {
+  height:120px;
+}
+
+.box160px {
+  height:160px;
+}
+
+.box270px {
+  height:270px;
+>>>>>>> master
 }

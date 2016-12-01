@@ -47,7 +47,8 @@ private
 
   def packer_params
     params.require(:packer).permit(:cv_link, :website, :youtube_link,
-      :skype, :phone, :nationality, :sexe, :profile_photo, :cover_picture)
+      :skype, :phone, :nationality, :sexe, :profile_photo, :cover_picture,
+      :value1, :value2, :value3, :quote, :quote_author)
   end
 
   def set_packer

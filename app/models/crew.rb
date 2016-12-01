@@ -4,6 +4,8 @@ class Crew < ApplicationRecord
   has_many :missions, dependent: :destroy
 
   validates :website, :allow_blank => true, format: { :with => /((http|ftp)s?:\/\/)?([a-zA-Z0-9<>\.,!@#$%^:;&*()\-_+=]+:[a-zA-Z0-9<>\.,!@#$%^;:&*()\-_+=]+\@)?([a-zA-Z0-9\-\_]+(\/|\.)){2,}[:a-zA-Z0-9\#\?\=\_\.\-\/]*/i, message: "it has to be an url" }
+  validates :youtube_link, :allow_blank => true, format: { :with => /(?:https?:\/\/)?(?:(?:(?:www\.?)?youtube\.com(?:\/(?:(?:watch\?.*?(v=[^&\s]+).*)|(?:v(\/.*))|(channel\/.+)|(?:user\/(.+))|(?:results\?(search_query=.+))))?)|(?:youtu\.be(\/.*)?))/i, message: "it has to be a youtube link" }
+
   has_attachments :crew_photos, maximum: 6
   has_attachment :logo
   has_attachment :cover_picture
@@ -20,7 +22,11 @@ class Crew < ApplicationRecord
     percent+=10 unless self.logo.nil?
     percent+=5 if self.social_issue.present?
     percent+=5 if self.mission.present?
-    percent+=10 if self.value1.present?
+    percent+=2 if self.value1.present?
+    percent+=2 if self.value2.present?
+    percent+=2 if self.value3.present?
+    percent+=2 if self.quote.present?
+    percent+=2 if self.youtube_link.present?
     percent+=10 if self.story.present?
     percent+=5 if self.team_description.present?
     percent+=5 if self.nb_collaborators.present?
