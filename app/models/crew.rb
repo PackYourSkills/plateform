@@ -46,6 +46,10 @@ class Crew < ApplicationRecord
     return percent
   end
 
+  def logo_url
+    logo.present? ? logo.path : 'http://placehold.it/300?text=logo'
+  end
+  
   private
 
   def full_address
@@ -55,5 +59,6 @@ class Crew < ApplicationRecord
   def full_address_changed?
     address_changed? || city_changed? || country_changed?
   end
+
 
 end
