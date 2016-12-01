@@ -33,7 +33,11 @@ class CrewsController < ApplicationController
   end
 
   def set_url_photos
-    @url_logo = @crew.logo.nil? ? "https://dummyimage.com/400x400/5fc857/2d221f.png&text=#{@crew.name.chars.first}" : @crew.logo.path
+    if @crew.name.nil?
+      @url_logo = @crew.logo.nil? ? "https://dummyimage.com/400x400/5fc857/2d221f.png&text=AA" : @crew.logo.path
+    else
+      @url_logo = @crew.logo.nil? ? "https://dummyimage.com/400x400/5fc857/2d221f.png&text=#{@crew.name.chars.first}" : @crew.logo.path
+    end
   end
 
   def set_crew
