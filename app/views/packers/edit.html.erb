@@ -1,5 +1,16 @@
-<h1>Packers#edit</h1>
-<p>Find me in app/views/packers/edit.html.erb</p>
-<%= params['infos'] == 'photo' ? (render 'profile_picture_form') : (render 'form') %>
-
-
+<% case params['infos'] %>
+  <% when 'photo' %>
+    <%= render 'profile_picture_form' %>
+  <% when 'quote' %>
+    <%= render 'quote_form' %>
+  <% when 'values' %>
+    <%= render 'values_form' %>
+  <% when 'website' %>
+    <%= render 'website_form' %>
+  <% when 'cv' %>
+    <%= render 'cv_form' %>
+  <% when 'youtube' %>
+    <%= render 'youtube_form' %>
+  <% else %>
+    <%= render 'form' %>
+<% end %>
