@@ -72,7 +72,7 @@ class MissionsController < ApplicationController
 
   def destroy
     @mission.destroy
-    redirect_to deck_crew_path @crew
+    redirect_to authenticated_root_path @crew
   end
 
   private

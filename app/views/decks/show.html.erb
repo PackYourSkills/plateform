@@ -1,0 +1,5 @@
+<% if current_user.crew? %>
+  <%= render 'crew_deck' %>
+<% else %>
+  <%= render 'packer_deck' %>
+<% end %>
