@@ -31,7 +31,11 @@ private
 
   def set_picture_url
     if @packer.profile_photo.nil?
-      @profile_picture_url = "https://dummyimage.com/400x400/4EB8BA/2d221f.png&text=#{@packer.user.first_name.chars.first}"
+      if @packer.user.first_name.nil?
+        @profile_picture_url = "https://dummyimage.com/400x400/4EB8BA/2d221f.png&text=AA"
+      else
+        @profile_picture_url = "https://dummyimage.com/400x400/4EB8BA/2d221f.png&text=#{@packer.user.first_name.chars.first}"
+      end
     else
       @profile_picture_url = @packer.profile_photo.path
     end
