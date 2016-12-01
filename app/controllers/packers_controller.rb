@@ -1,9 +1,9 @@
 class PackersController < ApplicationController
 
-  before_action :set_packer, only: [ :edit, :update, :deck, :show ]
-  before_action :set_picture_url, only: [ :show, :deck ]
+  before_action :set_packer, only: [ :edit, :update, :show ]
+  before_action :set_picture_url, only: [ :show ]
   before_action :set_list, only: [:show]
-  before_action :set_editable, only: [:show, :deck]
+    before_action :set_editable, only: [:show]
 
   def index
     @packers = policy_scope(Packer)
@@ -21,14 +21,6 @@ class PackersController < ApplicationController
     @editable = user_signed_in? ? (current_user == @packer.user || current_user.admin) : false
     @db_constants = YAML.load_file(Rails.root.join('config', 'constants.yml'))
     @db_skills = @db_constants['skills']
-  end
-
-  def deck
-    @connections = @packer.connections.order(created_at: :desc)
-    @all_accepted = @connections.select { |c| c.accepted? }
-    @all_online = @connections.select { |c| c.online? }
-    @all_draft = @connections.select { |c| c.draft? }
-    @all_old = @connections.select { |c| !c.draft? && !c.online? && !c.accepted? }
   end
 
 private

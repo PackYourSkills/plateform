@@ -48,11 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 private
 
   def after_sign_up_path_for(resource)
-    resource.crew? ? (deck_crew_path(resource.crew)) : (deck_packer_path(resource.packer))
+    authenticated_root_path
   end
 
   def after_inactive_sign_up_path_for(resource)
-    resource.crew? ? (deck_crew_path(resource.crew)) : (deck_packer_path(resource.packer))
+    authenticated_root_path
   end
 end
-

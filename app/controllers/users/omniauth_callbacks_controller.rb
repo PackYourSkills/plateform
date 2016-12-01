@@ -16,10 +16,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def after_sign_in_path_for(user)
-    if user.role == "crew"
-      deck_crew_path(user.crew)
-    else
-      deck_packer_path(user.packer)
-    end
+    authenticated_root_path
   end
 end

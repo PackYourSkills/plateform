@@ -2,7 +2,7 @@ class CrewsController < ApplicationController
 
   before_action :set_crew, only: [ :edit, :update, :show, :destroy, :deck ]
   before_action :set_editable, only: [ :show ]
-  before_action :set_url_photos, only: [ :show, :deck ]
+  before_action :set_url_photos, only: [ :show ]
   before_action :set_list, only: [ :new, :edit ]
 
 
@@ -19,15 +19,6 @@ class CrewsController < ApplicationController
   end
 
   def show
-  end
-
-  def deck
-    authorize @crew
-    @missions = @crew.missions.order(created_at: :desc)
-    @all_closed = @missions.select { |c| c.closed? }
-    @all_online = @missions.select { |c| c.online? }
-    @all_draft = @missions.select { |c| c.draft? }
-    @all_old = @missions.select { |c| !c.draft? && !c.online? && !c.closed? }
   end
 
   private
