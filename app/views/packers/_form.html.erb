@@ -1,0 +1,22 @@
+<%= simple_form_for(@packer) do |f| %>
+  <div class="form-inputss">
+    <%= f.input :sexe, as: :radio_buttons,
+      collection: ['Male', 'Female'], wrapper: :vertical_radio_and_checkboxes %>
+    <%= f.input :website ,label: "Your website", placeholder: 'put the link here'%>
+    <%= f.input :phone ,label: "Phone number", placeholder: 'put your phone number here'%>
+    <%= f.input :skype ,label: "Skype", placeholder: 'put your username in Skype'%>
+    <%= f.input :youtube_link ,label: "Do you want to add a video?", placeholder: 'give us a youtube link'%>
+    <%= f.input :job , placeholder: 'What are you doing ?' %>
+    <%= f.input :cv_link ,label: "Link to your CV", placeholder: 'put the link here (linkedin, viadeo...)'%>
+    <p>What is your favorite quote</p>
+    <%= f.input :quote, label: false %>
+    <%= f.input :quote_author, label: "who said that ?" %>
+    <p>What are your 3 main values</p>
+    <%= f.input :value1, label: false %>
+    <%= f.input :value2, label: false %>
+    <%= f.input :value3, label: false %>
+  </div>
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
+<% end %>

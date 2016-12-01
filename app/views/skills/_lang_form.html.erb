@@ -1,0 +1,14 @@
+<div class="container skill_edit">
+  <div class="skill_form_inputs">
+    <%= simple_form_for [@packer, @skill] do |a| %>
+      <%= a.hidden_field :skill_id, :value => @skill.id %>
+      <%= a.input :title, label: :Language, collection: LanguageList::COMMON_LANGUAGES.select(&:living?).map { |e| e.name }, required: true %>
+      <%= a.input :level, collection: @pro_level, required: true, prompt: "What is your level" %>
+      <%= a.input :type_of_skill, as: :hidden, input_html: { value: params['type_of_skill'] } %>
+      <div class="container submit">
+        <%= a.submit class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

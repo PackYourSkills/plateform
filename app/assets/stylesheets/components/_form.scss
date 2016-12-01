@@ -1,0 +1,36 @@
+.link{
+  margin: 15px;
+  padding-bottom: 30px;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.form-title {
+  color: $dark;
+  font-family: $header-font;
+}
+
+.intro {
+  h1 {
+    font-family: $base-font;
+    color: $brand-color;
+    margin: 0;
+    margin-top: 40px;
+  }
+  h3 {
+    font-family: $header-font;
+    color: $dark;
+    margin: 0;
+    margin-bottom: 40px;
+  }
+}
+
+.form_inputs {
+  width: 60%;
+}
+
+.control-label {
+  font-family: $base-font;
+}

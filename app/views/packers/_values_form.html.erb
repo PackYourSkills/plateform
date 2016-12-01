@@ -1,0 +1,11 @@
+<%= simple_form_for(@packer) do |f| %>
+  <div class="form-inputss">
+    <p>What are your 3 main values</p>
+    <%= f.input :value1, label: false %>
+    <%= f.input :value2, label: false %>
+    <%= f.input :value3, label: false %>
+  </div>
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
+<% end %>

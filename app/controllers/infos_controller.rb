@@ -1,12 +1,14 @@
 class InfosController < ApplicationController
  skip_after_action :verify_authorized
+
   def edit
-    @user = current_user
+    @user = User.find(params[:user])
   end
 
   def update
-    current_user.update(params_packer)
-    redirect_to packer_path(current_user.packer)
+    @user = User.find(params[:format])
+    @user.update(params_packer)
+    redirect_to packer_path(@user.packer)
   end
 
   private

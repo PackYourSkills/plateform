@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Pack Your Skills</title>
-    <link rel="shortcut icon" type="image/x-icon" href="app/assets/images/ICONPackYourSkills.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/ICONPackYourSkills.png" />
     <meta name="description" content="Pack Your Skills is the new web platform that allows travelers to join the team of a project for the duration of a mission in exchange for food and accommodation. #Volunteering #PositiveImpact #SocialEntrepreneurship">
     <%= csrf_meta_tags %>
 
@@ -14,7 +14,7 @@
 
   </head>
 
-  <body>
+  <body class="<%= params[:controller] %>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 

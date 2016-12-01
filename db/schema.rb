@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128150951) do
+ActiveRecord::Schema.define(version: 20161130165229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(version: 20161128150951) do
     t.string   "status"
     t.integer  "packer_id"
     t.integer  "mission_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "read",       default: false
     t.index ["mission_id"], name: "index_connections_on_mission_id", using: :btree
     t.index ["packer_id"], name: "index_connections_on_packer_id", using: :btree
   end
@@ -53,11 +54,23 @@ ActiveRecord::Schema.define(version: 20161128150951) do
     t.string   "twitter"
     t.string   "facebook"
     t.string   "website"
-    t.text     "values"
     t.integer  "credit_count"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.text     "story"
+    t.string   "address"
+    t.string   "country"
+    t.string   "city"
+    t.string   "zip_code"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "value1"
+    t.string   "value2"
+    t.string   "value3"
+    t.string   "quote"
+    t.string   "quote_author"
+    t.string   "youtube_link"
     t.index ["user_id"], name: "index_crews_on_user_id", using: :btree
   end
 
@@ -117,6 +130,11 @@ ActiveRecord::Schema.define(version: 20161128150951) do
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.string   "job"
+    t.string   "value1"
+    t.string   "value2"
+    t.string   "value3"
+    t.string   "quote"
+    t.string   "quote_author"
     t.index ["user_id"], name: "index_packers_on_user_id", using: :btree
   end
 

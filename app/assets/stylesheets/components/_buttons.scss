@@ -31,3 +31,16 @@
   background-color: $brown;
   color: $brand-color;
 }
+
+.btn-secondary {
+  background-color: $brown;
+  color: white;
+  border-style: none;
+  margin: 0;
+  padding-right: 20px;
+}
+
+.btn-secondary:hover {
+  background-color: $dark;
+  color: white;
+}

@@ -1,7 +1,7 @@
 class ConnectionsController < ApplicationController
 
-  before_action :set_connection, only: [ :edit, :update,:show, :accept, :refuse, :confirm, :cancel, :destroy ]
-  before_action :set_mission, only: [ :new, :create, :edit, :update, :show, :accept, :refuse, :confirm, :cancel, :destroy ]
+  before_action :set_connection, only: [ :edit, :update, :accept, :refuse, :confirm, :cancel, :destroy ]
+  before_action :set_mission, only: [ :new, :create, :edit, :update, :accept, :refuse, :confirm, :cancel, :destroy ]
   before_action :set_packer, only: [ :destroy ]
 
   def index
@@ -17,7 +17,7 @@ class ConnectionsController < ApplicationController
     @connection = @mission.connections.new(connection_params)
     params[:commit] == 'Send' ? (@connection.status = 'online') : (@connection.status = 'draft')
     authorize @connection
-    @connection.save ? (redirect_to mission_connection_path(@mission,@connection)) : (render :new)
+    @connection.save ? (redirect_to authenticated_root_path) : (render :new)
   end
 
   def show
@@ -28,36 +28,32 @@ class ConnectionsController < ApplicationController
 
   def update
     params[:commit] == 'Send' ? (@connection.status = 'online') : (@connection.status = 'draft')
-    @connection.update(connection_params) ? (redirect_to mission_connection_path(@mission,@connection)) : (render :edit)
+    @connection.update(connection_params) ? (redirect_to authenticated_root_path) : (render :edit)
   end
 
   def accept
-    @connection.status = 'accepted'
-    @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    @connection.accept
+    redirect_to authenticated_root_path
   end
 
   def refuse
-    @connection.status = 'refused'
-    @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    @connection.refuse
+    redirect_to authenticated_root_path
   end
 
   def cancel
-    @connection.status = 'canceled'
-    @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    @connection.cancel
+    redirect_to authenticated_root_path
   end
 
   def confirm
-    @connection.status = 'confirmed'
-    @connection.save
-    redirect_to mission_connection_path(@mission,@connection)
+    @connection.confirm
+    redirect_to authenticated_root_path
   end
 
   def destroy
     @connection.destroy
-    redirect_to deck_packer_path @packer
+    redirect_to authenticated_root_path
   end
 
   private
@@ -79,7 +75,3 @@ class ConnectionsController < ApplicationController
     params.require(:connection).permit(:message, :status, :packer_id)
   end
 end
-
-
-
-

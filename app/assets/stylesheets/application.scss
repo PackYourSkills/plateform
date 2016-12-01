@@ -1,31 +1,30 @@
-// Graphical variables
-@import "http://fonts.googleapis.com/css?family=Catamaran:100,300,500,700,900";
-@import "http://fonts.googleapis.com/css?family=Amatic+SC:400,700";
 @import "config/variables";
+@import "typography-default";
 @import "config/bootstrap_variables";
 
 // External libraries
-//@import "typography-default";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-// Your CSS
-@import "layout/index";
-@import "components/index";
-@import "pages/index";
-@import "vendor/index";
-@import "fontello/css/fontello";
-@import "magnific-popup/magnific-popup";
-@import "rs-plugin/css/settings";
-@import "animations";
-@import "owl-carousel/owl.carousel";
-@import "owl-carousel/owl.transitions";
-@import "hover/hover-min";
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "style";
 @import "skins/pink";
+@import "theme";
+
+// @import "magnific-popup/magnific-popup";
+
+// @import "fontello/css/fontello";
+// @import "rs-plugin/css/settings";
+// @import "animations";
+// @import "owl-carousel/owl.carousel";
+// @import "owl-carousel/owl.transitions";
+// @import "hover/hover-min";
+
+// Your CSS
+@import "vendor/index";
+@import "layout/index";
+@import "pages/index";
+@import "components/index";
 @import "missions";
 @import "packers";
-@import "component/component";
-@import "component/colors/pink";

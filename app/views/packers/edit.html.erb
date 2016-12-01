@@ -1,23 +1,16 @@
-<h1>Packers#edit</h1>
-<p>Find me in app/views/packers/edit.html.erb</p>
-
-<%= simple_form_for(@packer) do |f| %>
-  <div class="form-inputss">
-    <%= f.input :sexe, as: :radio_buttons,
-      collection: ['Male', 'Female'], wrapper: :vertical_radio_and_checkboxes %>
-    <%= f.input :website ,label: "Your website", placeholder: 'put the link here'%>
-    <%= f.input :phone ,label: "Phone number", placeholder: 'put your phone number here'%>
-    <%= f.input :skype ,label: "Skype", placeholder: 'put your username in Skype'%>
-    <%= f.input :youtube_link ,label: "Do you want to add a video?", placeholder: 'give us a youtube link'%>
-    <%= f.input :job , placeholder: 'What are you doing ?' %>
-    <%= f.input :cv_link ,label: "Link to your CV", placeholder: 'put the link here (linkedin, viadeo...)'%>
-  </div>
-
-<%= link_to 'Add a skill', new_packer_skill_path(current_user.packer), :class => "btn btn-info active" %></br>
-
-  <div class="form-actionss">
-    <%= f.button :submit %>
-  </div>
+<% case params['infos'] %>
+  <% when 'photo' %>
+    <%= render 'profile_picture_form' %>
+  <% when 'quote' %>
+    <%= render 'quote_form' %>
+  <% when 'values' %>
+    <%= render 'values_form' %>
+  <% when 'website' %>
+    <%= render 'website_form' %>
+  <% when 'cv' %>
+    <%= render 'cv_form' %>
+  <% when 'youtube' %>
+    <%= render 'youtube_form' %>
+  <% else %>
+    <%= render 'form' %>
 <% end %>
-
-

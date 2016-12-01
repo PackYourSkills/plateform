@@ -56,18 +56,4 @@ class User < ApplicationRecord
       now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     end
   end
-
-  def progress
-    percent = 20
-    percent+=5 if self.first_name.present?
-    percent+=5 if self.last_name.present?
-    percent+=5 if self.story.present?
-    percent+=5 if self.address.present?
-    percent+=5 if self.city.present?
-    percent+=5 if self.zip_code.present?
-    percent+=5 if self.country.present?
-    percent+=5 if self.birthdate.present?
-
-    return percent
-  end
 end

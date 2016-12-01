@@ -7,7 +7,8 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+#gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -81,6 +82,9 @@ gem 'rails_admin', '>= 1.0.0.rc'
 
 # Faker pour les Seeds
 gem 'faker', '~> 1.6', '>= 1.6.6'
+
+# all_languages list
+gem 'language_list', '~> 1.1'
 
 #--------------------------------------------------#
 #End

@@ -26,3 +26,45 @@ color: red;
 .form-actionss {
   color: #088A29;
 }
+
+.feature-box, .feature-box-2 {
+  margin-bottom: 0px;
+  text-align:left;
+  .right{
+    text-align:right;
+  }
+  h4 {
+    font-size: 14px;
+    margin-bottom:4px;
+  }
+}
+
+.feature-box-2 .body {
+  a {
+    color: rgba(1,1,1,0.3);
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+
+.icon.without-bg {
+  font-size: 14px;
+  margin:4px;
+}
+
+.feature-box-2.right .body{
+  margin-right:30px;
+}
+.feature-box-2 .body{
+  margin-left:30px;
+}
+.feature-box-2.right .icon.without-bg{
+  right:15px;
+}
+
+.body_new{
+  a {
+    color: rgba(1,1,1,0.3);
+    font-size: 12px;
+  }
+}
