@@ -1,0 +1,8 @@
+<%= simple_form_for(@packer) do |f| %>
+  <div class="form-inputss">
+    <%= f.input :youtube_link ,label: "Do you want to add a video?", placeholder: 'give us a youtube link'%>
+  </div>
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
+<% end %>

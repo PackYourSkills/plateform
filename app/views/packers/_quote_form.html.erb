@@ -1,0 +1,10 @@
+<%= simple_form_for(@packer) do |f| %>
+  <div class="form-inputss">
+    <p>What is your favorite quote</p>
+    <%= f.input :quote, label: false %>
+    <%= f.input :quote_author, label: "who said that ?" %>
+  </div>
+  <div class="form-actionss">
+    <%= f.button :submit %>
+  </div>
+<% end %>
