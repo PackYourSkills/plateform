@@ -91,7 +91,11 @@ class MissionsController < ApplicationController
   def set_urls
     @url_cover = @mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : @mission.cover_picture.path
     @url_hosting = @mission.hosting_picture.nil? ? '/no_hosting_picture.jpg' : @mission.hosting_picture.path
-    @url_logo = @mission.crew.logo.nil? ? "https://dummyimage.com/400x400/EC605F/2d221f.png&text=#{@mission.crew.name.chars.first}" : @mission.crew.logo.path
+    if @mission.crew.name.nil?
+      @url_logo = @mission.crew.logo.nil? ? "https://dummyimage.com/400x400/EC605F/2d221f.png&text=AA : @mission.crew.logo.path" : @mission.crew.logo.path
+    else
+      @url_logo = @mission.crew.logo.nil? ? "https://dummyimage.com/400x400/EC605F/2d221f.png&text=#{@mission.crew.name.chars.first}" : @mission.crew.logo.path
+    end
   end
 
   def set_list_skills
