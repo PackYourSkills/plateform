@@ -20,7 +20,7 @@ class Crew < ApplicationRecord
     percent+=10 unless self.logo.nil?
     percent+=5 if self.social_issue.present?
     percent+=5 if self.mission.present?
-    percent+=10 if self.values.present?
+    percent+=10 if self.value1.present?
     percent+=10 if self.story.present?
     percent+=5 if self.team_description.present?
     percent+=5 if self.nb_collaborators.present?

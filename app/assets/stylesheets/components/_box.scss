@@ -51,20 +51,19 @@
 }
 
 .action-box {
-  min-height: 80px;
   height:100%;
   width:100%;
   text-align:center;
   background-color: $brand-color;
-  padding-top: 30px;
+  padding-top: 5px;
   margin-bottom: 10px;
   a {
+    display: block;
     color: $dark;
     border-radius: 1px;
-    line-height: 100%;
     font-family: $base-font;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
   }
   a:hover {
     color: white;
@@ -146,3 +145,23 @@
   color: $dark;
 }
 
+.path-box {
+  background-color: $grey;
+  border: 1px solid $green;
+  a {
+    display: block;
+    color: $dark;
+    border-radius: 1px;
+    font-family: $base-font;
+    font-weight: 300;
+    font-size: 15px;
+  }
+  a:hover {
+    color: $dark;
+    text-decoration: none;
+  }
+}
+
+.path-box:hover {
+  background-color: $green;
+}
