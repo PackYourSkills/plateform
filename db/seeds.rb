@@ -556,8 +556,7 @@ c = 0
     value3: values[2],
     quote: quote['quote'],
     quote_author: quote['author'],
-    youtube_link: youtube_crew_list[c],
-    other_comment: mission["other_comment"]
+    youtube_link: youtube_crew_list[c]
   )
   crew.save!
 
@@ -583,7 +582,8 @@ c = 0
       skill: skills[m - 1]["name"],
       status: status_mission_list.sample,
       description: mission['description'],
-      language: language_list.sample
+      language: language_list.sample,
+      other_comment: mission["other_comment"]
     )
   mission.save!
 
