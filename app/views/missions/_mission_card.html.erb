@@ -20,10 +20,12 @@
       </ul>
     </div>
     <div class="mission-card--background">
-       <div class="image" style="background-image: url('<%= cl_image_path mission.cover_picture.path %>')"></div>
+       <% url_cover = mission.cover_picture.nil? ? 'http://res.cloudinary.com/pack-your-skills/image/upload/v1480073054/Website/Home%20Page/Banner_PackyourSkills.jpg' : mission.cover_picture.path %>
+       <div class="image" style="background-image: url('<%= cl_image_path url_cover %>')"></div>
     </div>
     <div class="mission-card--brand">
-      <div class="logo" style="background-image: url('<%= cl_image_path mission.crew.logo.path %>')"></div>
+    <% url_logo = mission.cover_picture.nil? ? 'https://dummyimage.com/400x400/EC605F/2d221f.png&text=.' : mission.crew.logo.path %>
+      <div class="logo" style="background-image: url('<%= cl_image_path url_logo %>')"></div>
       <div class="name">
         <%= mission.crew.name %>
       </div>
