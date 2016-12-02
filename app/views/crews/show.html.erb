@@ -1,3 +1,6 @@
+<div class="box_margin">
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-1">
@@ -6,7 +9,9 @@
 
       <!-- Box name + social issue -->
       <div class=text-center>
-        <h2><%= @crew.name %></h2>
+        <div class="title_box">
+          <h1><%= @crew.name %></h1>
+        </div>
         <p><i class="fa fa-map-marker" aria-hidden="true"></i>
         <%= @crew.city %>, <%= @crew.country %></p>
       </div>
@@ -30,20 +35,22 @@
               </div>
             <% else %>
               <div class="content_box">
-                <p><%= @crew.social_issue %></p>
+                <div class="title_box">
+                  <h1><%= @crew.social_issue %></h1>
+                </div>
               </div>
             <% end %>
           </div>
         </div>
         <div class="col-xs-9">
-          <div class="box box120px">
+          <div class="box box120px mission_box">
             <% if @crew.mission == nil || @crew.mission == '' %>
               <div class="box_empty">
                 <h2>What is your mission </h2>
               </div>
             <% else %>
               <div class="content_box">
-                <p><%= @crew.name %> have been created to <%= @crew.mission %></p>
+                <p><%= @crew.name %> have been created to <strong><%= @crew.mission %></strong></p>
               </div>
             <% end %>
           </div>
@@ -51,7 +58,7 @@
 
         <!-- Box story 1 column  -->
         <div class="col-xs-12">
-          <div class="box box_red">
+          <div class="box box_red box_story">
             <div class="title_box">
               <h1>Story</h1>
             </div>
@@ -80,7 +87,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-9">
-          <div class="box box270px">
+          <div class="box box270px team_box">
             <div class="title_box">
               <h1>Team</h1>
             </div>
@@ -110,17 +117,19 @@
         <!-- Box value 1/1 -->
         <% if (!nil_or_empty_string @crew.value1) || (!nil_or_empty_string @crew.value2) ||(!nil_or_empty_string @crew.value3)  %>
           <div class="col-xs-12 col-sm-6">
-            <div class="box box_ratio_1_1 box_green">
+            <div class="box box_ratio_1_1 box_green box_value">
               <div class="content_box">
-                <h1>Value</h1>
+                <div class="title_box">
+                  <h1>Value</h1>
+                </div>
                 <% unless nil_or_empty_string @crew.value1 %>
-                  <p><%= @crew.value1 %></p>
+                  <h2><%= @crew.value1 %></h2>
                 <% end %>
                 <% unless nil_or_empty_string @crew.value2 %>
-                  <p><%= @crew.value2 %></p>
+                  <h2><%= @crew.value2 %></h2>
                 <% end %>
                 <% unless nil_or_empty_string @crew.value3 %>
-                  <p><%= @crew.value3 %></p>
+                  <h2><%= @crew.value3 %></h2>
                 <% end %>
               </div>
             </div>
@@ -140,9 +149,13 @@
           <div class="col-xs-12 col-sm-6">
             <div class="box box_ratio_1_1 box_quote">
               <div class="content_box">
-                <h1>Inspiring quote</h1>
-                <h2><%= @crew.quote %></h2>
-                <p><%= @crew.quote_author %></p>
+                <div class="title_box">
+                  <h1>Inspiring quote</h1>
+                </div>
+                <p><%= @crew.quote %></p>
+                <div class="author">
+                  <p><%= @crew.quote_author %></p>
+                </div>
               </div>
             </div>
           </div>
@@ -159,3 +172,20 @@
     </div>
   </div>
 </div>
+<div class="box_margin_bottom">
+</div>
+
+<footer class="footer">
+  <div id="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <span class="footer__copyright">© 2016 Pack Your Skills</span>
+          <a href="">Terms &amp; Conditions</a>
+          <a href="">Privacy Policy</a>
+          <a href="">Careers</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
