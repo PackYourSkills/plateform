@@ -1,9 +1,34 @@
+<div class="box_margin">
+</div>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-      <div class=" form-box">
-        <%= render 'form' %>
+
+      <div class="row">
+
+        <div class="col-xs-12">
+          <div class ="intro text-center">
+            <h3>Tell them all your motivation</h3>
+            <p>They will receive your profile and this small text
+            and they will be able to contact you.<br/>
+            Do your best to join this crew!</p>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class=" form-box">
+            <%= render 'form' %>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="link text-center">
+            <%= link_to "Return to the mission", render: :back %>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </div>
 </div>
