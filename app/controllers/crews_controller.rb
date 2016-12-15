@@ -11,6 +11,7 @@ class CrewsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
